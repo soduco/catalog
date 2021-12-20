@@ -1,8 +1,3 @@
-nginx.conf : "server_name" has to be changed
-
-Docker-compose contain 3 containers :
- - nginx
- - whoami to test port 80 (can be removed)
- - portainer to test port redirection (http: 9000)
-
-https not enabled 
+reverse proxy test working with 2 containers :
+- one on port 80
+- one 80 port 9000
