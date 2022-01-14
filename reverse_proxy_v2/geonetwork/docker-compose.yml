@@ -1,7 +1,10 @@
 version: '3.1'
 volumes:
   geonetwork:
-      
+  esdata:
+  pgdata:
+  pglog:
+   
 networks:
   geonetwork_network:
     name: geonetwork_network
@@ -28,7 +31,7 @@ services:
       POSTGRES_DB_PASSWORD: geonetwork
 
     volumes:
-      - geonetwork:/var/lib/geonetwork_data
+      - geonetwork:/catalogue-data
     networks:
       - geonetwork_network
     depends_on:
@@ -39,6 +42,8 @@ services:
     image: elasticsearch:7.6.2
     environment:
       discovery.type: single-node
+    volumes:
+      - esdata:/usr/share/elasticsearch/data
     networks:
       - geonetwork_network
 
@@ -48,6 +53,9 @@ services:
       POSTGRES_USER: geonetwork
       POSTGRES_PASSWORD: geonetwork
       POSTGRES_DB: geonetwork
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - pglog:/var/log/postgresql
     networks:
       - geonetwork_network
 
