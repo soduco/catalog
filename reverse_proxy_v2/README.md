@@ -4,4 +4,4 @@ CKAN currently not working
 
 Geonetwork v4.0.5 working
 
-removing containers delete all in Geonetwork
+:warning: removing containers delete all in Geonetwork
