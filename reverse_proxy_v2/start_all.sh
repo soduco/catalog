@@ -11,6 +11,11 @@ echo "---"
 docker-compose -f geonetwork/docker-compose.yml up -d
 
 echo "---"
+echo "starting Portainer"
+echo "---"
+docker-compose -f portainer/docker-compose.yml up -d
+
+echo "---"
 echo "starting reverse-proxy"
 echo "---"
 docker-compose -f nginx/docker-compose.yml up -d

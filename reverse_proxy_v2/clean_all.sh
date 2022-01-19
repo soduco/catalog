@@ -6,6 +6,11 @@ echo "---"
 docker-compose -f nginx/docker-compose.yml down -v
 
 echo "---"
+echo "cleaning Portainer"
+echo "---"
+docker-compose -f portainer/docker-compose.yml down -v
+
+echo "---"
 echo "cleaning Geonetwork"
 echo "---"
 docker-compose -f geonetwork/docker-compose.yml down -v
