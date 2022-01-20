@@ -1,0 +1,133 @@
+version: '3'
+services:
+    reverse-proxy:
+    # The official v2 Traefik docker image
+      image: traefik:v2.2
+    # Enables the web UI and tells Traefik to listen to docker
+      command:
+      - "--api.insecure=true"
+      - "--providers.docker=true"
+      - "--providers.docker.exposedbydefault=false"
+      - "--entrypoints.web.address=:80"
+      - "--"
+      ports:
+      # The HTTP port
+      - "80:80"
+      # The Web UI (enabled by --api.insecure=true)
+      - "8089:8080"
+      volumes:
+      # So that Traefik can listen to the Docker events
+      - /var/run/docker.sock:/var/run/docker.sock
+
+    postgres:
+      container_name: postgres
+      ports:
+        - "5432:5432"
+      image: library/postgres:10.13
+      restart: unless-stopped
+
+      environment:
+        - "LC_ALL=C.UTF-8"
+        - POSTGRES_DB=${POSTGRES_DB}
+        - POSTGRES_USER=${POSTGRES_USER}
+        - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+        - POSTGRES_PORT=${POSTGRES_PORT}
+      volumes:
+        - database-data:/var/lib/postgresql/data/ # persist data even if container shuts down
+
+    dbgui:
+      image: dockage/phppgadmin
+      container_name: dbgui
+      environment:
+        - PHP_PG_ADMIN_SERVER_HOST=postgres
+      ports:
+      - 8086:80
+
+    solr:
+      image: ekoindarto/solr-cvm:latest
+      container_name: solr
+      privileged: true
+      ports:
+        - "8983:8983"
+      environment:
+        - "SOLR_HOST=solr"
+        - "SOLR_PORT=8983"
+        - "SOLR_JAVA_MEM=-Xms1g -Xmx1g"
+      volumes:
+        - ./data/solr-data:/opt/solr/server/solr/collection1/data
+      labels:
+        - "traefik.enable=true"
+        - "traefik.http.routers.solr.rule=Host(`solr.${traefikhost}`)"
+        - "traefik.http.services.solr.loadbalancer.server.port=8983"
+
+    whoami:
+      image: "containous/whoami"
+      container_name: "whoami"
+      labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.whoami.entrypoints=web"
+      - "traefik.http.routers.whoami.rule=Host(`whoami.${traefikhost}`)"
+
+    dataverse:
+      image: coronawhy/dataverse:5.2.2-cv
+      container_name: dataverse
+      privileged: true
+      ports:
+        - "443:443"
+        - "4848:4848"
+        - "8085:8080"
+      environment:
+        - "CVM_SERVER_NAME=CESSDA" #Optional
+        - "CVM_SERVER_URL=https://vocabularies-dev.cessda.eu/v2/search/vocabularies"
+        - "CVM_TSV_SOURCE=https://github.com/IQSS/dataverse-docker/releases/download/5.2-cv/citation.tsv"
+        - "1GIT_CVM_TEMPLATES=https://github.com/Dans-labs/semantic-gateway"
+        - "WAR_FILE=https://github.com/IQSS/dataverse-docker/releases/download/5.2-cv/dataverse-5.2-cv.war"
+        - "GIT_BRANCH=v5.2-cvm"
+        - "CVM_SQL=https://github.com/IQSS/dataverse-docker/releases/download/5.2-cv/cv-update.sql"
+        - "CVM_CONFIG=https://github.com/IQSS/dataverse-docker/releases/download/5.2-cv/cv-cessda-keywords.json"
+        - "GIT_SOURCE=https://github.com/ekoi/dataverse"
+        - "GIT_BRANCH=v5.0-cvm-autocomplete"
+        - "LANG=en"
+        - "cvManager=http://"
+        - "BUNDLEPROPERTIES=Bundle.properties"
+        - "ADMIN_EMAIL=admin@localhost"
+        - "MAIL_SERVER=mailrelay"
+        - "POSTGRES_SERVER=postgres"
+        - "POSTGRES_PORT=${POSTGRES_PORT}"
+        - "POSTGRES_DATABASE=${POSTGRES_DB}"
+        - "POSTGRES_USER=${POSTGRES_USER}"
+        - "PGPASSWORD=${POSTGRES_PASSWORD}"
+        - "SOLR_LOCATION=solr:8983"
+        - "TWORAVENS_LOCATION=NOT INSTALLED"
+        - "RSERVE_HOST=localhost"
+        - "RSERVE_PORT=6311"
+        - "RSERVE_USER=rserve"
+        - "RSERVE_PASSWORD=rserve"
+        - "JVM_OPTS='-Xmx1g -Xms1g -XX:MaxPermSize=2g -XX:PermSize=2g'"
+      depends_on:
+        - postgres
+        - solr
+      volumes:
+        - dataverse-data:/usr/local/payara5/glassfish/domains/domain1/autodeploy
+      labels:
+        - "traefik.enable=true"
+        - "traefik.http.routers.dataverse.rule=Host(`dataverse-dev.${traefikhost}`)"
+        - "traefik.http.services.dataverse.loadbalancer.server.port=8080"
+
+    repo:
+      image: nginx:latest
+      container_name: repo
+      ports:
+        - "8080:80"
+      volumes:
+        - ${LOCAL_WAR}:/usr/share/nginx/html/dataverse.war
+
+volumes:
+  database-data:
+  solr-data:
+  dataverse-data:
+
+networks:
+  dvn:
+    driver: bridge
+

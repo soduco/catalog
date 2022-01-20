@@ -1,0 +1,90 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: dataverse-en
+  namespace: dataverse-eu
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        component: dataverse-en
+    spec:
+      containers:
+      - name: dataverse-en
+        image: vtycloud/dataverse:4.9.31
+        ports:
+        - containerPort: 8080
+        - containerPort: 443                
+        readinessProbe:
+          httpGet:
+            path: /loginpage.xhtml
+            port: 8080
+          initialDelaySeconds: 120
+          periodSeconds: 110
+          timeoutSeconds: 110
+          successThreshold: 1
+          failureThreshold: 10        
+        env:
+        - name: SITEURL
+          value : "dataverse-dev.cessda.eu"
+        - name: HOST_DNS_ADDRESS 
+          value : "0.0.0.0"
+        - name: LANG
+          value : "en"
+        - name: BUNDLEPROPERTIES
+          value : "Bundle.properties"
+        - name: GLASSFISH_DIRECTORY
+          value : "/opt/glassfish4"
+        - name: ADMIN_EMAIL
+          value : "info@somedomain.org"
+        - name: FROM_EMAIL
+          value : "do-not-reply@somedomain.org"
+        - name: MAIL_SERVER
+          value : "mailrelay"
+        - name: POSTGRES_ADMIN_PASSWORD
+          value : "secret"
+        - name: POSTGRES_SERVER
+          value : "postgres"
+        - name: POSTGRES_PORT
+          value : "5432"
+        - name: POSTGRES_DATABASE
+          value : "dvndb"
+        - name: POSTGRES_USER
+          value : "dvnapp"
+        - name: POSTGRES_PASSWORD
+          value : "secret"
+        - name: SOLR_LOCATION
+          value : "solr:8983"
+        - name: TWORAVENS_LOCATION
+          value : "NOT INSTALLED"
+        - name: RSERVE_HOST
+          value : "localhost"
+        - name: RSERVE_PORT
+          value : "6311"
+        - name: RSERVE_USER
+          value : "rserve"
+        - name: RSERVE_PASSWORD
+          value : "rserve"
+        - name: doiprovider
+          value : "dara-4.0"
+        - name: authority
+          value : "10.5072"
+        - name: DOIseparator
+          value : "/"
+        - name: baseuri
+          value : "http://labs.da-ra.de"
+        - name: login 
+          value : "dveu"
+        - name: password
+          value : "test_dveu3"
+        - name: DEBUG
+          value : "yes"
+        volumeMounts:
+        - name: dataverse-storage
+          mountPath: "/opt/glassfish4/glassfish/domains/domain1/docroot"
+          subPath: "dataverse_files_docroot"
+      volumes:
+      - name: dataverse-storage
+        persistentVolumeClaim:
+          claimName: dataverse-pvc
