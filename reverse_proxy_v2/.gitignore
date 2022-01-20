@@ -1,6 +1,8 @@
 #Dataverse
 dataverse/dataverse.war
 
+dataverse/data/
+
 #Ignoring IDE files
 dataverse/.idea
 dataverse/.idea/*
