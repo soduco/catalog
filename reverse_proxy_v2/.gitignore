@@ -2,6 +2,7 @@
 dataverse/dataverse.war
 
 dataverse/data/
+dataverse/database-data/
 
 #Ignoring IDE files
 dataverse/.idea
