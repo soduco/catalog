@@ -1,6 +1,3 @@
-[submodule "reverse_proxy_v2/ckan/ckanext/ckanext-geoview"]
-	path = reverse_proxy_v2/ckan/ckanext/ckanext-geoview
-	url = https://github.com/ckan/ckanext-geoview.git
 [submodule "docker-geonetwork"]
 	path = docker-geonetwork
 	url = https://github.com/soduco/docker-geonetwork.git
