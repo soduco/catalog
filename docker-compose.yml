@@ -1,0 +1,142 @@
+version: '3.5'
+
+volumes:
+  geonetwork:
+  esdata:
+  esbackup:
+  kibanadata:
+  pgdata:
+  pglog:
+  nginxlog:
+
+
+networks:
+  gn-network:
+    driver: bridge
+
+
+services:
+  www:
+    image: nginx
+    ports:
+      - 80:80
+    environment:
+      # Only used for / redirect to default webapp
+      - NGINX_PUBLIC_HOST=${NGINX_PUBLIC_HOST}
+      #- NGINX_PUBLIC_HOST=apps.titellus.net
+      - NGINX_HOST=${NGINX_HOST}
+      - NGINX_PORT=80
+    volumes:
+      - ./nginx:/etc/nginx/templates
+      - nginxlog:/var/log/nginx
+    depends_on:
+      - geonetwork
+      - angular-service
+    networks:
+      - gn-network
+
+  database:
+    image: postgis/postgis:11-2.5
+    environment:
+      POSTGRES_USER: geonetwork
+      POSTGRES_PASSWORD: geonetwork
+      POSTGRES_DB: geonetwork
+    command: [ "postgres",
+               "-c", "log_statement=all",
+               "-c", "logging_collector=true",
+               "-c", "log_file_mode=0644",
+               "-c", "log_directory=/var/log/postgresql",
+               "-c", "log_filename=postgresql.log" ]
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - pglog:/var/log/postgresql
+    networks:
+      - gn-network
+
+
+  geonetwork:
+    image: geonetwork:4.0.5
+    restart: always
+    ports:
+      - 8080:8080
+    environment:
+      DATA_DIR: /catalogue-data
+
+      JAVA_OPTS: >
+        -Dorg.eclipse.jetty.annotations.AnnotationParser.LEVEL=OFF
+        -Djava.security.egd=file:/dev/./urandom -Djava.awt.headless=true
+        -Xms512M -Xss512M -Xmx2G -XX:+UseConcMarkSweepGC
+        -Dgeonetwork.resources.dir=/catalogue-data/resources
+        -Dgeonetwork.data.dir=/catalogue-data
+        -Dgeonetwork.codeList.dir=/var/lib/jetty/webapps/geonetwork/WEB-INF/data/config/codelist
+        -Dgeonetwork.schema.dir=/var/lib/jetty/webapps/geonetwork/WEB-INF/data/config/schema_plugins
+
+      ES_HOST: elasticsearch
+      ES_PROTOCOL: http
+      ES_PORT: 9200
+
+      KB_URL: http://kibana:5601
+
+      GEONETWORK_DB_TYPE: postgres
+      GEONETWORK_DB_HOST: database
+      GEONETWORK_DB_PORT: 5432
+      GEONETWORK_DB_NAME: geonetwork
+      GEONETWORK_DB_USERNAME: geonetwork
+      GEONETWORK_DB_PASSWORD: geonetwork
+    volumes:
+      - geonetwork:/catalogue-data
+    depends_on:
+      - elasticsearch
+      - database
+    networks:
+      - gn-network
+
+
+  elasticsearch:
+    image: elasticsearch:7.9.2
+    ports:
+      - 9200:9200
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+      nofile:
+        soft: 65536
+        hard: 65536
+    environment:
+      ES_JAVA_OPTS: "-Xms1G -Xmx1G"
+      discovery.type: single-node
+      path.repo: "/usr/share/elasticsearch/snapshots"
+    volumes:
+      - esdata:/usr/share/elasticsearch/data
+      - esbackup:/usr/share/elasticsearch/snapshots
+    networks:
+      - gn-network
+
+  kibana:
+    image: kibana:7.9.2
+    environment:
+      SERVER_NAME: 'kibana'
+      ELASTICSEARCH_URL: http://elasticsearch:9200/
+      SERVER_BASEPATH: /geonetwork/dashboards
+      SERVER_REWRITEBASEPATH: 'false'
+      KIBANA_INDEX: .dashboards
+      XPACK_MONITORING_UI_CONTAINER_ELASTICSEARCH_ENABLED: 'true'
+    networks:
+      - gn-network
+    volumes:
+      - kibanadata:/usr/share/kibana/data
+
+
+  angular-service: # The name of the service
+    build: ./geonetwork-ui # Location of our Dockerfile
+    volumes: # Volume binding
+      - './geonetwork-ui:/usr/src/app' 
+    ports: 
+      - '4200:4200' # Port mapping
+    networks:
+      - gn-network
+    depends_on:
+      - geonetwork
+    command: > 
+      bash -c "npm install && ng serve search --host 0.0.0.0 --port 4200"
