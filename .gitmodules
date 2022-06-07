@@ -4,3 +4,6 @@
 [submodule "geonetwork-ui"]
 	path = geonetwork-ui
 	url = https://github.com/soduco/geonetwork-ui.git
+[submodule "nginx"]
+	path = nginx
+	url = https://github.com/soduco/docker-nginx.git
