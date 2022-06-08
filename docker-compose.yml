@@ -18,7 +18,7 @@ networks:
 
 services:
   www:
-    image: nginx
+    build: ./nginx/mainline/debian # Location of our Dockerfile 
     ports:
       - 80:80
     environment:
@@ -28,7 +28,7 @@ services:
       - NGINX_HOST=${NGINX_HOST}
       - NGINX_PORT=80
     volumes:
-      - ./nginx:/etc/nginx/templates
+      - ./nginx/config_files/http:/etc/nginx/templates
       - nginxlog:/var/log/nginx
     depends_on:
       - geonetwork
