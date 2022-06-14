@@ -36,20 +36,20 @@ services:
   #   networks:
   #     - gn-network
 
-  traefik-me-certificate-downloader:
-    image: alpine
-    command: sh -c "cd /etc/ssl/traefik
-      && wget traefik.me/fullchain.pem -O traefik.me.crt
-      && wget traefik.me/privkey.pem -O traefik.me-key.pem"
-    volumes:
-      - ./traefik_config/ssl:/etc/ssl/traefik
-    networks:
-      - gn-network
+  # traefik-me-certificate-downloader:
+  #   image: alpine
+  #   command: sh -c "cd /etc/ssl/traefik
+  #     && wget traefik.me/fullchain.pem -O traefik.me.crt
+  #     && wget traefik.me/privkey.pem -O traefik.me-key.pem"
+  #   volumes:
+  #     - ./traefik_config/ssl:/etc/ssl/traefik
+  #   networks:
+  #     - gn-network
 
-  geonetwork-134-158-75-87.traefik.me:
+  catalog.geohistoricaldata.org:
     image: traefik:v2.7
-    depends_on:
-      - traefik-me-certificate-downloader
+    # depends_on:
+    #   - traefik-me-certificate-downloader
     command: 
       - "--api.insecure=true"
       - "--providers.docker=true"
@@ -57,17 +57,19 @@ services:
     ports:
       - 80:80
       - 443:443
+      # Port 8080 is open by default on lal vm
+      - 8080:8080
     volumes:
       # So that Traefik can listen to the Docker events
       - /var/run/docker.sock:/var/run/docker.sock
-      - ./traefik_config/ssl:/etc/certs:ro
+      # - ./traefik_config/ssl:/etc/certs:ro
       - ./traefik_config/traefik.yml:/etc/traefik/traefik.yml:ro
-      - ./traefik_config/traefik-config.yml:/etc/traefik/config.yml:ro
+      # - ./traefik_config/traefik-config.yml:/etc/traefik/config.yml:ro
     restart: always
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.traefik.tls=true"
-      - "traefik.http.routers.traefik.rule=Host(`geonetwork-134-158-75-87.traefik.me`) && (PathPrefix(`/traefik`) || PathPrefix(`/api`))"
+      # - "traefik.http.routers.traefik.tls=true"
+      - "traefik.http.routers.traefik.rule=PathPrefix(`/traefik`) || PathPrefix(`/api`)"
       - "traefik.http.routers.traefik.service=api@internal"
       - "traefik.http.routers.traefik.middlewares=traefik-strip"
       - "traefik.http.middlewares.traefik-strip.stripprefix.prefixes=/traefik"
@@ -92,15 +94,12 @@ services:
       - pglog:/var/log/postgresql
     networks:
       - gn-network
-    # ports 8080 is open by default on lal stack
-    ports:
-      - 8080:5432
-    # labels:
-    #   - "traefik.enable=true"
-    #   - "traefik.tcp.routers.database.rule=HostSNI(`*`)"
-    #   - "traefik.tcp.routers.database.entryPoints=database"
-    #   - "traefik.tcp.routers.database.service=database"
-    #   - "traefik.tcp.services.database.loadbalancer.server.port=5432"
+    labels:
+      - "traefik.enable=true"
+      - "traefik.tcp.routers.database.rule=HostSNI(`*`)"
+      - "traefik.tcp.routers.database.entryPoints=database"
+      - "traefik.tcp.routers.database.service=database"
+      - "traefik.tcp.services.database.loadbalancer.server.port=5432"
 
   pgadmin4:
     image: dpage/pgadmin4:6.9
@@ -119,8 +118,8 @@ services:
       - gn-network
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.pgadmin4.tls=true"
-      - "traefik.http.routers.pgadmin4.rule=Host(`geonetwork-134-158-75-87.traefik.me`) && (PathPrefix(`/pgadmin`))"
+      # - "traefik.http.routers.pgadmin4.tls=true"
+      - "traefik.http.routers.pgadmin4.rule=PathPrefix(`/pgadmin`)"
       # - "traefik.http.routers.pgadmin4.rule=PathPrefix(`/pgadmin`)"
 
   geonetwork:
@@ -159,8 +158,8 @@ services:
       - gn-network
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.geonetwork.tls=true"
-      - "traefik.http.routers.geonetwork.rule=Host(`geonetwork-134-158-75-87.traefik.me`) && (PathPrefix(`/geonetwork`))"
+      # - "traefik.http.routers.geonetwork.tls=true"
+      - "traefik.http.routers.geonetwork.rule=PathPrefix(`/geonetwork`)"
       # - "traefik.http.routers.geonetwork.rule=PathPrefix(`/geonetwork`)"
 
 
