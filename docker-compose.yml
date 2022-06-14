@@ -17,27 +17,66 @@ networks:
 
 
 services:
-  www:
-    build: ./nginx/mainline/debian # Location of our Dockerfile 
+  # www:
+  #   build: ./nginx/mainline/debian # Location of our Dockerfile 
+  #   ports:
+  #     - 80:80
+  #   environment:
+  #     # Only used for / redirect to default webapp
+  #     - NGINX_PUBLIC_HOST=${NGINX_PUBLIC_HOST}
+  #     #- NGINX_PUBLIC_HOST=apps.titellus.net
+  #     - NGINX_HOST=${NGINX_HOST}
+  #     - NGINX_PORT=80
+  #   volumes:
+  #     - ./nginx/config_files/http:/etc/nginx/templates
+  #     - nginxlog:/var/log/nginx
+  #   depends_on:
+  #     - geonetwork
+  #     - angular-service
+  #   networks:
+  #     - gn-network
+
+  traefik-me-certificate-downloader:
+    image: alpine
+    command: sh -c "cd /etc/ssl/traefik
+      && wget traefik.me/fullchain.pem -O traefik.me.crt
+      && wget traefik.me/privkey.pem -O traefik.me-key.pem"
+    volumes:
+      - ./traefik_config/ssl:/etc/ssl/traefik
+    networks:
+      - gn-network
+
+  geonetwork-134-158-75-87.traefik.me:
+    image: traefik:v2.7
+    depends_on:
+      - traefik-me-certificate-downloader
+    command: 
+      - "--api.insecure=true"
+      - "--providers.docker=true"
+      - "--providers.docker.exposedbydefault=false"
     ports:
       - 80:80
-    environment:
-      # Only used for / redirect to default webapp
-      - NGINX_PUBLIC_HOST=${NGINX_PUBLIC_HOST}
-      #- NGINX_PUBLIC_HOST=apps.titellus.net
-      - NGINX_HOST=${NGINX_HOST}
-      - NGINX_PORT=80
+      - 443:443
     volumes:
-      - ./nginx/config_files/http:/etc/nginx/templates
-      - nginxlog:/var/log/nginx
-    depends_on:
-      - geonetwork
-      - angular-service
+      # So that Traefik can listen to the Docker events
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./traefik_config/ssl:/etc/certs:ro
+      - ./traefik_config/traefik.yml:/etc/traefik/traefik.yml:ro
+      - ./traefik_config/traefik-config.yml:/etc/traefik/config.yml:ro
+    restart: always
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.traefik.tls=true"
+      - "traefik.http.routers.traefik.rule=Host(`geonetwork-134-158-75-87.traefik.me`) && (PathPrefix(`/traefik`) || PathPrefix(`/api`))"
+      - "traefik.http.routers.traefik.service=api@internal"
+      - "traefik.http.routers.traefik.middlewares=traefik-strip"
+      - "traefik.http.middlewares.traefik-strip.stripprefix.prefixes=/traefik"
     networks:
       - gn-network
 
   database:
     image: postgis/postgis:11-2.5
+    restart: always
     environment:
       POSTGRES_USER: geonetwork
       POSTGRES_PASSWORD: geonetwork
@@ -48,13 +87,20 @@ services:
                "-c", "log_file_mode=0644",
                "-c", "log_directory=/var/log/postgresql",
                "-c", "log_filename=postgresql.log" ]
-    ports:
-      - 5432:5432
     volumes:
       - pgdata:/var/lib/postgresql/data
       - pglog:/var/log/postgresql
     networks:
       - gn-network
+    # ports 8080 is open by default on lal stack
+    ports:
+      - 8080:5432
+    # labels:
+    #   - "traefik.enable=true"
+    #   - "traefik.tcp.routers.database.rule=HostSNI(`*`)"
+    #   - "traefik.tcp.routers.database.entryPoints=database"
+    #   - "traefik.tcp.routers.database.service=database"
+    #   - "traefik.tcp.services.database.loadbalancer.server.port=5432"
 
   pgadmin4:
     image: dpage/pgadmin4:6.9
@@ -62,18 +108,24 @@ services:
     environment:
       PGADMIN_DEFAULT_EMAIL: admin@soduco.com
       PGADMIN_DEFAULT_PASSWORD: admin
+      # SCRIPT_NAME needed for "PathPrefix" in traefik
+      SCRIPT_NAME: /pgadmin
+    # ports need to stay, even with traefik, or it will cause a security error
     ports:
       - 5050:80
     volumes:
       - pgadmindata:/var/lib/pgadmin
     networks:
       - gn-network
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.pgadmin4.tls=true"
+      - "traefik.http.routers.pgadmin4.rule=Host(`geonetwork-134-158-75-87.traefik.me`) && (PathPrefix(`/pgadmin`))"
+      # - "traefik.http.routers.pgadmin4.rule=PathPrefix(`/pgadmin`)"
 
   geonetwork:
     image: geonetwork:4.0.5
     restart: always
-    ports:
-      - 8080:8080
     environment:
       DATA_DIR: /catalogue-data
 
@@ -105,12 +157,15 @@ services:
       - database
     networks:
       - gn-network
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.geonetwork.tls=true"
+      - "traefik.http.routers.geonetwork.rule=Host(`geonetwork-134-158-75-87.traefik.me`) && (PathPrefix(`/geonetwork`))"
+      # - "traefik.http.routers.geonetwork.rule=PathPrefix(`/geonetwork`)"
 
 
   elasticsearch:
     image: elasticsearch:7.9.2
-    ports:
-      - 9200:9200
     ulimits:
       memlock:
         soft: -1
@@ -146,9 +201,7 @@ services:
   angular-service: # The name of the service
     build: ./geonetwork-ui # Location of our Dockerfile
     volumes: # Volume binding
-      - './geonetwork-ui:/usr/src/app' 
-    ports: 
-      - '4200:4200' # Port mapping
+      - './geonetwork-ui:/usr/src/app'
     networks:
       - gn-network
     depends_on:
