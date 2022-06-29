@@ -96,7 +96,7 @@ services:
       - gn-network
     labels:
       - "traefik.enable=true"
-      - "traefik.tcp.routers.database.rule=HostSNI(`*`)"
+      - "traefik.tcp.routers.database.rule=HostSNI(`*`,`database.catalog.geohistoricaldata.org`)"
       - "traefik.tcp.routers.database.entryPoints=database"
       - "traefik.tcp.routers.database.service=database"
       - "traefik.tcp.services.database.loadbalancer.server.port=5432"
