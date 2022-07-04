@@ -18,49 +18,26 @@ networks:
 services:
   traefik:
     image: traefik:v2.7
-    command: 
-      - "--api.insecure=true"
-      - "--providers.docker=true"
-      - "--providers.docker.exposedbydefault=false"
-      - "--entrypoints.web.address=:80"
-      - "--entrypoints.websecure.address=:443"
-      - "--entrypoints.database.address=:8081"
-      - "--certificatesresolvers.myhttpchallenge.acme.httpchallenge=true"
-      - "--certificatesresolvers.myhttpchallenge.acme.httpchallenge.entrypoint=web"
-      - "--certificatesresolvers.myhttpchallenge.acme.caserver=https://acme-staging-v02.api.letsencrypt.org/directory"
-      - "--certificatesresolvers.myhttpchallenge.acme.email=melvin.hersent@ign.fr"
-      - "--certificatesresolvers.myhttpchallenge.acme.storage=/letsencrypt/acme.json"
     ports:
       - 80:80
       - 443:443
       # Port 8080 is open by default on lal vm
-      # - 8080:8080
-      # Need to redirect to 8081 when not using traefik.yml, cause port 8080 is used by default for dashboard
-      - 8080:8081
+      - 8080:8080
     volumes:
-      # Volumes needed for Traefik to listen to Docker events
-      - /var/run/docker.sock:/var/run/docker.sock
-      - "./letsencrypt:/letsencrypt"
-      # - ./traefik_config/traefik.yml:/etc/traefik/traefik.yml:ro
-      # - ./traefik_config/ssl:/etc/certs:ro
-      # - ./traefik_config/traefik-config.yml:/etc/traefik/config.yml:ro
+      # First volume needed for Traefik to listen to Docker events
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - ./traefik_config/ssl:/etc/certs:ro
+      - ./traefik_config/traefik.yml:/etc/traefik/traefik.yml:ro
+      - ./traefik_config/traefik-config.yml:/etc/traefik/config.yml:ro
     restart: always
     labels:
       - "traefik.enable=true"
-      # http and https
+      - "traefik.http.routers.traefik.entryPoints=websecure"
+      - "traefik.http.routers.traefik.tls=true"
       - "traefik.http.routers.traefik.service=api@internal"
       - "traefik.http.routers.traefik.middlewares=traefik-strip"
       - "traefik.http.middlewares.traefik-strip.stripprefix.prefixes=/traefik"
-      # http
-      - "traefik.http.routers.traefik.entryPoints=web"
       - "traefik.http.routers.traefik.rule=Host(`catalog.geohistoricaldata.org`, `www.catalog.geohistoricaldata.org`) && PathPrefix(`/traefik`) || PathPrefix(`/api`)"
-      # https
-      # - "traefik.http.routers.traefik.middlewares=redirect-to-https"
-      # - "traefik.http.middlewares.redirect-to-https.redirectscheme.scheme=https"
-      - "traefik.http.routers.traefik-secure.entryPoints=websecure"
-      - "traefik.http.routers.traefik-secure.rule=Host(`catalog.geohistoricaldata.org`, `www.catalog.geohistoricaldata.org`) && PathPrefix(`/traefik`) || PathPrefix(`/api`)"
-      - "traefik.http.routers.traefik-secure.tls.certresolver=myhttpchallenge"
-      - "traefik.http.routers.traefik-secure.tls=true"
     networks:
       - gn-network
 
@@ -84,10 +61,13 @@ services:
       - gn-network
     labels:
       - "traefik.enable=true"
+      - "traefik.http.routers.database.entryPoints=websecure"
       - "traefik.tcp.routers.database.rule=HostSNI(`*`,`database.catalog.geohistoricaldata.org`)"
       - "traefik.tcp.routers.database.entryPoints=database"
       - "traefik.tcp.routers.database.service=database"
       - "traefik.tcp.services.database.loadbalancer.server.port=5432"
+      - "traefik.http.routers.database.tls=true"
+
 
   pgadmin4:
     image: dpage/pgadmin4:6.9
@@ -106,7 +86,10 @@ services:
       - gn-network
     labels:
       - "traefik.enable=true"
+      - "traefik.http.routers.pgadmin4.entryPoints=websecure"
       - "traefik.http.routers.pgadmin4.rule=Host(`catalog.geohistoricaldata.org`, `www.catalog.geohistoricaldata.org`) && PathPrefix(`/pgadmin`)"
+      - "traefik.http.routers.pgadmin4.tls=true"
+
 
   geonetwork:
     image: geonetwork:4.0.5
@@ -144,7 +127,10 @@ services:
       - gn-network
     labels:
       - "traefik.enable=true"
+      - "traefik.http.routers.geonetwork.entryPoints=websecure"      
       - "traefik.http.routers.geonetwork.rule=Host(`catalog.geohistoricaldata.org`, `www.catalog.geohistoricaldata.org`) && PathPrefix(`/geonetwork`)"
+      - "traefik.http.routers.geonetwork.tls=true"
+
 
 
   elasticsearch:
