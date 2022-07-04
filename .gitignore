@@ -1,2 +1,3 @@
 backup/volume_dump/
-traefik_config/ssl/traefik.*
+traefik_config/ssl/fullchain.crt
+traefik_config/ssl/privkey.pem
