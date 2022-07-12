@@ -41,6 +41,7 @@ services:
     networks:
       - gn-network
 
+
   database:
     image: postgis/postgis:11-2.5
     restart: always
@@ -132,7 +133,6 @@ services:
       - "traefik.http.routers.geonetwork.tls=true"
 
 
-
   elasticsearch:
     image: elasticsearch:7.9.2
     ulimits:
@@ -152,6 +152,7 @@ services:
     networks:
       - gn-network
 
+
   kibana:
     image: kibana:7.9.2
     environment:
@@ -165,6 +166,37 @@ services:
       - gn-network
     volumes:
       - kibanadata:/usr/share/kibana/data
+
+
+  ontop:
+    image: ontop/ontop-endpoint:4.2.0
+    restart: unless-stopped
+    environment:
+      ONTOP_ONTOLOGY_FILE: /opt/ontop/input/university-complete.ttl
+      ONTOP_MAPPING_FILE: /opt/ontop/input/university-complete.obda
+      ONTOP_PROPERTIES_FILE: /opt/ontop/input/test.compose.properties
+      # ONTOP_PORTAL_FILE: /opt/ontop/input/university-complete.portal.toml
+      ONTOP_CORS_ALLOWED_ORIGINS: "*"
+      ONTOP_DEV_MODE: "true"
+      ONTOP_LAZY_INIT: "true"
+      ONTOP_DB_URL: "database:5432"
+      ONTOP_DB_PASSWORD: "geonetwork"
+      ONTOP_DB_USER: "geonetwork"
+    volumes:
+      # files needed by ontop
+      - ./ontop_config/input:/opt/ontop/input
+      - ./ontop_config/jdbc:/opt/ontop/jdbc
+    # ports:
+    #   - "8080:8080"
+    depends_on:
+      - "database"
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.ontop.entryPoints=websecure"
+      - "traefik.http.routers.ontop.rule=Host(`catalog.geohistoricaldata.org`, `www.catalog.geohistoricaldata.org`) && PathPrefix(`/ontop`)"
+      - "traefik.http.routers.ontop.tls=true"
+      - "traefik.http.routers.ontop.middlewares=ontop-strip"
+      - "traefik.http.middlewares.ontop-strip.stripprefix.prefixes=/ontop"
 
 
   angular-service: # The name of the service
