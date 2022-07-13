@@ -8,6 +8,7 @@ volumes:
   pgdata:
   pglog:
   pgadmindata:
+  cantaloupdata:
 
 
 networks:
@@ -186,17 +187,37 @@ services:
       # files needed by ontop
       - ./ontop_config/input:/opt/ontop/input
       - ./ontop_config/jdbc:/opt/ontop/jdbc
-    # ports:
-    #   - "8080:8080"
     depends_on:
       - "database"
+    networks:
+      - gn-network    
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.ontop.entryPoints=websecure"
       - "traefik.http.routers.ontop.rule=Host(`catalog.geohistoricaldata.org`, `www.catalog.geohistoricaldata.org`) && PathPrefix(`/ontop`)"
       - "traefik.http.routers.ontop.tls=true"
+      # - "traefik.http.middlewares.ontop-redirectregex.redirectregex.regex=^https://.*/ontop"
+      # - "traefik.http.middlewares.ontop-redirectregex.redirectregex.replacement=https://.*/ontop/$${1}"      
+      # - "traefik.http.middlewares.ontop-strip.stripprefix.forceSlash=true"
+      - "traefik.http.middlewares.ontop-strip.stripprefix.prefixes=/ontop/"
       - "traefik.http.routers.ontop.middlewares=ontop-strip"
-      - "traefik.http.middlewares.ontop-strip.stripprefix.prefixes=/ontop"
+
+
+  cantaloupe:
+    image: uclalibrary/cantaloupe:5.0.5-1
+    restart: unless-stopped
+    volumes:
+      - ./cantaloupdata:/imageroot
+    networks:
+      - gn-network
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.cantaloupe.entryPoints=websecure"
+      - "traefik.http.routers.cantaloupe.rule=Host(`catalog.geohistoricaldata.org`, `www.catalog.geohistoricaldata.org`)"
+      - "traefik.http.routers.cantaloupe.tls=true"
+      # - "traefik.http.middlewares.cantaloupe-strip.stripprefix.forceSlash=true"
+      # - "traefik.http.middlewares.cantaloupe-strip.stripprefix.prefixes=/cantaloupe/"
+      # - "traefik.http.routers.cantaloupe.middlewares=cantaloupe-strip"
 
 
   angular-service: # The name of the service
