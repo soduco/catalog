@@ -1,0 +1,72 @@
+#--------------------------------------------------------------
+# Requete pour récupérer toutes les infos associées aux RecordSets
+#--------------------------------------------------------------
+PREFIX rico:<https://www.ica.org/standards/RiC/ontology#>
+select *
+where {?s a rico:RecordSet. ?s ?p ?o.}
+
+
+#--------------------------------------------------------------
+# Requete pour récupérer l'échelle d'une carte ancienne (infos associée à son RecordSet)
+#--------------------------------------------------------------
+PREFIX rico:<https://www.ica.org/standards/RiC/ontology#>
+PREFIX xys: <http://data.ign.fr/def/xysemantics#>
+select ?s ?name ?ech
+where {?s a rico:RecordSet. ?s rico:name ?name. ?s xys:geometricResolution ?res. ?res xys:scaleDenominator ?ech.}
+
+
+#--------------------------------------------------------------
+# Requete pour récupérer les dates de début et de fin associées à une carte ancienne (infos associée à son RecordSet)
+#--------------------------------------------------------------
+PREFIX rico:<https://www.ica.org/standards/RiC/ontology#>
+PREFIX xys: <http://data.ign.fr/def/xysemantics#>
+select ?s ?name ?d1 ?d2
+where {?s a rico:RecordSet. ?s rico:name ?name. ?s rico:isAssociatedWithDate ?dateRange. ?dateRange rico:beginningDate ?d1. ?dateRange rico:endDate ?d2.}
+
+
+#--------------------------------------------------------------
+# Requete pour récupérer les dates associées à une carte ancienne (infos associée à son RecordSet)
+#--------------------------------------------------------------
+PREFIX rico:<https://www.ica.org/standards/RiC/ontology#>
+PREFIX xys: <http://data.ign.fr/def/xysemantics#>
+select ?s ?name ?date
+where {?s a rico:RecordSet. ?s rico:name ?name. ?s rico:isAssociatedWithDate ?dateRange. ?dateRange rico:date ?date. }
+
+#--------------------------------------------------------------
+# Requete pour récupérer l'étendue spatiale d'une carte ancienne (info associée à son RecordSet)
+#--------------------------------------------------------------
+PREFIX rico:<https://www.ica.org/standards/RiC/ontology#>
+PREFIX xys: <http://data.ign.fr/def/xysemantics#>
+PREFIX gsp: <http://www.opengis.net/ont/geosparql#>
+
+select ?s ?name ?geoext
+where {?s a rico:RecordSet. ?s rico:name ?name. ?s xys:extent/xys:geographicElement/xys:polygon/gsp:asWKT ?geoext. }
+
+#--------------------------------------------------------------
+# Requete pour tester les relations d'inclusion entre RecordSets (relations "verticales")
+#--------------------------------------------------------------
+PREFIX rico:<https://www.ica.org/standards/RiC/ontology#>
+PREFIX xys: <http://data.ign.fr/def/xysemantics#>
+PREFIX gsp: <http://www.opengis.net/ont/geosparql#>
+
+select ?ns ?nr
+where {?s a rico:RecordSet. ?s rico:includesOrIncluded ?r. ?s rico:name ?ns. ?r rico:name ?nr. }
+
+#--------------------------------------------------------------
+# Requete pour tester les relations d'instantiation entre RecordSets et Instantiations (relations "horizontales" type rico:hasInstantiation)
+#--------------------------------------------------------------
+
+#--------------------------------------------------------------
+# Requete pour tester les relations d'instantiation entre Instantiations (relations "horizontales" type rico:hasDerivedInstantiation)
+#--------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
