@@ -56,7 +56,7 @@ source		SELECT *, (CASE presentation_form
 			WHEN NULL THEN ''
 			END) crsuri,
 			array_to_string(keywords,';') as motsclefs
-			FROM "public"."rico_recordsets_instances" 
+			FROM "public"."rico_recordsets_instances"
 			WHERE presentation_form LIKE 'mapDigital';
 
 mappingId	MAPID-f4025f619fea49ec9bf57b62846b2295
@@ -72,7 +72,7 @@ source		SELECT *, (CASE presentation_form
 			WHEN NULL THEN ''
 			END) crsuri,
 			array_to_string(keywords,';') AS motsclefs
-			FROM "public"."rico_recordsets_instances" 
+			FROM "public"."rico_recordsets_instances"
 			WHERE presentation_form Like 'mapHardcopy';
 
 mappingId	MAPID-0e2a463aef9d43cabdb3a7a3e53475c7
@@ -104,5 +104,13 @@ target		cat:instantiation/{res1} rico:hasDerivedInstantiation cat:instantiation/
 source		SELECT REC.uuid as res1, REL.uuid as res2
 			FROM "public"."rico_recordsets_instances" AS REC JOIN "public"."rico_horizontal_relations" AS REL ON REC."uuid"=REL."source"
 			WHERE REC.presentation_form IS NOT NULL;
+
+mappingId	MAPID-7b0382b380ea455980e99be82784238b
+target		cat:recordset/{uuid} rico:hasCreator cat:person/{contacts_cc} . cat:person/{contacts_cc} a rico:Person ; rico:isOrWasDescribedBy cat:corporateBody/SoducoProject ; rdfs:label {contacts_names}^^xsd:string ; rico:hasOrHadAgentName cat:agentName/{contacts_cc} . cat:agentName/{contacts_cc} a rico:AgentName ; rdfs:label {contacts_names}^^xsd:string ; rico:normalizedValue {contacts_names}^^xsd:string ; rico:isOrWasAgentNameOf cat:person/{contacts_cc} ; rico:isOrWasRegulatedBy alg:rule/rl001 ; rico:type "nom d'agent : forme préférée"@fr . cat:record/{contacts_cc} a rico:Record ; rico:hasDocumentaryFormType ric-dft:AuthorityRecord ; rdfs:label {contacts_notices}^^xsd:string ; rico:title {contacts_notices}^^xsd:string ; rico:describesOrDescribed cat:person/{contacts_cc} ; rdfs:seeAlso {contacts_uris}^^xsd:anyURI ; rico:hasCreator cat:corporateBody/SoducoProject ; rico:hasPublisher cat:corporateBody/SoducoProject ; rico:isOrWasRegulatedBy alg:rule/rl001 , alg:rule/rl003 , alg:rule/rl004 . 
+source		SELECT uuid, contacts_names, contacts_uris, REGEXP_REPLACE(contacts_names, ' ','') AS contacts_cc, CONCAT(contacts_names, ' : notice d''autorité') AS contacts_notices FROM "public"."rico_contacts" AS CTC WHERE CTC.contacts_roles LIKE 'originator' AND CTC.contacts_names IS NOT NULL;
+
+mappingId	MAPID-45245a2247d94dbb977ba40f0a89891f
+target		cat:instantiation/{uuid} rico:hasOrHadHolder cat:corporateBody/{contacts_cc} . cat:corporateBody/{contacts_cc} a rico:CorporateBody ; rico:isOrWasDescribedBy cat:corporateBody/SoducoProject ; rdfs:label {contacts_names}^^xsd:string ; rico:hasOrHadAgentName cat:agentName/{contacts_cc} . cat:agentName/{contacts_cc} a rico:AgentName ; rdfs:label {contacts_names}^^xsd:string ; rico:normalizedValue {contacts_names}^^xsd:string ; rico:isOrWasAgentNameOf cat:corporateBody/{contacts_cc} ; rico:isOrWasRegulatedBy alg:rule/rl001 ; rico:type "nom d'agent : forme préférée"@fr . cat:record/{contacts_cc} a rico:Record ; rico:hasDocumentaryFormType ric-dft:AuthorityRecord ; rdfs:label {contacts_notices}^^xsd:string ; rico:title {contacts_notices}^^xsd:string ; rico:describesOrDescribed cat:corporateBody/{contacts_cc} ; rdfs:seeAlso {contacts_uris}^^xsd:anyURI ; rico:hasCreator cat:corporateBody/SoducoProject ; rico:hasPublisher cat:corporateBody/SoducoProject ; rico:isOrWasRegulatedBy alg:rule/rl001 , alg:rule/rl003 , alg:rule/rl004 . 
+source		SELECT uuid, contacts_names, contacts_uris, REGEXP_REPLACE(contacts_names, ' ','') AS contacts_cc, CONCAT(contacts_names, ' : notice d''autorité') AS contacts_notices FROM "public"."rico_contacts" AS CTC WHERE CTC.contacts_roles LIKE 'custodian' AND CTC.contacts_names IS NOT NULL;
 ]]
 
