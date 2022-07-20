@@ -46,23 +46,36 @@ where {?s a rico:RecordSet. ?s rico:name ?name. ?s xys:extent/xys:geographicElem
 # Requete pour tester les relations d'inclusion entre RecordSets (relations "verticales")
 #--------------------------------------------------------------
 PREFIX rico:<https://www.ica.org/standards/RiC/ontology#>
-PREFIX xys: <http://data.ign.fr/def/xysemantics#>
-PREFIX gsp: <http://www.opengis.net/ont/geosparql#>
-
 select ?ns ?nr
 where {?s a rico:RecordSet. ?s rico:includesOrIncluded ?r. ?s rico:name ?ns. ?r rico:name ?nr. }
 
 #--------------------------------------------------------------
-# Requete pour tester les relations d'instantiation entre RecordSets et Instantiations (relations "horizontales" type rico:hasInstantiation)
+# Requete pour tester les relations d'instantiation entre RecordSets et Instantiations (relations "horizontales" type rico:hasInstantiation et rico:hasDerivedInstantiation)
 #--------------------------------------------------------------
+PREFIX rico:<https://www.ica.org/standards/RiC/ontology#>
+select ?ns ?nr
+where {?s a rico:RecordSet. ?s rico:hasInstantiation ?r. ?s rico:name ?ns. ?r rico:name ?nr. }
 
 #--------------------------------------------------------------
 # Requete pour tester les relations d'instantiation entre Instantiations (relations "horizontales" type rico:hasDerivedInstantiation)
 #--------------------------------------------------------------
+PREFIX rico:<https://www.ica.org/standards/RiC/ontology#>
+select ?ns ?nr
+where {?s a rico:Instantiation. ?s rico:hasDerivedInstantiation ?r. ?s rico:name ?ns. ?r rico:name ?nr. }
 
+#--------------------------------------------------------------
+# Requete pour retrouver l'auteur d'un RecordSet
+#--------------------------------------------------------------
+PREFIX rico:<https://www.ica.org/standards/RiC/ontology#>
+select ?n ?l
+where {?s a rico:RecordSet. ?s rico:name ?n. ?s rico:hasCreator ?c. ?c rdfs:label ?l.}
 
-
-
+#--------------------------------------------------------------
+# Requete pour retrouver l'institution qui conserve une archive
+#--------------------------------------------------------------
+PREFIX rico:<https://www.ica.org/standards/RiC/ontology#>
+select ?n ?l
+where {?s a rico:Instantiation. ?s rico:name ?n. ?s rico:hasOrHadHolder ?c. ?c rdfs:label ?l.}
 
 
 
