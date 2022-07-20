@@ -173,16 +173,13 @@ services:
     image: ontop/ontop-endpoint:4.2.0
     restart: unless-stopped
     environment:
-      ONTOP_ONTOLOGY_FILE: /opt/ontop/input/university-complete.ttl
-      ONTOP_MAPPING_FILE: /opt/ontop/input/university-complete.obda
-      ONTOP_PROPERTIES_FILE: /opt/ontop/input/test.compose.properties
+      ONTOP_ONTOLOGY_FILE: /opt/ontop/input/catalog.ttl
+      ONTOP_MAPPING_FILE: /opt/ontop/input/catalog.obda
+      ONTOP_PROPERTIES_FILE: /opt/ontop/input/catalog.properties
       # ONTOP_PORTAL_FILE: /opt/ontop/input/university-complete.portal.toml
       ONTOP_CORS_ALLOWED_ORIGINS: "*"
       ONTOP_DEV_MODE: "true"
       ONTOP_LAZY_INIT: "true"
-      ONTOP_DB_URL: "database:5432"
-      ONTOP_DB_PASSWORD: "geonetwork"
-      ONTOP_DB_USER: "geonetwork"
     volumes:
       # files needed by ontop
       - ./ontop_config/input:/opt/ontop/input
