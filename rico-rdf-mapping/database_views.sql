@@ -127,7 +127,7 @@ SELECT * FROM (
               ARRAY['mri', 'http://standards.iso.org/iso/19115/-3/mri/1.0']
          ])::text[]) AS contacts_roles,
     -- Contacts:Names
-    UNNEST(xpath('//mri:pointOfContact/cit:CI_Responsibility/cit:party/*/cit:name/gco:CharacterString/text()',
+    UNNEST(xpath('( //mri:pointOfContact/cit:CI_Responsibility/cit:party/cit:CI_Organisation | //mri:pointOfContact/cit:CI_Responsibility/cit:party//cit:CI_Individual)/cit:name/gco:CharacterString/text()',
          data::xml,
          ARRAY[
               ARRAY['cit', 'http://standards.iso.org/iso/19115/-3/cit/2.0'],
@@ -135,7 +135,7 @@ SELECT * FROM (
               ARRAY['mri', 'http://standards.iso.org/iso/19115/-3/mri/1.0']
          ])::text[]) AS contacts_names,   
     -- Contacts:URIs
-    UNNEST(xpath('//mri:pointOfContact/cit:CI_Responsibility/cit:party/*/cit:name/gco:CharacterString/text()',
+    UNNEST(xpath('//mri:pointOfContact/cit:CI_Responsibility/cit:party/cit:CI_Organisation//cit:CI_OnlineResource/cit:linkage/gco:CharacterString/text()',
          data::xml,
           ARRAY[
               ARRAY['cit', 'http://standards.iso.org/iso/19115/-3/cit/2.0'],
