@@ -198,6 +198,9 @@ services:
       # - "traefik.http.middlewares.ontop-strip.stripprefix.forceSlash=true"
       - "traefik.http.middlewares.ontop-strip.stripprefix.prefixes=/ontop/"
       - "traefik.http.routers.ontop.middlewares=ontop-strip"
+      # - "traefik.http.routers.ontop.middlewares=ontop-strip, redirect-sparql"
+      # - "traefik.http.middlewares.redirect-sparql.redirectregex.regex=^https(://catalog.geohistoricaldata.org/rdf/id/.*)"
+      # - "traefik.http.middlewares.redirect-sparql.redirectregex.replacement=https://catalog.geohistoricaldata.org/ontop/sparql?query=DESCRIBE+<http$${1}>"
 
 
   cantaloupe:
@@ -215,7 +218,9 @@ services:
       # - "traefik.http.middlewares.cantaloupe-strip.stripprefix.forceSlash=true"
       # - "traefik.http.middlewares.cantaloupe-strip.stripprefix.prefixes=/cantaloupe/"
       # - "traefik.http.routers.cantaloupe.middlewares=cantaloupe-strip"
-
+      - "traefik.http.routers.cantaloupe.middlewares=redirect-sparql"
+      - "traefik.http.middlewares.redirect-sparql.redirectregex.regex=^https(://catalog.geohistoricaldata.org/rdf/id/.*)"
+      - "traefik.http.middlewares.redirect-sparql.redirectregex.replacement=https://catalog.geohistoricaldata.org/ontop/sparql?query=DESCRIBE+<http$${1}>"
 
   angular-service: # The name of the service
     build: ./geonetwork-ui # Location of our Dockerfile
