@@ -2,4 +2,4 @@ backup/volume_dump/
 traefik_config/ssl/fullchain.crt
 traefik_config/ssl/privkey.pem
 verniquet_digitalization/*
-cantaloupdata/*
+cantaloupe/cantaloupdata/*
