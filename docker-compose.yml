@@ -207,7 +207,8 @@ services:
     image: uclalibrary/cantaloupe:5.0.5-1
     restart: unless-stopped
     volumes:
-      - ./cantaloupdata:/imageroot
+      - ./cantaloupe/cantaloupdata:/imageroot
+      - ./cantaloupe/cantaloupe.properties:/etc/cantaloupe.properties
     networks:
       - gn-network
     labels:
