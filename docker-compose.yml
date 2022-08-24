@@ -2,6 +2,7 @@ version: '3.5'
 
 volumes:
   geonetwork:
+  geonetwork_jetty:
   esdata:
   esbackup:
   kibanadata:
@@ -122,6 +123,7 @@ services:
       GEONETWORK_DB_PASSWORD: geonetwork
     volumes:
       - geonetwork:/catalogue-data
+      - geonetwork_jetty:/var/lib/jetty
     depends_on:
       - elasticsearch
       - database
