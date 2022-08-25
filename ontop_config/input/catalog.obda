@@ -41,11 +41,11 @@ source		SELECT *, (CASE crs
 			array_to_string(keywords,';') as motsclefs,
 			split_part(array_to_string(temporal_extent,';'), ';', 1) as date1,
 			split_part(array_to_string(temporal_extent,';'), ';', 2) as date2
-			FROM "public"."rico_recordsets_instances" WHERE presentation_form IS NULL;
+			FROM "public"."rico_instanciations" WHERE instanciation_type IS NULL;
 
 mappingId	MAPID-5981c67380a64441afd64ef3e53c0798
 target		cat:instantiation/{uuid} a rico:Instantiation ; rico:title {title}^^xsd:string ; geom:crs ign-crs:{crsuri} ; rico:descriptiveNote {motsclefs}^^xsd:string ; rico:hasCarrierType clt:{carrier} . 
-source		SELECT *, (CASE presentation_form
+source		SELECT *, (CASE instanciation_type
 			WHEN 'mapDigital' THEN '<ark:/67717/c25e8a3b-c22c-4f00-bb06-b13f8eccb732>'
 			END) carrier,
 			(CASE crs
@@ -56,12 +56,12 @@ source		SELECT *, (CASE presentation_form
 			WHEN NULL THEN ''
 			END) crsuri,
 			array_to_string(keywords,';') as motsclefs
-			FROM "public"."rico_recordsets_instances"
-			WHERE presentation_form LIKE 'mapDigital';
+			FROM "public"."rico_instanciations"
+			WHERE instanciation_type LIKE 'mapDigital';
 
 mappingId	MAPID-f4025f619fea49ec9bf57b62846b2295
 target		cat:instantiation/{uuid} a rico:Instantiation ; rico:title {title}^^xsd:string ; geom:crs ign-crs:{crsuri} ; rico:descriptiveNote {motsclefs}^^xsd:string ; rico:hasCarrierType alg:{carrier} . 
-source		SELECT *, (CASE presentation_form
+source		SELECT *, (CASE instanciation_type
 			WHEN 'mapHardcopy' THEN 'carrierType/FRAN_RI_002-d3nd9yh03b--1lx80czdt83ae>'
 			END) carrier,
 			(CASE crs
@@ -72,8 +72,8 @@ source		SELECT *, (CASE presentation_form
 			WHEN NULL THEN ''
 			END) crsuri,
 			array_to_string(keywords,';') AS motsclefs
-			FROM "public"."rico_recordsets_instances"
-			WHERE presentation_form Like 'mapHardcopy';
+			FROM "public"."rico_instanciations"
+			WHERE instanciation_type Like 'mapHardcopy';
 
 mappingId	MAPID-0e2a463aef9d43cabdb3a7a3e53475c7
 target		cat:recordset/{res1} rico:{ppte} cat:recordset/{res2} . 
@@ -81,8 +81,8 @@ source		SELECT REC.uuid as res1, REL.associations_ids as res2, (CASE REL.associa
 			WHEN 'isComposedOf' THEN 'includesOrIncluded'
 			WHEN 'largerWorkCitation' THEN 'isOrWasIncludedIn'
 			END) ppte
-			FROM "public"."rico_recordsets_instances" AS REC JOIN "public"."rico_vertical_relations" AS REL ON REC."uuid"=REL."uuid"
-			WHERE presentation_form IS NULL;
+			FROM "public"."rico_instanciations" AS REC JOIN "public"."rico_vertical_relations" AS REL ON REC."uuid"=REL."uuid"
+			WHERE instanciation_type IS NULL;
 
 mappingId	MAPID-51bce2f98a8948508df9b410c07e7867
 target		cat:instantiation/{res1} rico:{ppte} cat:instantiation/{res2} . 
@@ -90,20 +90,20 @@ source		SELECT REC.uuid as res1, REL.associations_ids as res2, (CASE REL.associa
 			WHEN 'isComposedOf' THEN 'includesOrIncluded'
 			WHEN 'largerWorkCitation' THEN 'isOrWasIncludedIn'
 			END) ppte
-			FROM "public"."rico_recordsets_instances" AS REC JOIN "public"."rico_vertical_relations" AS REL ON REC."uuid"=REL."uuid"
-			WHERE presentation_form IS NOT NULL;
+			FROM "public"."rico_instanciations" AS REC JOIN "public"."rico_vertical_relations" AS REL ON REC."uuid"=REL."uuid"
+			WHERE instanciation_type IS NOT NULL;
 
 mappingId	MAPID-8606fea9bb77463a90f641373261e481
 target		cat:recordset/{res1} rico:hasInstantiation cat:instantiation/{res2} . 
 source		SELECT REC.uuid as res1, REL.uuid as res2
-			FROM "public"."rico_recordsets_instances" AS REC JOIN "public"."rico_horizontal_relations" AS REL ON REC."uuid"=REL."source"
-			WHERE REC.presentation_form IS NULL;
+			FROM "public"."rico_instanciations" AS REC JOIN "public"."rico_horizontal_relations" AS REL ON REC."uuid"=REL."source"
+			WHERE REC.instanciation_type IS NULL;
 
 mappingId	MAPID-d15fd73a9f1942ddb1f561644e102ea3
 target		cat:instantiation/{res1} rico:hasDerivedInstantiation cat:instantiation/{res2} . 
 source		SELECT REC.uuid as res1, REL.uuid as res2
-			FROM "public"."rico_recordsets_instances" AS REC JOIN "public"."rico_horizontal_relations" AS REL ON REC."uuid"=REL."source"
-			WHERE REC.presentation_form IS NOT NULL;
+			FROM "public"."rico_instanciations" AS REC JOIN "public"."rico_horizontal_relations" AS REL ON REC."uuid"=REL."source"
+			WHERE REC.instanciation_type IS NOT NULL;
 
 mappingId	MAPID-7b0382b380ea455980e99be82784238b
 target		cat:recordset/{uuid} rico:hasCreator cat:person/{contacts_cc} . cat:person/{contacts_cc} a rico:Person ; rico:isOrWasDescribedBy cat:corporateBody/SoducoProject ; rdfs:label {contacts_names}^^xsd:string ; rico:hasOrHadAgentName cat:agentName/{contacts_cc} . cat:agentName/{contacts_cc} a rico:AgentName ; rdfs:label {contacts_names}^^xsd:string ; rico:normalizedValue {contacts_names}^^xsd:string ; rico:isOrWasAgentNameOf cat:person/{contacts_cc} ; rico:isOrWasRegulatedBy alg:rule/rl001 ; rico:type "nom d'agent : forme préférée"@fr . cat:record/{contacts_cc} a rico:Record ; rico:hasDocumentaryFormType ric-dft:AuthorityRecord ; rdfs:label {contacts_notices}^^xsd:string ; rico:title {contacts_notices}^^xsd:string ; rico:describesOrDescribed cat:person/{contacts_cc} ; rdfs:seeAlso {contacts_uris}^^xsd:anyURI ; rico:hasCreator cat:corporateBody/SoducoProject ; rico:hasPublisher cat:corporateBody/SoducoProject ; rico:isOrWasRegulatedBy alg:rule/rl001 , alg:rule/rl003 , alg:rule/rl004 . 
