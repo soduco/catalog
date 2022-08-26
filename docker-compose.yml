@@ -65,7 +65,7 @@ services:
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.database.entryPoints=websecure"
-      - "traefik.tcp.routers.database.rule=HostSNI(`*`,`database.catalog.geohistoricaldata.org`)"
+      - "traefik.tcp.routers.database.rule=HostSNI(`*`,`database.geohistoricaldata.org`)"
       - "traefik.tcp.routers.database.entryPoints=database"
       - "traefik.tcp.routers.database.service=database"
       - "traefik.tcp.services.database.loadbalancer.server.port=5432"
@@ -209,12 +209,16 @@ services:
   ontop_html:
     image: nginx:1.23
     restart: unless-stopped
+    networks:
+      - gn-network    
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.ontop_html.entryPoints=websecure"
-      - "traefik.http.routers.ontop_html.rule=Host(`nginx.geohistoricaldata.org`, `www.nginx.geohistoricaldata.org`)"
-      # - "traefik.http.routers.ontop_html.rule=Host(`catalog.geohistoricaldata.org`, `www.catalog.geohistoricaldata.org`) && PathPrefix(`/nginx`)"
+      - "traefik.http.routers.ontop_html.rule=Host(`ontop.geohistoricaldata.org`, `www.ontop.geohistoricaldata.org`) && PathPrefix(`/nginx`)"
       - "traefik.http.routers.ontop_html.tls=true"
+      - "traefik.http.middlewares.ontop_html-strip.stripprefix.prefixes=/nginx/"
+      - "traefik.http.routers.ontop_html.middlewares=ontop_html-strip"
+
 
   cantaloupe:
     image: uclalibrary/cantaloupe:5.0.5-1
