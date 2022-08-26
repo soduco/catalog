@@ -12,11 +12,6 @@ volumes:
   cantaloupdata:
 
 
-networks:
-  gn-network:
-    driver: bridge
-
-
 services:
   traefik:
     image: traefik:v2.7
@@ -40,8 +35,6 @@ services:
       - "traefik.http.routers.traefik.middlewares=traefik-strip"
       - "traefik.http.middlewares.traefik-strip.stripprefix.prefixes=/traefik"
       - "traefik.http.routers.traefik.rule=Host(`traefik.geohistoricaldata.org`, `www.traefik.geohistoricaldata.org`)"
-    networks:
-      - gn-network
 
 
   database:
@@ -60,8 +53,6 @@ services:
     volumes:
       - pgdata:/var/lib/postgresql/data
       - pglog:/var/log/postgresql
-    networks:
-      - gn-network
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.database.entryPoints=websecure"
@@ -85,8 +76,6 @@ services:
       - 5050:80
     volumes:
       - pgadmindata:/var/lib/pgadmin
-    networks:
-      - gn-network
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.pgadmin4.entryPoints=websecure"
@@ -131,8 +120,6 @@ services:
     depends_on:
       - elasticsearch
       - database
-    networks:
-      - gn-network
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.geonetwork.entryPoints=websecure"
@@ -161,8 +148,6 @@ services:
     volumes:
       - esdata:/usr/share/elasticsearch/data
       - esbackup:/usr/share/elasticsearch/snapshots
-    networks:
-      - gn-network
 
 
   kibana:
@@ -174,8 +159,6 @@ services:
       SERVER_REWRITEBASEPATH: 'false'
       KIBANA_INDEX: .dashboards
       XPACK_MONITORING_UI_CONTAINER_ELASTICSEARCH_ENABLED: 'true'
-    networks:
-      - gn-network
     volumes:
       - kibanadata:/usr/share/kibana/data
 
@@ -197,8 +180,6 @@ services:
       - ./ontop_config/jdbc:/opt/ontop/jdbc
     depends_on:
       - "database"
-    networks:
-      - gn-network    
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.ontop.entryPoints=websecure"
@@ -209,8 +190,6 @@ services:
   ontop_html:
     image: nginx:1.23
     restart: unless-stopped
-    networks:
-      - gn-network    
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.ontop_html.entryPoints=websecure"
@@ -226,8 +205,6 @@ services:
     volumes:
       - ./cantaloupe/cantaloupdata:/imageroot
       - ./cantaloupe/cantaloupe.properties:/etc/cantaloupe.properties
-    networks:
-      - gn-network
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.cantaloupe.entryPoints=websecure"
@@ -239,8 +216,6 @@ services:
     build: ./geonetwork-ui # Location of our Dockerfile
     volumes: # Volume binding
       - './geonetwork-ui:/usr/src/app'
-    networks:
-      - gn-network
     depends_on:
       - geonetwork
     command: > 
