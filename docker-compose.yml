@@ -134,6 +134,7 @@ services:
 
   elasticsearch:
     image: elasticsearch:7.9.2
+    restart: always
     ulimits:
       memlock:
         soft: -1
@@ -152,6 +153,7 @@ services:
 
   kibana:
     image: kibana:7.9.2
+    restart: always
     environment:
       SERVER_NAME: 'kibana'
       ELASTICSEARCH_URL: http://elasticsearch:9200/
