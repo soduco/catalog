@@ -41,7 +41,7 @@ source		SELECT *, (CASE crs
 			array_to_string(keywords,';') as motsclefs,
 			split_part(array_to_string(temporal_extent,';'), ';', 1) as date1,
 			split_part(array_to_string(temporal_extent,';'), ';', 2) as date2
-			FROM "public"."rico_instanciations" WHERE instanciation_type IS NULL;
+			FROM "public"."rico_recordsets";
 
 mappingId	MAPID-5981c67380a64441afd64ef3e53c0798
 target		cat:instantiation/{uuid} a rico:Instantiation ; rico:title {title}^^xsd:string ; geom:crs ign-crs:{crsuri} ; rico:descriptiveNote {motsclefs}^^xsd:string ; rico:hasCarrierType clt:{carrier} . 
