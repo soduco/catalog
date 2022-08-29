@@ -13,11 +13,12 @@ endpoints :
 TLS now enabled.
 
 Memo for futur certificate generation :
-Certbot used for certificate generation with "catalog.geohistoricaldata.org" domain name and this command :
-
-```bash
-sudo certbot certonly --webroot
-```
 
 list of subdomains for certbot :
-catalog.geohistoricaldata.org traefik.geohistoricaldata.org iiif.geohistoricaldata.org ontop.geohistoricaldata.org pgadmin.geohistoricaldata.org database.geohistoricaldata.org
+catalog.geohistoricaldata.org,traefik.geohistoricaldata.org,iiif.geohistoricaldata.org,ontop.geohistoricaldata.org,pgadmin.geohistoricaldata.org,database.geohistoricaldata.org
+
+Certbot used for certificate generation with this command (needs port 80 open, so with traefik down):
+
+```bash
+sudo certbot certonly --standalone -d catalog.geohistoricaldata.org,traefik.geohistoricaldata.org,iiif.geohistoricaldata.org,ontop.geohistoricaldata.org,pgadmin.geohistoricaldata.org,database.geohistoricaldata.org
+```
