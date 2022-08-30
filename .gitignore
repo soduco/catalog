@@ -1,5 +1,6 @@
 backup/volume_dump/
-traefik_config/ssl/fullchain.crt
-traefik_config/ssl/privkey.pem
-verniquet_digitalization/*
-cantaloupe/cantaloupdata/*
+backup/ssl_certs/
+config/traefik/ssl/fullchain.crt
+config/traefik/ssl/privkey.pem
+backup/verniquet_digitalization/*
+config/cantaloupe/cantaloupdata/*
