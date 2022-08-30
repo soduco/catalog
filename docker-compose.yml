@@ -64,7 +64,7 @@ services:
 
 
   pgadmin4:
-    image: dpage/pgadmin4:6.9
+    image: dpage/pgadmin4:6.13
     restart: always
     environment:
       PGADMIN_DEFAULT_EMAIL: admin@soduco.com
