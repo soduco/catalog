@@ -4,3 +4,4 @@ config/traefik/ssl/fullchain.crt
 config/traefik/ssl/privkey.pem
 backup/verniquet_digitalization/*
 config/cantaloupe/cantaloupdata/*
+scripts/upload/__pycache__/*
