@@ -1,6 +1,3 @@
-[submodule "docker-geonetwork"]
-	path = docker-geonetwork
-	url = https://github.com/soduco/docker-geonetwork.git
 [submodule "geonetwork-ui"]
 	path = geonetwork-ui
 	url = https://github.com/soduco/geonetwork-ui.git
