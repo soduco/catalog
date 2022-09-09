@@ -5,3 +5,4 @@ config/traefik/ssl/privkey.pem
 backup/verniquet_digitalization/*
 config/cantaloupe/cantaloupdata/*
 scripts/upload/__pycache__/*
+scripts/upload/datasets/rumsey/records
