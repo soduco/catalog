@@ -192,6 +192,8 @@ services:
   ontop_html:
     image: nginx:1.23
     restart: unless-stopped
+    volumes:
+      - ./config/nginx:/usr/share/nginx/html
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.ontop_html.entryPoints=websecure"
