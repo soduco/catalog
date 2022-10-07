@@ -3,6 +3,6 @@ backup/ssl_certs/
 config/traefik/ssl/fullchain.crt
 config/traefik/ssl/privkey.pem
 backup/verniquet_digitalization/*
-config/cantaloupe/cantaloupdata/*
+data/cantaloupdata/*
 scripts/upload/__pycache__/*
 scripts/upload/datasets/rumsey/records

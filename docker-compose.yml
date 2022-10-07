@@ -32,8 +32,6 @@ services:
       - "traefik.http.routers.traefik.entryPoints=websecure"
       - "traefik.http.routers.traefik.tls=true"
       - "traefik.http.routers.traefik.service=api@internal"
-      - "traefik.http.routers.traefik.middlewares=traefik-strip"
-      - "traefik.http.middlewares.traefik-strip.stripprefix.prefixes=/traefik"
       - "traefik.http.routers.traefik.rule=Host(`traefik.geohistoricaldata.org`, `www.traefik.geohistoricaldata.org`)"
 
 
@@ -207,7 +205,7 @@ services:
     image: uclalibrary/cantaloupe:5.0.5-1
     restart: unless-stopped
     volumes:
-      - ./config/cantaloupe/cantaloupdata:/imageroot
+      - ./data/cantaloupdata:/imageroot
       - ./config/cantaloupe/cantaloupe.properties:/etc/cantaloupe.properties
     labels:
       - "traefik.enable=true"
