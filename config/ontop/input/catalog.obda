@@ -61,7 +61,7 @@ source		SELECT *, (CASE instanciation_type
 
 mappingId	MAPID-0e2a463aef9d43cabdb3a7a3e53475c7
 target		cat:recordset/{res1} rico:{ppte} cat:recordset/{res2} . 
-source		SELECT REC.uuid as res1, REL.associations_ids as res2, (CASE REL.associations_types
+source		SELECT REC.uuid as res1, REL.parent as res2, (CASE REL.association
 			WHEN 'isComposedOf' THEN 'includesOrIncluded'
 			WHEN 'largerWorkCitation' THEN 'isOrWasIncludedIn'
 			END) ppte
@@ -69,7 +69,7 @@ source		SELECT REC.uuid as res1, REL.associations_ids as res2, (CASE REL.associa
 
 mappingId	MAPID-51bce2f98a8948508df9b410c07e7867
 target		cat:instantiation/{res1} rico:{ppte} cat:instantiation/{res2} . 
-source		SELECT REC.uuid as res1, REL.associations_ids as res2, (CASE REL.associations_types
+source		SELECT REC.uuid as res1, REL.parent as res2, (CASE REL.association
 			WHEN 'isComposedOf' THEN 'hasOrHadComponent'
 			WHEN 'largerWorkCitation' THEN 'isOrWasComponentOf'
 			END) ppte
@@ -78,12 +78,12 @@ source		SELECT REC.uuid as res1, REL.associations_ids as res2, (CASE REL.associa
 mappingId	MAPID-8606fea9bb77463a90f641373261e481
 target		cat:recordset/{res1} rico:hasInstantiation cat:instantiation/{res2} . 
 source		SELECT REC.uuid as res1, REL.uuid as res2
-			FROM "public"."rico_instanciations" AS REC JOIN "public"."rico_horizontal_relations" AS REL ON REC."uuid"=REL."source";
+			FROM "public"."rico_recordsets" AS REC JOIN "public"."rico_horizontal_relations" AS REL ON REC."uuid"=REL."parent";
 
 mappingId	MAPID-d15fd73a9f1942ddb1f561644e102ea3
 target		cat:instantiation/{res1} rico:hasDerivedInstantiation cat:instantiation/{res2} . 
 source		SELECT REC.uuid as res1, REL.uuid as res2
-			FROM "public"."rico_instanciations" AS REC JOIN "public"."rico_horizontal_relations" AS REL ON REC."uuid"=REL."source";
+			FROM "public"."rico_instanciations" AS REC JOIN "public"."rico_horizontal_relations" AS REL ON REC."uuid"=REL."parent";
 
 mappingId	MAPID-7b0382b380ea455980e99be82784238b
 target		cat:recordset/{uuid} rico:hasCreator cat:person/{contacts_cc} . cat:person/{contacts_cc} a rico:Person ; rico:isOrWasDescribedBy cat:corporateBody/SoducoProject ; rdfs:label {contacts_names}^^xsd:string ; rico:hasOrHadAgentName cat:agentName/{contacts_cc} . cat:agentName/{contacts_cc} a rico:AgentName ; rdfs:label {contacts_names}^^xsd:string ; rico:normalizedValue {contacts_names}^^xsd:string ; rico:isOrWasAgentNameOf cat:person/{contacts_cc} ; rico:isOrWasRegulatedBy alg:rule/rl001 ; rico:type "nom d'agent : forme préférée"@fr . cat:record/{contacts_cc} a rico:Record ; rico:hasDocumentaryFormType ric-dft:AuthorityRecord ; rdfs:label {contacts_notices}^^xsd:string ; rico:title {contacts_notices}^^xsd:string ; rico:describesOrDescribed cat:person/{contacts_cc} ; rdfs:seeAlso {contacts_uris}^^xsd:anyURI ; rico:hasCreator cat:corporateBody/SoducoProject ; rico:hasPublisher cat:corporateBody/SoducoProject ; rico:isOrWasRegulatedBy alg:rule/rl001 , alg:rule/rl003 , alg:rule/rl004 . 
