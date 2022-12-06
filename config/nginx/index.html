@@ -1,0 +1,67 @@
+<html>
+<meta charset="UTF-8">
+
+<head>
+  <title>Affichage des données: </title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+</head>
+
+<body>
+	<table id="table" border="1"></table>
+	<script>
+		//On récupère l'URL demandée
+		// var url = window.location.href
+		// Local test
+		// url = url.replace("https://ontop.geohistoricaldata.org/nginx/","https://ontop.geohistoricaldata.org/sparql")
+		//On remplace 'page' par 'id'
+		// var newUrl = url.replace('page', 'id')
+		//Requête SPARQL pour récupérer les données sur les monuments historiques de Paris		
+		// var queryString = "DESCRIBE <"+newUrl+">"
+		// console.log(queryString);
+		//On encode la requête pour l'envoyer par HTTP				
+		var queryURL = "https://ontop.geohistoricaldata.org/sparql?query=DESCRIBE+%3Chttp://catalog.geohistoricaldata.org/rdf/id/recordset/076e85f9-d3ed-4cc9-a439-54c9ee38475f%3E"+"&output=json";
+		console.log(queryURL)
+
+
+		//the JSON data we want to render
+		$.getJSON(queryURL, function(data) {
+			//run the rendering
+			// console.log(data)
+			fillTable(data, $("#table"))
+		});
+
+
+		function fillTable(data, tbl) {
+      // Getting the all column names
+      //var cols = Headers(list, selector); 
+      // var headers = data["head"]["vars"]
+      console.log(data)
+      // var $tr
+      // $.each(data, function(i, item) {
+      //   for (const [key, value] of Object.entries(item)) {
+      //     console.log(value)
+      //     $tr = $('<tr>').append(
+      //       $('<td>').text(value)
+      //     ) //.appendTo('#records_table')
+      //   }
+
+      //   console.log($tr.wrap('<p>').html())
+      // })
+
+      // var rows = []
+      // // Traversing the JSON data
+      // for (var i = 0; i < triples.length; i++) {
+      //   row = $("<tr/>")
+      //   for (const [key, value] of Object.entries(triples)) {
+      //     var cell_value = value
+      //     row.append($("<td/>")).html(cell_value)
+      //   }
+      //   rows.push(row)
+      // }
+      // tbl.append(rows)
+		}
+
+
+	</script>
+</body>
+</html>
