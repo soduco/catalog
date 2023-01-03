@@ -6,3 +6,5 @@ backup/verniquet_digitalization/*
 data/cantaloupdata/*
 scripts/upload/__pycache__/*
 scripts/upload/datasets/rumsey/records
+
+password_encryptor_dump.txt
