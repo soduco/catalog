@@ -1,5 +1,5 @@
 backup/volume_dump/
-backup/ssl_certs/
+backup/config/
 config/traefik/ssl/*
 config/traefik/ssl_old/
 verniquet_digitalization/
