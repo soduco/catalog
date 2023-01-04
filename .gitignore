@@ -2,7 +2,7 @@ backup/volume_dump/
 backup/ssl_certs/
 config/traefik/ssl/*
 config/traefik/ssl_old/
-backup/verniquet_digitalization/*
+verniquet_digitalization/
 data/cantaloupdata/*
 scripts/upload/__pycache__/*
 scripts/upload/datasets/rumsey/records
