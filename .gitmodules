@@ -1,0 +1,3 @@
+[submodule "webgl2-preview"]
+	path = webgl2-preview
+	url = https://github.com/soduco/webgl2-preview.git
