@@ -83,7 +83,7 @@ services:
     image: dpage/pgadmin4:6.13
     restart: always
     environment:
-      PGADMIN_DEFAULT_EMAIL: admin@soduco.com
+      PGADMIN_DEFAULT_EMAIL: admin@soduco.fr
       PGADMIN_DEFAULT_PASSWORD: admin
       # SCRIPT_NAME needed for url
       SCRIPT_NAME: /pgadmin
@@ -182,12 +182,9 @@ services:
 
 
   preview:
-    build: webgl2-preview/.
+    image: webgl2-preview
+    #Build: webgl2-preview/.
     restart: unless-stopped
-    depends_on:
-      - "geonetwork"
-    volumes:
-      - previewdata:/usr/share/nginx/html
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.preview.entryPoints=websecure"
@@ -234,8 +231,14 @@ services:
 
 
   cantaloupe:
-    image: uclalibrary/cantaloupe:5.0.5-1
+    image: uclalibrary/cantaloupe:5.0.5-4
     restart: unless-stopped
+    cpus: 4
+    mem_limit: 16g
+    environment:
+      HEAP_PERCENTAGE: "50"
+      HEAP_SIZE: "16g"
+      JAVA_OPTS: "-Xmx16g"
     volumes:
       - ./data/cantaloupdata:/imageroot
       - ./config/cantaloupe/cantaloupe.properties:/etc/cantaloupe.properties
