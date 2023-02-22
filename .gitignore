@@ -8,6 +8,6 @@ scripts/upload/__pycache__/*
 scripts/upload/datasets/rumsey/records
 *.lock
 dist/
-.env
+.env.secret
 
 __pycache__
