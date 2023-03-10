@@ -7,61 +7,97 @@
 </head>
 
 <body>
-	<table id="table" border="1"></table>
+  <table id="table" border="1"></table>
+
 	<script>
 		//On récupère l'URL demandée
-		// var url = window.location.href
-		// Local test
-		// url = url.replace("https://ontop.geohistoricaldata.org/nginx/","https://ontop.geohistoricaldata.org/sparql")
-		//On remplace 'page' par 'id'
-		// var newUrl = url.replace('page', 'id')
-		//Requête SPARQL pour récupérer les données sur les monuments historiques de Paris		
-		// var queryString = "DESCRIBE <"+newUrl+">"
-		// console.log(queryString);
-		//On encode la requête pour l'envoyer par HTTP				
-		var queryURL = "https://ontop.geohistoricaldata.org/sparql?query=DESCRIBE+%3Chttp://catalog.geohistoricaldata.org/rdf/id/recordset/076e85f9-d3ed-4cc9-a439-54c9ee38475f%3E"+"&output=json";
-		console.log(queryURL)
+		var queryURL = window.location.href
+
+    //On encode la requête SPARQL pour l'envoyer par HTTP
+		queryURL = queryURL.replace("https://ontop.geohistoricaldata.org/nginx","https://ontop.geohistoricaldata.org/sparql")
+    // console.log(queryURL)
+    // // Test url
+		// var queryURL = "https://ontop.geohistoricaldata.org/sparql?query=DESCRIBE+<http://catalog.geohistoricaldata.org/rdf/id/instantiation/a1c2d2d2-3865-4a23-9aeb-4237a6fa965b>";
+		// console.log(queryURL)
 
 
-		//the JSON data we want to render
-		$.getJSON(queryURL, function(data) {
-			//run the rendering
-			// console.log(data)
-			fillTable(data, $("#table"))
-		});
+		//the XML response we want to render
+    //run the rendering
+    $.ajax({
+            type: "GET",
+            url: queryURL,
+            cache: false,
+            dataType: "json",
+            success: function(json) {
+              // console.log(json)
+              fillTable(json, $("#table"))
+            }
+        });
 
+    // Querry pour uniquement 1 ressource
+		function fillTable(json_response, tbl) {
+      var rows = []
+      var rdf = json_response[0];
+      
+      // console.log(rdf)
 
-		function fillTable(data, tbl) {
-      // Getting the all column names
-      //var cols = Headers(list, selector); 
-      // var headers = data["head"]["vars"]
-      console.log(data)
-      // var $tr
-      // $.each(data, function(i, item) {
-      //   for (const [key, value] of Object.entries(item)) {
-      //     console.log(value)
-      //     $tr = $('<tr>').append(
-      //       $('<td>').text(value)
-      //     ) //.appendTo('#records_table')
-      //   }
+      // On boucle sur les clefs de la réponse json
+      Object.keys(rdf).forEach( (key) => {
+        row = $("<tbody>");
+        
+        // Si les valeurs de la clef sont dans un tableau, on le parcourt
+        // et on construit une ligne par valeur (sinon les cases sont mises à la suite et sont trop petites)
+        if (Array.isArray(rdf[key])) {
+          rdf[key].forEach(e => {
+            row.append($("<tr>"));
+            if (key) {
+              // Pour la première colonne si la case contient un "#" on supprime la partie avant pour plus de lisibilité
+              containsHashtag(key) ? row.append("<td>" + deleteNamespace(key)[0] + "</td>") : row.append("<td>" + key + "</td>");
+              // On vérifie que les valeurs dans le tableau sont des strings ou des objets
+              if (typeof e === 'string' || e instanceof String) {
+                row.append("<td>" + e + "</td>")
+                // console.log(containsHashtag(e))
+                // deleteNamespace(e)
+              }
+              else if (typeof(e) === 'object' && rdf[key] !== null) {
+                row.append("<td>" + e[Object.keys(e)[0]] + "</td>")
+              }
+              row.append($("</tr>"));
+            }
+          })
+        }
+        else {
+          row.append($("<tr>"));
+          row.append("<td>" + key + "</td>");
+          row.append("<td>" + rdf[key] + "</td>")
+          row.append($("</tr>"))
+        }
+        row.append($("</tbody>"))
+        rows.push(row)
+      });
 
-      //   console.log($tr.wrap('<p>').html())
-      // })
+      tbl.append(rows)
+    }
 
-      // var rows = []
-      // // Traversing the JSON data
-      // for (var i = 0; i < triples.length; i++) {
-      //   row = $("<tr/>")
-      //   for (const [key, value] of Object.entries(triples)) {
-      //     var cell_value = value
-      //     row.append($("<td/>")).html(cell_value)
-      //   }
-      //   rows.push(row)
-      // }
-      // tbl.append(rows)
-		}
+    function containsHashtag(string) {
+      const regExp = /#/gm;
+      return regExp.test(string);
+    }
 
-
+    // returns an array
+    function deleteNamespace(string) {
+      return string.match(/(?<=#).*/gm);
+    }
 	</script>
 </body>
 </html>
+
+<!-- for (const [key, value] of Object.entries(item)) {
+  console.log("key :")
+  console.log(key)
+  console.log("value :")
+  console.log(value)
+  var $tr = $('<tr>').append(
+    $('<td>').text(value)
+  ).appendTo('#table')
+}; -->
