@@ -1,3 +1,6 @@
 [submodule "webgl2-preview"]
 	path = webgl2-preview
 	url = https://github.com/soduco/webgl2-preview.git
+[submodule "LodView"]
+	path = LodView
+	url = https://github.com/soduco/LodView.git
