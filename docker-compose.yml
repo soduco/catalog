@@ -104,7 +104,7 @@ services:
 
 
   geonetwork:
-    image: geonetwork:4.2.2
+    image: geonetwork:4.2.5
     restart: always
     environment:
       DATA_DIR: /catalogue-data
@@ -145,7 +145,7 @@ services:
       - "traefik.http.middlewares.redirect-geonetwork.redirectregex.regex=^https:\\/\\/([^\\/]+)\\/?$$"
       - "traefik.http.middlewares.redirect-geonetwork.redirectregex.replacement=https://$$1/geonetwork"
       - "traefik.http.middlewares.redirect-sparql.redirectregex.regex=^https(://catalog.geohistoricaldata.org/rdf/id/.*)"
-      - "traefik.http.middlewares.redirect-sparql.redirectregex.replacement=https://ontop.geohistoricaldata.org/nginx?query=DESCRIBE+<http$${1}>"
+      - "traefik.http.middlewares.redirect-sparql.redirectregex.replacement=https://ontop.geohistoricaldata.org/sparql?query=DESCRIBE+<http$${1}>"
 
 
   elasticsearch:
