@@ -216,18 +216,54 @@ services:
       - "traefik.http.routers.ontop.tls=true"
 
 
-  ontop_html:
-    image: nginx:1.23
+  # ontop_html:
+  #   image: nginx:1.23
+  #   restart: unless-stopped
+  #   volumes:
+  #     - ./config/nginx:/usr/share/nginx/html
+  #   labels:
+  #     - "traefik.enable=true"
+  #     - "traefik.http.routers.ontop_html.entryPoints=websecure"
+  #     - "traefik.http.routers.ontop_html.rule=Host(`ontop.geohistoricaldata.org`, `www.ontop.geohistoricaldata.org`) && PathPrefix(`/nginx`)"
+  #     - "traefik.http.routers.ontop_html.tls=true"
+  #     - "traefik.http.middlewares.ontop_html-strip.stripprefix.prefixes=/nginx"
+  #     - "traefik.http.routers.ontop_html.middlewares=ontop_html-strip"
+
+
+  lodview:
+    image: lodview:latest
     restart: unless-stopped
-    volumes:
-      - ./config/nginx:/usr/share/nginx/html
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.ontop_html.entryPoints=websecure"
-      - "traefik.http.routers.ontop_html.rule=Host(`ontop.geohistoricaldata.org`, `www.ontop.geohistoricaldata.org`) && PathPrefix(`/nginx`)"
-      - "traefik.http.routers.ontop_html.tls=true"
-      - "traefik.http.middlewares.ontop_html-strip.stripprefix.prefixes=/nginx"
-      - "traefik.http.routers.ontop_html.middlewares=ontop_html-strip"
+      - "traefik.http.routers.lodview.entryPoints=websecure"
+      - "traefik.http.routers.lodview.rule=Host(`rdf.geohistoricaldata.org`, `www.rdf.geohistoricaldata.org`)"
+      - "traefik.http.routers.lodview.tls=true"
+      - "traefik.http.routers.lodview.middlewares=redirect-lodview"
+      - "traefik.http.middlewares.redirect-lodview.redirectregex.regex=^https:\\/\\/([^\\/]+)\\/?$$"
+      - "traefik.http.middlewares.redirect-lodview.redirectregex.replacement=https://$$1/lodview"
+
+# Ontop for Solenn's work.
+# Container's name must be changed to something better, like ontop_dir
+  ontop_rdf:
+    image: ontop/ontop-endpoint:4.2.0
+    restart: unless-stopped
+    environment:
+      ONTOP_ONTOLOGY_FILE: /opt/ontop/input/directory.ttl
+      ONTOP_MAPPING_FILE: /opt/ontop/input/directory_saved.obda
+      ONTOP_PROPERTIES_FILE: /opt/ontop/input/directory.properties
+      # ONTOP_PORTAL_FILE: /opt/ontop/input/university-complete.portal.toml
+      ONTOP_CORS_ALLOWED_ORIGINS: "*"
+      ONTOP_DEV_MODE: "true"
+      ONTOP_LAZY_INIT: "true"
+    volumes:
+      # files needed by ontop
+      - ./config/ontop_photographes/input:/opt/ontop/input
+      - ./config/ontop_photographes/jdbc:/opt/ontop/jdbc
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.ontop_rdf.entryPoints=websecure"
+      - "traefik.http.routers.ontop_rdf.rule=Host(`dir.geohistoricaldata.org`, `www.dir.geohistoricaldata.org`)"
+      - "traefik.http.routers.ontop_rdf.tls=true"
 
 
   cantaloupe:

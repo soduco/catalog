@@ -1,0 +1,67 @@
+[PrefixDeclaration]
+:		http://example.org/voc#
+cc:		http://creativecommons.org/ns#
+dc:		http://purl.org/dc/elements/1.1/
+ex:		http://example.org/
+sf:		http://www.opengis.net/ont/sf#
+adb:		http://rdf.geohistoricaldata.org/def/directory#
+alg:		http://data.alegoria-project.fr/id/anf/
+cat:		http://catalog.geohistoricaldata.org/rdf/id/
+clt:		http://data.culture.fr/thesaurus/resource/
+gsp:		http://www.opengis.net/ont/geosparql#
+owl:		http://www.w3.org/2002/07/owl#
+pav:		http://purl.org/pav/
+rda:		http://rdaregistry.info/Elements/a/
+rdf:		http://www.w3.org/1999/02/22-rdf-syntax-ns#
+xml:		http://www.w3.org/XML/1998/namespace
+xsd:		http://www.w3.org/2001/XMLSchema#
+xys:		http://data.ign.fr/def/xysemantics#
+data:		http://rdf.geohistoricaldata.org/id/directories/
+foaf:		http://xmlns.com/foaf/0.1/
+geom:		http://data.ign.fr/def/geometrie#
+html:		http://www.w3.org/1999/xhtml
+ignf:		http://data.ign.fr/def/ignf#
+locn:		http://www.w3.org/ns/locn#
+obda:		https://w3id.org/obda/vocabulary#
+prov:		http://www.w3.org/ns/prov#
+rdfs:		http://www.w3.org/2000/01/rdf-schema#
+rico:		https://www.ica.org/standards/RiC/ontology#
+skos:		http://www.w3.org/2004/02/skos/core#
+time:		http://www.w3.org/2006/time#
+vann:		http://purl.org/vocab/vann/
+voaf:		http://purl.org/vocommons/voaf#
+dcterms:		http://purl.org/dc/terms/
+ign-crs:		http://data.ign.fr/id/ignf/crs/
+ric-dft:		https://www.ica.org/standards/RiC/vocabularies/documentaryFormTypes#
+ric-rst:		https://www.ica.org/standards/RiC/vocabularies/recordSetTypes#
+organization:	http://www.w3.org/ns/org#
+
+[MappingDeclaration] @collection [[
+mappingId	MAPID-2a851f885c024d0babf35f1a653339bc
+target		data:directory/{directory} a adb:Directory ; pav:createdOn {published}^^xsd:integer ; rdfs:label {directory}^^xsd:string . 
+source		select * from directories_graph.directories
+
+mappingId	MAPID-d5f34f2efdaf45278789bec6572853e3
+target		data:activity/0002 rdfs:comment "Géocodage historique"@fr ; prov:atTime "2022-08-31"^^xsd:dateTime ; prov:used data:entry/{entry_id} . 
+source		select distinct * from directories_graph.geocoding
+
+mappingId	MAPID-348da7258faf42acaeb43491994444db
+target		data:entry/{entry_id} a adb:Entry ; adb:numEntry {entry_id}^^xsd:integer ; prov:wasDerivedFrom data:directory/{directory} ; rdfs:label {nom_per}^^xsd:string ; rda:P50104 {nom_act}^^xsd:string ; locn:address _:address/{fulladd} . _:address/{fulladd} a locn:Address ; prov:wasGeneratedBy data:activity/0001 ; locn:thoroughfare {loc}@fr ; locn:locatorDesignator {cardinal}^^xsd:string ; locn:fullAddress {fulladd}@fr . 
+source		select * from directories_graph.directories_content
+
+mappingId	MAPID-3953b625580a41a5b09699f068cfbab6
+target		data:activity/0001 a prov:Activity ; prov:atTime "2022-06-15"^^xsd:dateTime ; rdfs:comment "Segmentation des entrées, reconnaissance du texte et des entités nommées."^^xsd:string ; prov:generated data:entry/{entry_index} ; prov:used data:directory/{directory} . 
+source		select distinct * from directories_graph.elements
+
+mappingId	MAPID-1f79d04717894630b2cd3416a05e706d
+target		data:entry/{entry_id} locn:address _:address_gcd/{entry_id} . _:address_gcd/{entry_id} a locn:Address ; prov:wasGeneratedBy data:activity/0002 ; locn:fullAddress {rsp}@fr ; gsp:hasGeometry _:geom/{rsp} . _:geom/{rsp} a gsp:Geometry ; gsp:asWKT "<http://www.opengis.net/def/crs/OGC/1.3/CRS84> {geom}"^^gsp:wktLiteral . 
+source		select elt.entry_id, gcd.precise_geo_response as rsp, gcd.precise_geom as geom  from directories_graph.geocoding gcd join directories_graph.elements elt on (gcd.entry_id=elt.entry_index);
+
+mappingId	MAPID-73173d30b7d14afbb3274f588bc8ac6c
+target		data:entry/{entry_id1} owl:sameAs data:entry/{entry_id2} . 
+source		select * from directories_graph.liens
+
+mappingId	MAPID-7a855c40fa4d43eabcffcb242272ed94
+target		data:entry/{entry_id} owl:sameAs {uri}^^xsd:anyURI . 
+source		select * from directories_graph.liens_externes
+]]

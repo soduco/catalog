@@ -8,3 +8,5 @@ scripts/upload/__pycache__/*
 scripts/upload/datasets/rumsey/records
 .env
 password_encryptor_dump.txt
+config/ontop/input/catalog.properties
+config/ontop_photographes/input/directory.properties
