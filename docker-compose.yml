@@ -54,7 +54,7 @@ services:
 
 
   database:
-    image: postgis/postgis:11-2.5
+    image: postgresql-pgcron
     restart: always
     environment:
       POSTGRES_USER: geonetwork
@@ -65,7 +65,11 @@ services:
                "-c", "logging_collector=true",
                "-c", "log_file_mode=0644",
                "-c", "log_directory=/var/log/postgresql",
-               "-c", "log_filename=postgresql.log" ]
+               "-c", "log_filename=postgresql.log",
+               "-c", "shared_preload_libraries=pg_cron",
+               "-c", "cron.database_name=geonetwork",
+      	       "-c", "cron.log_run=off",
+               "-c", "cron.timezone=Europe/Paris", ]
     volumes:
       - pgdata:/var/lib/postgresql/data
       - pglog:/var/log/postgresql
