@@ -153,7 +153,7 @@ services:
 
 
   elasticsearch:
-    image: elasticsearch:7.9.2
+    image: elasticsearch:7.17.13
     restart: always
     ulimits:
       memlock:
@@ -287,3 +287,13 @@ services:
       - "traefik.http.routers.cantaloupe.entryPoints=websecure"
       - "traefik.http.routers.cantaloupe.rule=Host(`iiif.geohistoricaldata.org`, `www.iiif.geohistoricaldata.org`)"
       - "traefik.http.routers.cantaloupe.tls=true"
+
+
+  # geonetwork-ui:
+  #   image: geonetwork-ui
+  #   restart: unless-stopped
+  #   labels:
+  #     - "traefik.enable=true"
+  #     - "traefik.http.routers.cantaloupe.entryPoints=websecure"
+  #     - "traefik.http.routers.cantaloupe.rule=Host(`iiif.geohistoricaldata.org`, `www.iiif.geohistoricaldata.org`)"
+  #     - "traefik.http.routers.cantaloupe.tls=true"
