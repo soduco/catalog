@@ -271,7 +271,8 @@ services:
 
 
   cantaloupe:
-    image: uclalibrary/cantaloupe:5.0.5-4
+    image: registry.gitlab.teklia.com/iiif/cantaloupe:5.0.5
+    # image: uclalibrary/cantaloupe:5.0.5-4
     restart: unless-stopped
     cpus: 4
     mem_limit: 16g
@@ -287,7 +288,7 @@ services:
       - "traefik.http.routers.cantaloupe.entryPoints=websecure"
       - "traefik.http.routers.cantaloupe.rule=Host(`iiif.geohistoricaldata.org`, `www.iiif.geohistoricaldata.org`)"
       - "traefik.http.routers.cantaloupe.tls=true"
-
+      - "traefik.http.services.cantaloupe.loadbalancer.server.port=8182"
 
   # geonetwork-ui:
   #   image: geonetwork-ui
