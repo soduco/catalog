@@ -270,6 +270,7 @@ services:
       - "traefik.http.routers.ontop_rdf.tls=true"
 
 
+# Teklia image expose port 80. We need to redirect traefik to port 8182
   cantaloupe:
     image: registry.gitlab.teklia.com/iiif/cantaloupe:5.0.5
     # image: uclalibrary/cantaloupe:5.0.5-4
