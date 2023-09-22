@@ -190,10 +190,10 @@ services:
     #Build: webgl2-preview/.
     restart: unless-stopped
     labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.preview.entryPoints=websecure"
-      - "traefik.http.routers.preview.rule=Host(`preview.geohistoricaldata.org`, `www.preview.geohistoricaldata.org`)"
-      - "traefik.http.routers.preview.tls=true"
+      - "traefik.enable=false"
+      # - "traefik.http.routers.preview.entryPoints=websecure"
+      # - "traefik.http.routers.preview.rule=Host(`preview.geohistoricaldata.org`, `www.preview.geohistoricaldata.org`)"
+      # - "traefik.http.routers.preview.tls=true"
 
 
   ontop:
@@ -291,11 +291,24 @@ services:
       - "traefik.http.routers.cantaloupe.tls=true"
       - "traefik.http.services.cantaloupe.loadbalancer.server.port=8182"
 
-  # geonetwork-ui:
-  #   image: geonetwork-ui
-  #   restart: unless-stopped
-  #   labels:
-  #     - "traefik.enable=true"
-  #     - "traefik.http.routers.cantaloupe.entryPoints=websecure"
-  #     - "traefik.http.routers.cantaloupe.rule=Host(`iiif.geohistoricaldata.org`, `www.iiif.geohistoricaldata.org`)"
-  #     - "traefik.http.routers.cantaloupe.tls=true"
+  geonetwork-ui:
+    image: geonetwork/geonetwork-ui-datahub
+    restart: unless-stopped
+    environment:
+      - GN4_API_URL=https://catalog.geohistoricaldata.org/geonetwork/srv/api
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.geonetwork-ui.entryPoints=websecure"
+      - "traefik.http.routers.geonetwork-ui.rule=Host(`preview.geohistoricaldata.org`, `www.preview.geohistoricaldata.org`)"
+      - "traefik.http.routers.geonetwork-ui.tls=true"
+
+  map-proxy:
+    image: ghcr.io/mapproxy/mapproxy/mapproxy:1.16.0-nginx
+    restart: unless-stopped
+    volumes:
+      - ./config/map_proxy:/mapproxy/config
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.map-proxy.entryPoints=websecure"
+      - "traefik.http.routers.map-proxy.rule=Host(`map.geohistoricaldata.org`, `www.map.geohistoricaldata.org`)"
+      - "traefik.http.routers.map-proxy.tls=true"
