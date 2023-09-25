@@ -58,7 +58,7 @@ services:
     restart: always
     environment:
       POSTGRES_USER: geonetwork
-      POSTGRES_PASSWORD: geonetwork
+      POSTGRES_PASSWORD: $POSTGRES_PASSWORD
       POSTGRES_DB: geonetwork
     command: [ "postgres",
                "-c", "log_statement=all",
@@ -87,8 +87,8 @@ services:
     image: dpage/pgadmin4:7.6
     restart: always
     environment:
-      PGADMIN_DEFAULT_EMAIL: admin@soduco.fr
-      PGADMIN_DEFAULT_PASSWORD: admin
+      PGADMIN_DEFAULT_EMAIL: $PGADMIN_DEFAULT_EMAIL
+      PGADMIN_DEFAULT_PASSWORD: $PGADMIN_DEFAULT_PASSWORD
       # SCRIPT_NAME needed for url
       SCRIPT_NAME: /pgadmin
     # ports need to stay, even with traefik, or it will cause a security error
@@ -133,7 +133,7 @@ services:
       GEONETWORK_DB_PORT: 5432
       GEONETWORK_DB_NAME: geonetwork
       GEONETWORK_DB_USERNAME: geonetwork
-      GEONETWORK_DB_PASSWORD: geonetwork
+      GEONETWORK_DB_PASSWORD: $POSTGRES_PASSWORD
     volumes:
       - geonetwork:/catalogue-data
       - geonetwork_jetty:/var/lib/jetty
@@ -272,8 +272,8 @@ services:
 
 # Teklia image expose port 80. We need to redirect traefik to port 8182
   cantaloupe:
-    image: registry.gitlab.teklia.com/iiif/cantaloupe:5.0.5
-    # image: uclalibrary/cantaloupe:5.0.5-4
+    #image: registry.gitlab.teklia.com/iiif/cantaloupe:5.0.5
+    image: uclalibrary/cantaloupe:5.0.5-7
     restart: unless-stopped
     cpus: 4
     mem_limit: 16g
@@ -281,6 +281,8 @@ services:
       HEAP_PERCENTAGE: "50"
       HEAP_SIZE: "16g"
       JAVA_OPTS: "-Xmx16g"
+      CANTALOUPE_ENDPOINT_ADMIN_ENABLED: "true"
+      CANTALOUPE_ENDPOINT_ADMIN_SECRET: $CANTALOUPE_PASSWORD
     volumes:
       - ./data/cantaloupdata:/imageroot
       - ./config/cantaloupe/cantaloupe.properties:/etc/cantaloupe.properties
