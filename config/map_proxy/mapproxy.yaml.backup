@@ -1,0 +1,77 @@
+# -------------------------------
+# MapProxy example configuration.
+# -------------------------------
+#
+# This is a minimal MapProxy configuration.
+# See full_example.yaml and the documentation for more options.
+#
+
+# Starts the following services:
+# Demo:
+#     http://localhost:8080/demo
+# WMS:
+#     capabilities: http://localhost:8080/service?REQUEST=GetCapabilities
+# WMTS:
+#     capabilities: http://localhost:8080/wmts/1.0.0/WMTSCapabilities.xml
+#     first tile: http://localhost:8080/wmts/osm/webmercator/0/0/0.png
+# Tile service (compatible with OSM/etc.)
+#     first tile: http://localhost:8080/tiles/osm/webmercator/0/0/0.png
+# TMS:
+#     note: TMS is not compatible with OSM/Google Maps/etc.
+#     first tile: http://localhost:8080/tms/1.0.0/osm/webmercator/0/0/0.png
+# KML:
+#     initial doc: http://localhost:8080/kml/osm/webmercator
+
+services:
+  demo:
+  tms:
+    use_grid_names: true
+    # origin for /tiles service
+    origin: 'nw'
+  kml:
+      use_grid_names: true
+  wmts:
+  wms:
+    md:
+      title: MapProxy WMS Proxy
+      abstract: This is a minimal MapProxy example.
+
+layers:
+  - name: osm
+    title: Omniscale OSM WMS - osm.omniscale.net
+    sources: [osm_cache]
+
+  - name: verniquet_bnf_44
+    title: Atlas du plan general de la ville de Paris, feuille 44
+    sources: [verniquet_bnf_44_cache]
+
+caches:
+  osm_cache:
+    grids: [webmercator]
+    sources: [osm_wms]
+
+  verniquet_bnf_44_cache:
+    grids: [webmercator]
+    sources: [verniquet_bnf_44_tms]
+
+sources:
+  osm_wms:
+    type: wms
+    req:
+      url: https://maps.omniscale.net/v2/demo/style.default/service?
+      layers: osm
+
+  verniquet_bnf_44_tms:
+    type: tile
+    grid: webmercator
+    url: https://allmaps.xyz/%(z)s/%(x)s/%(y)s.png?url=https://dataverse.harvard.edu/api/access/datafile/7002723
+    coverage:
+      bbox: [2.3259038953800517, 48.846871413007726, 2.34183776146025, 48.853882225819824]
+      srs: 'EPSG:4326'
+    transparent: true
+
+grids:
+    webmercator:
+        base: GLOBAL_WEBMERCATOR
+
+globals:

@@ -1,77 +1,3084 @@
-# -------------------------------
-# MapProxy example configuration.
-# -------------------------------
-#
-# This is a minimal MapProxy configuration.
-# See full_example.yaml and the documentation for more options.
-#
-
-# Starts the following services:
-# Demo:
-#     http://localhost:8080/demo
-# WMS:
-#     capabilities: http://localhost:8080/service?REQUEST=GetCapabilities
-# WMTS:
-#     capabilities: http://localhost:8080/wmts/1.0.0/WMTSCapabilities.xml
-#     first tile: http://localhost:8080/wmts/osm/webmercator/0/0/0.png
-# Tile service (compatible with OSM/etc.)
-#     first tile: http://localhost:8080/tiles/osm/webmercator/0/0/0.png
-# TMS:
-#     note: TMS is not compatible with OSM/Google Maps/etc.
-#     first tile: http://localhost:8080/tms/1.0.0/osm/webmercator/0/0/0.png
-# KML:
-#     initial doc: http://localhost:8080/kml/osm/webmercator
-
 services:
-  demo:
   tms:
     use_grid_names: true
-    # origin for /tiles service
-    origin: 'nw'
+    origin: nw
   kml:
-      use_grid_names: true
-  wmts:
+    use_grid_names: true
+  wmts: {}
   wms:
     md:
       title: MapProxy WMS Proxy
       abstract: This is a minimal MapProxy example.
-
 layers:
-  - name: osm
-    title: Omniscale OSM WMS - osm.omniscale.net
-    sources: [osm_cache]
-
-  - name: verniquet_bnf_44
-    title: Atlas du plan general de la ville de Paris, feuille 44
-    sources: [verniquet_bnf_44_cache]
-
+- name: verniquet_bnf_1
+  title: Atlas du plan general de la ville de Paris, feuille 1 [Exemplaire bnf]
+  sources:
+  - verniquet_bnf_1_cache
+- name: verniquet_bnf_2
+  title: Atlas du plan general de la ville de Paris, feuille 2 [Exemplaire bnf]
+  sources:
+  - verniquet_bnf_2_cache
+- name: verniquet_bnf_3
+  title: Atlas du plan general de la ville de Paris, feuille 3 [Exemplaire bnf]
+  sources:
+  - verniquet_bnf_3_cache
+- name: verniquet_bnf_4
+  title: Atlas du plan general de la ville de Paris, feuille 4 [Exemplaire bnf]
+  sources:
+  - verniquet_bnf_4_cache
+- name: verniquet_bnf_5
+  title: Atlas du plan general de la ville de Paris, feuille 5 [Exemplaire bnf]
+  sources:
+  - verniquet_bnf_5_cache
+- name: verniquet_bnf_6
+  title: Atlas du plan general de la ville de Paris, feuille 6 [Exemplaire bnf]
+  sources:
+  - verniquet_bnf_6_cache
+- name: verniquet_bnf_7
+  title: Atlas du plan general de la ville de Paris, feuille 7 [Exemplaire bnf]
+  sources:
+  - verniquet_bnf_7_cache
+- name: verniquet_bnf_8
+  title: Atlas du plan general de la ville de Paris, feuille 8 [Exemplaire bnf]
+  sources:
+  - verniquet_bnf_8_cache
+- name: verniquet_bnf_9
+  title: Atlas du plan general de la ville de Paris, feuille 9 [Exemplaire bnf]
+  sources:
+  - verniquet_bnf_9_cache
+- name: verniquet_bnf_10
+  title: Atlas du plan general de la ville de Paris, feuille 10 [Exemplaire bnf]
+  sources:
+  - verniquet_bnf_10_cache
+- name: verniquet_bnf_11
+  title: Atlas du plan general de la ville de Paris, feuille 11 [Exemplaire bnf]
+  sources:
+  - verniquet_bnf_11_cache
+- name: verniquet_bnf_12
+  title: Atlas du plan general de la ville de Paris, feuille 12 [Exemplaire bnf]
+  sources:
+  - verniquet_bnf_12_cache
+- name: verniquet_bnf_13
+  title: Atlas du plan general de la ville de Paris, feuille 13 [Exemplaire bnf]
+  sources:
+  - verniquet_bnf_13_cache
+- name: verniquet_bnf_14
+  title: Atlas du plan general de la ville de Paris, feuille 14 [Exemplaire bnf]
+  sources:
+  - verniquet_bnf_14_cache
+- name: verniquet_bnf_15
+  title: Atlas du plan general de la ville de Paris, feuille 15 [Exemplaire bnf]
+  sources:
+  - verniquet_bnf_15_cache
+- name: verniquet_bnf_16
+  title: Atlas du plan general de la ville de Paris, feuille 16 [Exemplaire bnf]
+  sources:
+  - verniquet_bnf_16_cache
+- name: verniquet_bnf_17
+  title: Atlas du plan general de la ville de Paris, feuille 17 [Exemplaire bnf]
+  sources:
+  - verniquet_bnf_17_cache
+- name: verniquet_bnf_18
+  title: Atlas du plan general de la ville de Paris, feuille 18 [Exemplaire bnf]
+  sources:
+  - verniquet_bnf_18_cache
+- name: verniquet_bnf_19
+  title: Atlas du plan general de la ville de Paris, feuille 19 [Exemplaire bnf]
+  sources:
+  - verniquet_bnf_19_cache
+- name: verniquet_bnf_20
+  title: Atlas du plan general de la ville de Paris, feuille 20 [Exemplaire bnf]
+  sources:
+  - verniquet_bnf_20_cache
+- name: verniquet_bnf_21
+  title: Atlas du plan general de la ville de Paris, feuille 21 [Exemplaire bnf]
+  sources:
+  - verniquet_bnf_21_cache
+- name: verniquet_bnf_22
+  title: Atlas du plan general de la ville de Paris, feuille 22 [Exemplaire bnf]
+  sources:
+  - verniquet_bnf_22_cache
+- name: verniquet_bnf_23
+  title: Atlas du plan general de la ville de Paris, feuille 23 [Exemplaire bnf]
+  sources:
+  - verniquet_bnf_23_cache
+- name: verniquet_bnf_24
+  title: Atlas du plan general de la ville de Paris, feuille 24 [Exemplaire bnf]
+  sources:
+  - verniquet_bnf_24_cache
+- name: verniquet_bnf_25
+  title: Atlas du plan general de la ville de Paris, feuille 25 [Exemplaire bnf]
+  sources:
+  - verniquet_bnf_25_cache
+- name: verniquet_bnf_26
+  title: Atlas du plan general de la ville de Paris, feuille 26 [Exemplaire bnf]
+  sources:
+  - verniquet_bnf_26_cache
+- name: verniquet_bnf_27
+  title: Atlas du plan general de la ville de Paris, feuille 27 [Exemplaire bnf]
+  sources:
+  - verniquet_bnf_27_cache
+- name: verniquet_bnf_28
+  title: Atlas du plan general de la ville de Paris, feuille 28 [Exemplaire bnf]
+  sources:
+  - verniquet_bnf_28_cache
+- name: verniquet_bnf_29
+  title: Atlas du plan general de la ville de Paris, feuille 29 [Exemplaire bnf]
+  sources:
+  - verniquet_bnf_29_cache
+- name: verniquet_bnf_30
+  title: Atlas du plan general de la ville de Paris, feuille 30 [Exemplaire bnf]
+  sources:
+  - verniquet_bnf_30_cache
+- name: verniquet_bnf_31
+  title: Atlas du plan general de la ville de Paris, feuille 31 [Exemplaire bnf]
+  sources:
+  - verniquet_bnf_31_cache
+- name: verniquet_bnf_32
+  title: Atlas du plan general de la ville de Paris, feuille 32 [Exemplaire bnf]
+  sources:
+  - verniquet_bnf_32_cache
+- name: verniquet_bnf_33
+  title: Atlas du plan general de la ville de Paris, feuille 33 [Exemplaire bnf]
+  sources:
+  - verniquet_bnf_33_cache
+- name: verniquet_bnf_34
+  title: Atlas du plan general de la ville de Paris, feuille 34 [Exemplaire bnf]
+  sources:
+  - verniquet_bnf_34_cache
+- name: verniquet_bnf_35
+  title: Atlas du plan general de la ville de Paris, feuille 35 [Exemplaire bnf]
+  sources:
+  - verniquet_bnf_35_cache
+- name: verniquet_bnf_36
+  title: Atlas du plan general de la ville de Paris, feuille 36 [Exemplaire bnf]
+  sources:
+  - verniquet_bnf_36_cache
+- name: verniquet_bnf_37
+  title: Atlas du plan general de la ville de Paris, feuille 37 [Exemplaire bnf]
+  sources:
+  - verniquet_bnf_37_cache
+- name: verniquet_bnf_38
+  title: Atlas du plan general de la ville de Paris, feuille 38 [Exemplaire bnf]
+  sources:
+  - verniquet_bnf_38_cache
+- name: verniquet_bnf_39
+  title: Atlas du plan general de la ville de Paris, feuille 39 [Exemplaire bnf]
+  sources:
+  - verniquet_bnf_39_cache
+- name: verniquet_bnf_40
+  title: Atlas du plan general de la ville de Paris, feuille 40 [Exemplaire bnf]
+  sources:
+  - verniquet_bnf_40_cache
+- name: verniquet_bnf_41
+  title: Atlas du plan general de la ville de Paris, feuille 41 [Exemplaire bnf]
+  sources:
+  - verniquet_bnf_41_cache
+- name: verniquet_bnf_42
+  title: Atlas du plan general de la ville de Paris, feuille 42 [Exemplaire bnf]
+  sources:
+  - verniquet_bnf_42_cache
+- name: verniquet_bnf_43
+  title: Atlas du plan general de la ville de Paris, feuille 43 [Exemplaire bnf]
+  sources:
+  - verniquet_bnf_43_cache
+- name: verniquet_bnf_44
+  title: Atlas du plan general de la ville de Paris, feuille 44 [Exemplaire bnf]
+  sources:
+  - verniquet_bnf_44_cache
+- name: verniquet_bnf_45
+  title: Atlas du plan general de la ville de Paris, feuille 45 [Exemplaire bnf]
+  sources:
+  - verniquet_bnf_45_cache
+- name: verniquet_bnf_46
+  title: Atlas du plan general de la ville de Paris, feuille 46 [Exemplaire bnf]
+  sources:
+  - verniquet_bnf_46_cache
+- name: verniquet_bnf_47
+  title: Atlas du plan general de la ville de Paris, feuille 47 [Exemplaire bnf]
+  sources:
+  - verniquet_bnf_47_cache
+- name: verniquet_bnf_48
+  title: Atlas du plan general de la ville de Paris, feuille 48 [Exemplaire bnf]
+  sources:
+  - verniquet_bnf_48_cache
+- name: verniquet_bnf_49
+  title: Atlas du plan general de la ville de Paris, feuille 49 [Exemplaire bnf]
+  sources:
+  - verniquet_bnf_49_cache
+- name: verniquet_bnf_50
+  title: Atlas du plan general de la ville de Paris, feuille 50 [Exemplaire bnf]
+  sources:
+  - verniquet_bnf_50_cache
+- name: verniquet_bnf_51
+  title: Atlas du plan general de la ville de Paris, feuille 51 [Exemplaire bnf]
+  sources:
+  - verniquet_bnf_51_cache
+- name: verniquet_bnf_52
+  title: Atlas du plan general de la ville de Paris, feuille 52 [Exemplaire bnf]
+  sources:
+  - verniquet_bnf_52_cache
+- name: verniquet_bnf_53
+  title: Atlas du plan general de la ville de Paris, feuille 53 [Exemplaire bnf]
+  sources:
+  - verniquet_bnf_53_cache
+- name: verniquet_bnf_54
+  title: Atlas du plan general de la ville de Paris, feuille 54 [Exemplaire bnf]
+  sources:
+  - verniquet_bnf_54_cache
+- name: verniquet_bnf_55
+  title: Atlas du plan general de la ville de Paris, feuille 55 [Exemplaire bnf]
+  sources:
+  - verniquet_bnf_55_cache
+- name: verniquet_bnf_56
+  title: Atlas du plan general de la ville de Paris, feuille 56 [Exemplaire bnf]
+  sources:
+  - verniquet_bnf_56_cache
+- name: verniquet_bnf_57
+  title: Atlas du plan general de la ville de Paris, feuille 57 [Exemplaire bnf]
+  sources:
+  - verniquet_bnf_57_cache
+- name: verniquet_bnf_58
+  title: Atlas du plan general de la ville de Paris, feuille 58 [Exemplaire bnf]
+  sources:
+  - verniquet_bnf_58_cache
+- name: verniquet_bnf_59
+  title: Atlas du plan general de la ville de Paris, feuille 59 [Exemplaire bnf]
+  sources:
+  - verniquet_bnf_59_cache
+- name: verniquet_bnf_60
+  title: Atlas du plan general de la ville de Paris, feuille 60 [Exemplaire bnf]
+  sources:
+  - verniquet_bnf_60_cache
+- name: verniquet_bnf_61
+  title: Atlas du plan general de la ville de Paris, feuille 61 [Exemplaire bnf]
+  sources:
+  - verniquet_bnf_61_cache
+- name: verniquet_bnf_62
+  title: Atlas du plan general de la ville de Paris, feuille 62 [Exemplaire bnf]
+  sources:
+  - verniquet_bnf_62_cache
+- name: verniquet_bnf_63
+  title: Atlas du plan general de la ville de Paris, feuille 63 [Exemplaire bnf]
+  sources:
+  - verniquet_bnf_63_cache
+- name: verniquet_bnf_64
+  title: Atlas du plan general de la ville de Paris, feuille 64 [Exemplaire bnf]
+  sources:
+  - verniquet_bnf_64_cache
+- name: verniquet_bnf_65
+  title: Atlas du plan general de la ville de Paris, feuille 65 [Exemplaire bnf]
+  sources:
+  - verniquet_bnf_65_cache
+- name: verniquet_bnf_66
+  title: Atlas du plan general de la ville de Paris, feuille 66 [Exemplaire bnf]
+  sources:
+  - verniquet_bnf_66_cache
+- name: verniquet_bnf_67
+  title: Atlas du plan general de la ville de Paris, feuille 67 [Exemplaire bnf]
+  sources:
+  - verniquet_bnf_67_cache
+- name: verniquet_bnf_68
+  title: Atlas du plan general de la ville de Paris, feuille 68 [Exemplaire bnf]
+  sources:
+  - verniquet_bnf_68_cache
+- name: verniquet_bnf_69
+  title: Atlas du plan general de la ville de Paris, feuille 69 [Exemplaire bnf]
+  sources:
+  - verniquet_bnf_69_cache
+- name: verniquet_bnf_70
+  title: Atlas du plan general de la ville de Paris, feuille 70 [Exemplaire bnf]
+  sources:
+  - verniquet_bnf_70_cache
+- name: verniquet_bnf_71
+  title: Atlas du plan general de la ville de Paris, feuille 71 [Exemplaire bnf]
+  sources:
+  - verniquet_bnf_71_cache
+- name: verniquet_bnf_72
+  title: Atlas du plan general de la ville de Paris, feuille 72 [Exemplaire bnf]
+  sources:
+  - verniquet_bnf_72_cache
+- name: verniquet_bnf
+  title: Atlas du plan general de la ville de Paris [Exemplaire bnf]
+  sources:
+  - verniquet_bnf_cache
+- name: verniquet_stanford_1
+  title: Atlas du plan general de la ville de Paris, feuille 1 [Exemplaire stanford]
+  sources:
+  - verniquet_stanford_1_cache
+- name: verniquet_stanford_2
+  title: Atlas du plan general de la ville de Paris, feuille 2 [Exemplaire stanford]
+  sources:
+  - verniquet_stanford_2_cache
+- name: verniquet_stanford_3
+  title: Atlas du plan general de la ville de Paris, feuille 3 [Exemplaire stanford]
+  sources:
+  - verniquet_stanford_3_cache
+- name: verniquet_stanford_4
+  title: Atlas du plan general de la ville de Paris, feuille 4 [Exemplaire stanford]
+  sources:
+  - verniquet_stanford_4_cache
+- name: verniquet_stanford_5
+  title: Atlas du plan general de la ville de Paris, feuille 5 [Exemplaire stanford]
+  sources:
+  - verniquet_stanford_5_cache
+- name: verniquet_stanford_6
+  title: Atlas du plan general de la ville de Paris, feuille 6 [Exemplaire stanford]
+  sources:
+  - verniquet_stanford_6_cache
+- name: verniquet_stanford_7
+  title: Atlas du plan general de la ville de Paris, feuille 7 [Exemplaire stanford]
+  sources:
+  - verniquet_stanford_7_cache
+- name: verniquet_stanford_8
+  title: Atlas du plan general de la ville de Paris, feuille 8 [Exemplaire stanford]
+  sources:
+  - verniquet_stanford_8_cache
+- name: verniquet_stanford_9
+  title: Atlas du plan general de la ville de Paris, feuille 9 [Exemplaire stanford]
+  sources:
+  - verniquet_stanford_9_cache
+- name: verniquet_stanford_10
+  title: Atlas du plan general de la ville de Paris, feuille 10 [Exemplaire stanford]
+  sources:
+  - verniquet_stanford_10_cache
+- name: verniquet_stanford_11
+  title: Atlas du plan general de la ville de Paris, feuille 11 [Exemplaire stanford]
+  sources:
+  - verniquet_stanford_11_cache
+- name: verniquet_stanford_12
+  title: Atlas du plan general de la ville de Paris, feuille 12 [Exemplaire stanford]
+  sources:
+  - verniquet_stanford_12_cache
+- name: verniquet_stanford_13
+  title: Atlas du plan general de la ville de Paris, feuille 13 [Exemplaire stanford]
+  sources:
+  - verniquet_stanford_13_cache
+- name: verniquet_stanford_14
+  title: Atlas du plan general de la ville de Paris, feuille 14 [Exemplaire stanford]
+  sources:
+  - verniquet_stanford_14_cache
+- name: verniquet_stanford_15
+  title: Atlas du plan general de la ville de Paris, feuille 15 [Exemplaire stanford]
+  sources:
+  - verniquet_stanford_15_cache
+- name: verniquet_stanford_16
+  title: Atlas du plan general de la ville de Paris, feuille 16 [Exemplaire stanford]
+  sources:
+  - verniquet_stanford_16_cache
+- name: verniquet_stanford_17
+  title: Atlas du plan general de la ville de Paris, feuille 17 [Exemplaire stanford]
+  sources:
+  - verniquet_stanford_17_cache
+- name: verniquet_stanford_18
+  title: Atlas du plan general de la ville de Paris, feuille 18 [Exemplaire stanford]
+  sources:
+  - verniquet_stanford_18_cache
+- name: verniquet_stanford_19
+  title: Atlas du plan general de la ville de Paris, feuille 19 [Exemplaire stanford]
+  sources:
+  - verniquet_stanford_19_cache
+- name: verniquet_stanford_20
+  title: Atlas du plan general de la ville de Paris, feuille 20 [Exemplaire stanford]
+  sources:
+  - verniquet_stanford_20_cache
+- name: verniquet_stanford_21
+  title: Atlas du plan general de la ville de Paris, feuille 21 [Exemplaire stanford]
+  sources:
+  - verniquet_stanford_21_cache
+- name: verniquet_stanford_22
+  title: Atlas du plan general de la ville de Paris, feuille 22 [Exemplaire stanford]
+  sources:
+  - verniquet_stanford_22_cache
+- name: verniquet_stanford_23
+  title: Atlas du plan general de la ville de Paris, feuille 23 [Exemplaire stanford]
+  sources:
+  - verniquet_stanford_23_cache
+- name: verniquet_stanford_24
+  title: Atlas du plan general de la ville de Paris, feuille 24 [Exemplaire stanford]
+  sources:
+  - verniquet_stanford_24_cache
+- name: verniquet_stanford_25
+  title: Atlas du plan general de la ville de Paris, feuille 25 [Exemplaire stanford]
+  sources:
+  - verniquet_stanford_25_cache
+- name: verniquet_stanford_26
+  title: Atlas du plan general de la ville de Paris, feuille 26 [Exemplaire stanford]
+  sources:
+  - verniquet_stanford_26_cache
+- name: verniquet_stanford_27
+  title: Atlas du plan general de la ville de Paris, feuille 27 [Exemplaire stanford]
+  sources:
+  - verniquet_stanford_27_cache
+- name: verniquet_stanford_28
+  title: Atlas du plan general de la ville de Paris, feuille 28 [Exemplaire stanford]
+  sources:
+  - verniquet_stanford_28_cache
+- name: verniquet_stanford_29
+  title: Atlas du plan general de la ville de Paris, feuille 29 [Exemplaire stanford]
+  sources:
+  - verniquet_stanford_29_cache
+- name: verniquet_stanford_30
+  title: Atlas du plan general de la ville de Paris, feuille 30 [Exemplaire stanford]
+  sources:
+  - verniquet_stanford_30_cache
+- name: verniquet_stanford_31
+  title: Atlas du plan general de la ville de Paris, feuille 31 [Exemplaire stanford]
+  sources:
+  - verniquet_stanford_31_cache
+- name: verniquet_stanford_32
+  title: Atlas du plan general de la ville de Paris, feuille 32 [Exemplaire stanford]
+  sources:
+  - verniquet_stanford_32_cache
+- name: verniquet_stanford_33
+  title: Atlas du plan general de la ville de Paris, feuille 33 [Exemplaire stanford]
+  sources:
+  - verniquet_stanford_33_cache
+- name: verniquet_stanford_34
+  title: Atlas du plan general de la ville de Paris, feuille 34 [Exemplaire stanford]
+  sources:
+  - verniquet_stanford_34_cache
+- name: verniquet_stanford_35
+  title: Atlas du plan general de la ville de Paris, feuille 35 [Exemplaire stanford]
+  sources:
+  - verniquet_stanford_35_cache
+- name: verniquet_stanford_36
+  title: Atlas du plan general de la ville de Paris, feuille 36 [Exemplaire stanford]
+  sources:
+  - verniquet_stanford_36_cache
+- name: verniquet_stanford_37
+  title: Atlas du plan general de la ville de Paris, feuille 37 [Exemplaire stanford]
+  sources:
+  - verniquet_stanford_37_cache
+- name: verniquet_stanford_38
+  title: Atlas du plan general de la ville de Paris, feuille 38 [Exemplaire stanford]
+  sources:
+  - verniquet_stanford_38_cache
+- name: verniquet_stanford_39
+  title: Atlas du plan general de la ville de Paris, feuille 39 [Exemplaire stanford]
+  sources:
+  - verniquet_stanford_39_cache
+- name: verniquet_stanford_40
+  title: Atlas du plan general de la ville de Paris, feuille 40 [Exemplaire stanford]
+  sources:
+  - verniquet_stanford_40_cache
+- name: verniquet_stanford_41
+  title: Atlas du plan general de la ville de Paris, feuille 41 [Exemplaire stanford]
+  sources:
+  - verniquet_stanford_41_cache
+- name: verniquet_stanford_42
+  title: Atlas du plan general de la ville de Paris, feuille 42 [Exemplaire stanford]
+  sources:
+  - verniquet_stanford_42_cache
+- name: verniquet_stanford_43
+  title: Atlas du plan general de la ville de Paris, feuille 43 [Exemplaire stanford]
+  sources:
+  - verniquet_stanford_43_cache
+- name: verniquet_stanford_44
+  title: Atlas du plan general de la ville de Paris, feuille 44 [Exemplaire stanford]
+  sources:
+  - verniquet_stanford_44_cache
+- name: verniquet_stanford_45
+  title: Atlas du plan general de la ville de Paris, feuille 45 [Exemplaire stanford]
+  sources:
+  - verniquet_stanford_45_cache
+- name: verniquet_stanford_46
+  title: Atlas du plan general de la ville de Paris, feuille 46 [Exemplaire stanford]
+  sources:
+  - verniquet_stanford_46_cache
+- name: verniquet_stanford_47
+  title: Atlas du plan general de la ville de Paris, feuille 47 [Exemplaire stanford]
+  sources:
+  - verniquet_stanford_47_cache
+- name: verniquet_stanford_48
+  title: Atlas du plan general de la ville de Paris, feuille 48 [Exemplaire stanford]
+  sources:
+  - verniquet_stanford_48_cache
+- name: verniquet_stanford_49
+  title: Atlas du plan general de la ville de Paris, feuille 49 [Exemplaire stanford]
+  sources:
+  - verniquet_stanford_49_cache
+- name: verniquet_stanford_50
+  title: Atlas du plan general de la ville de Paris, feuille 50 [Exemplaire stanford]
+  sources:
+  - verniquet_stanford_50_cache
+- name: verniquet_stanford_51
+  title: Atlas du plan general de la ville de Paris, feuille 51 [Exemplaire stanford]
+  sources:
+  - verniquet_stanford_51_cache
+- name: verniquet_stanford_52
+  title: Atlas du plan general de la ville de Paris, feuille 52 [Exemplaire stanford]
+  sources:
+  - verniquet_stanford_52_cache
+- name: verniquet_stanford_53
+  title: Atlas du plan general de la ville de Paris, feuille 53 [Exemplaire stanford]
+  sources:
+  - verniquet_stanford_53_cache
+- name: verniquet_stanford_54
+  title: Atlas du plan general de la ville de Paris, feuille 54 [Exemplaire stanford]
+  sources:
+  - verniquet_stanford_54_cache
+- name: verniquet_stanford_55
+  title: Atlas du plan general de la ville de Paris, feuille 55 [Exemplaire stanford]
+  sources:
+  - verniquet_stanford_55_cache
+- name: verniquet_stanford_56
+  title: Atlas du plan general de la ville de Paris, feuille 56 [Exemplaire stanford]
+  sources:
+  - verniquet_stanford_56_cache
+- name: verniquet_stanford_57
+  title: Atlas du plan general de la ville de Paris, feuille 57 [Exemplaire stanford]
+  sources:
+  - verniquet_stanford_57_cache
+- name: verniquet_stanford_58
+  title: Atlas du plan general de la ville de Paris, feuille 58 [Exemplaire stanford]
+  sources:
+  - verniquet_stanford_58_cache
+- name: verniquet_stanford_59
+  title: Atlas du plan general de la ville de Paris, feuille 59 [Exemplaire stanford]
+  sources:
+  - verniquet_stanford_59_cache
+- name: verniquet_stanford_60
+  title: Atlas du plan general de la ville de Paris, feuille 60 [Exemplaire stanford]
+  sources:
+  - verniquet_stanford_60_cache
+- name: verniquet_stanford_61
+  title: Atlas du plan general de la ville de Paris, feuille 61 [Exemplaire stanford]
+  sources:
+  - verniquet_stanford_61_cache
+- name: verniquet_stanford_62
+  title: Atlas du plan general de la ville de Paris, feuille 62 [Exemplaire stanford]
+  sources:
+  - verniquet_stanford_62_cache
+- name: verniquet_stanford_63
+  title: Atlas du plan general de la ville de Paris, feuille 63 [Exemplaire stanford]
+  sources:
+  - verniquet_stanford_63_cache
+- name: verniquet_stanford_64
+  title: Atlas du plan general de la ville de Paris, feuille 64 [Exemplaire stanford]
+  sources:
+  - verniquet_stanford_64_cache
+- name: verniquet_stanford_65
+  title: Atlas du plan general de la ville de Paris, feuille 65 [Exemplaire stanford]
+  sources:
+  - verniquet_stanford_65_cache
+- name: verniquet_stanford_66
+  title: Atlas du plan general de la ville de Paris, feuille 66 [Exemplaire stanford]
+  sources:
+  - verniquet_stanford_66_cache
+- name: verniquet_stanford_67
+  title: Atlas du plan general de la ville de Paris, feuille 67 [Exemplaire stanford]
+  sources:
+  - verniquet_stanford_67_cache
+- name: verniquet_stanford_68
+  title: Atlas du plan general de la ville de Paris, feuille 68 [Exemplaire stanford]
+  sources:
+  - verniquet_stanford_68_cache
+- name: verniquet_stanford_69
+  title: Atlas du plan general de la ville de Paris, feuille 69 [Exemplaire stanford]
+  sources:
+  - verniquet_stanford_69_cache
+- name: verniquet_stanford_70
+  title: Atlas du plan general de la ville de Paris, feuille 70 [Exemplaire stanford]
+  sources:
+  - verniquet_stanford_70_cache
+- name: verniquet_stanford_71
+  title: Atlas du plan general de la ville de Paris, feuille 71 [Exemplaire stanford]
+  sources:
+  - verniquet_stanford_71_cache
+- name: verniquet_stanford_72
+  title: Atlas du plan general de la ville de Paris, feuille 72 [Exemplaire stanford]
+  sources:
+  - verniquet_stanford_72_cache
+- name: verniquet_stanford
+  title: Atlas du plan general de la ville de Paris [Exemplaire stanford]
+  sources:
+  - verniquet_stanford_cache
 caches:
-  osm_cache:
-    grids: [webmercator]
-    sources: [osm_wms]
-
+  verniquet_bnf_1_cache:
+    grids:
+    - webmercator
+    sources:
+    - verniquet_bnf_1_tms
+  verniquet_bnf_2_cache:
+    grids:
+    - webmercator
+    sources:
+    - verniquet_bnf_2_tms
+  verniquet_bnf_3_cache:
+    grids:
+    - webmercator
+    sources:
+    - verniquet_bnf_3_tms
+  verniquet_bnf_4_cache:
+    grids:
+    - webmercator
+    sources:
+    - verniquet_bnf_4_tms
+  verniquet_bnf_5_cache:
+    grids:
+    - webmercator
+    sources:
+    - verniquet_bnf_5_tms
+  verniquet_bnf_6_cache:
+    grids:
+    - webmercator
+    sources:
+    - verniquet_bnf_6_tms
+  verniquet_bnf_7_cache:
+    grids:
+    - webmercator
+    sources:
+    - verniquet_bnf_7_tms
+  verniquet_bnf_8_cache:
+    grids:
+    - webmercator
+    sources:
+    - verniquet_bnf_8_tms
+  verniquet_bnf_9_cache:
+    grids:
+    - webmercator
+    sources:
+    - verniquet_bnf_9_tms
+  verniquet_bnf_10_cache:
+    grids:
+    - webmercator
+    sources:
+    - verniquet_bnf_10_tms
+  verniquet_bnf_11_cache:
+    grids:
+    - webmercator
+    sources:
+    - verniquet_bnf_11_tms
+  verniquet_bnf_12_cache:
+    grids:
+    - webmercator
+    sources:
+    - verniquet_bnf_12_tms
+  verniquet_bnf_13_cache:
+    grids:
+    - webmercator
+    sources:
+    - verniquet_bnf_13_tms
+  verniquet_bnf_14_cache:
+    grids:
+    - webmercator
+    sources:
+    - verniquet_bnf_14_tms
+  verniquet_bnf_15_cache:
+    grids:
+    - webmercator
+    sources:
+    - verniquet_bnf_15_tms
+  verniquet_bnf_16_cache:
+    grids:
+    - webmercator
+    sources:
+    - verniquet_bnf_16_tms
+  verniquet_bnf_17_cache:
+    grids:
+    - webmercator
+    sources:
+    - verniquet_bnf_17_tms
+  verniquet_bnf_18_cache:
+    grids:
+    - webmercator
+    sources:
+    - verniquet_bnf_18_tms
+  verniquet_bnf_19_cache:
+    grids:
+    - webmercator
+    sources:
+    - verniquet_bnf_19_tms
+  verniquet_bnf_20_cache:
+    grids:
+    - webmercator
+    sources:
+    - verniquet_bnf_20_tms
+  verniquet_bnf_21_cache:
+    grids:
+    - webmercator
+    sources:
+    - verniquet_bnf_21_tms
+  verniquet_bnf_22_cache:
+    grids:
+    - webmercator
+    sources:
+    - verniquet_bnf_22_tms
+  verniquet_bnf_23_cache:
+    grids:
+    - webmercator
+    sources:
+    - verniquet_bnf_23_tms
+  verniquet_bnf_24_cache:
+    grids:
+    - webmercator
+    sources:
+    - verniquet_bnf_24_tms
+  verniquet_bnf_25_cache:
+    grids:
+    - webmercator
+    sources:
+    - verniquet_bnf_25_tms
+  verniquet_bnf_26_cache:
+    grids:
+    - webmercator
+    sources:
+    - verniquet_bnf_26_tms
+  verniquet_bnf_27_cache:
+    grids:
+    - webmercator
+    sources:
+    - verniquet_bnf_27_tms
+  verniquet_bnf_28_cache:
+    grids:
+    - webmercator
+    sources:
+    - verniquet_bnf_28_tms
+  verniquet_bnf_29_cache:
+    grids:
+    - webmercator
+    sources:
+    - verniquet_bnf_29_tms
+  verniquet_bnf_30_cache:
+    grids:
+    - webmercator
+    sources:
+    - verniquet_bnf_30_tms
+  verniquet_bnf_31_cache:
+    grids:
+    - webmercator
+    sources:
+    - verniquet_bnf_31_tms
+  verniquet_bnf_32_cache:
+    grids:
+    - webmercator
+    sources:
+    - verniquet_bnf_32_tms
+  verniquet_bnf_33_cache:
+    grids:
+    - webmercator
+    sources:
+    - verniquet_bnf_33_tms
+  verniquet_bnf_34_cache:
+    grids:
+    - webmercator
+    sources:
+    - verniquet_bnf_34_tms
+  verniquet_bnf_35_cache:
+    grids:
+    - webmercator
+    sources:
+    - verniquet_bnf_35_tms
+  verniquet_bnf_36_cache:
+    grids:
+    - webmercator
+    sources:
+    - verniquet_bnf_36_tms
+  verniquet_bnf_37_cache:
+    grids:
+    - webmercator
+    sources:
+    - verniquet_bnf_37_tms
+  verniquet_bnf_38_cache:
+    grids:
+    - webmercator
+    sources:
+    - verniquet_bnf_38_tms
+  verniquet_bnf_39_cache:
+    grids:
+    - webmercator
+    sources:
+    - verniquet_bnf_39_tms
+  verniquet_bnf_40_cache:
+    grids:
+    - webmercator
+    sources:
+    - verniquet_bnf_40_tms
+  verniquet_bnf_41_cache:
+    grids:
+    - webmercator
+    sources:
+    - verniquet_bnf_41_tms
+  verniquet_bnf_42_cache:
+    grids:
+    - webmercator
+    sources:
+    - verniquet_bnf_42_tms
+  verniquet_bnf_43_cache:
+    grids:
+    - webmercator
+    sources:
+    - verniquet_bnf_43_tms
   verniquet_bnf_44_cache:
-    grids: [webmercator]
-    sources: [verniquet_bnf_44_tms]
-
+    grids:
+    - webmercator
+    sources:
+    - verniquet_bnf_44_tms
+  verniquet_bnf_45_cache:
+    grids:
+    - webmercator
+    sources:
+    - verniquet_bnf_45_tms
+  verniquet_bnf_46_cache:
+    grids:
+    - webmercator
+    sources:
+    - verniquet_bnf_46_tms
+  verniquet_bnf_47_cache:
+    grids:
+    - webmercator
+    sources:
+    - verniquet_bnf_47_tms
+  verniquet_bnf_48_cache:
+    grids:
+    - webmercator
+    sources:
+    - verniquet_bnf_48_tms
+  verniquet_bnf_49_cache:
+    grids:
+    - webmercator
+    sources:
+    - verniquet_bnf_49_tms
+  verniquet_bnf_50_cache:
+    grids:
+    - webmercator
+    sources:
+    - verniquet_bnf_50_tms
+  verniquet_bnf_51_cache:
+    grids:
+    - webmercator
+    sources:
+    - verniquet_bnf_51_tms
+  verniquet_bnf_52_cache:
+    grids:
+    - webmercator
+    sources:
+    - verniquet_bnf_52_tms
+  verniquet_bnf_53_cache:
+    grids:
+    - webmercator
+    sources:
+    - verniquet_bnf_53_tms
+  verniquet_bnf_54_cache:
+    grids:
+    - webmercator
+    sources:
+    - verniquet_bnf_54_tms
+  verniquet_bnf_55_cache:
+    grids:
+    - webmercator
+    sources:
+    - verniquet_bnf_55_tms
+  verniquet_bnf_56_cache:
+    grids:
+    - webmercator
+    sources:
+    - verniquet_bnf_56_tms
+  verniquet_bnf_57_cache:
+    grids:
+    - webmercator
+    sources:
+    - verniquet_bnf_57_tms
+  verniquet_bnf_58_cache:
+    grids:
+    - webmercator
+    sources:
+    - verniquet_bnf_58_tms
+  verniquet_bnf_59_cache:
+    grids:
+    - webmercator
+    sources:
+    - verniquet_bnf_59_tms
+  verniquet_bnf_60_cache:
+    grids:
+    - webmercator
+    sources:
+    - verniquet_bnf_60_tms
+  verniquet_bnf_61_cache:
+    grids:
+    - webmercator
+    sources:
+    - verniquet_bnf_61_tms
+  verniquet_bnf_62_cache:
+    grids:
+    - webmercator
+    sources:
+    - verniquet_bnf_62_tms
+  verniquet_bnf_63_cache:
+    grids:
+    - webmercator
+    sources:
+    - verniquet_bnf_63_tms
+  verniquet_bnf_64_cache:
+    grids:
+    - webmercator
+    sources:
+    - verniquet_bnf_64_tms
+  verniquet_bnf_65_cache:
+    grids:
+    - webmercator
+    sources:
+    - verniquet_bnf_65_tms
+  verniquet_bnf_66_cache:
+    grids:
+    - webmercator
+    sources:
+    - verniquet_bnf_66_tms
+  verniquet_bnf_67_cache:
+    grids:
+    - webmercator
+    sources:
+    - verniquet_bnf_67_tms
+  verniquet_bnf_68_cache:
+    grids:
+    - webmercator
+    sources:
+    - verniquet_bnf_68_tms
+  verniquet_bnf_69_cache:
+    grids:
+    - webmercator
+    sources:
+    - verniquet_bnf_69_tms
+  verniquet_bnf_70_cache:
+    grids:
+    - webmercator
+    sources:
+    - verniquet_bnf_70_tms
+  verniquet_bnf_71_cache:
+    grids:
+    - webmercator
+    sources:
+    - verniquet_bnf_71_tms
+  verniquet_bnf_72_cache:
+    grids:
+    - webmercator
+    sources:
+    - verniquet_bnf_72_tms
+  verniquet_bnf_cache:
+    grids:
+    - webmercator
+    sources:
+    - verniquet_bnf_tms
+  verniquet_stanford_1_cache:
+    grids:
+    - webmercator
+    sources:
+    - verniquet_stanford_1_tms
+  verniquet_stanford_2_cache:
+    grids:
+    - webmercator
+    sources:
+    - verniquet_stanford_2_tms
+  verniquet_stanford_3_cache:
+    grids:
+    - webmercator
+    sources:
+    - verniquet_stanford_3_tms
+  verniquet_stanford_4_cache:
+    grids:
+    - webmercator
+    sources:
+    - verniquet_stanford_4_tms
+  verniquet_stanford_5_cache:
+    grids:
+    - webmercator
+    sources:
+    - verniquet_stanford_5_tms
+  verniquet_stanford_6_cache:
+    grids:
+    - webmercator
+    sources:
+    - verniquet_stanford_6_tms
+  verniquet_stanford_7_cache:
+    grids:
+    - webmercator
+    sources:
+    - verniquet_stanford_7_tms
+  verniquet_stanford_8_cache:
+    grids:
+    - webmercator
+    sources:
+    - verniquet_stanford_8_tms
+  verniquet_stanford_9_cache:
+    grids:
+    - webmercator
+    sources:
+    - verniquet_stanford_9_tms
+  verniquet_stanford_10_cache:
+    grids:
+    - webmercator
+    sources:
+    - verniquet_stanford_10_tms
+  verniquet_stanford_11_cache:
+    grids:
+    - webmercator
+    sources:
+    - verniquet_stanford_11_tms
+  verniquet_stanford_12_cache:
+    grids:
+    - webmercator
+    sources:
+    - verniquet_stanford_12_tms
+  verniquet_stanford_13_cache:
+    grids:
+    - webmercator
+    sources:
+    - verniquet_stanford_13_tms
+  verniquet_stanford_14_cache:
+    grids:
+    - webmercator
+    sources:
+    - verniquet_stanford_14_tms
+  verniquet_stanford_15_cache:
+    grids:
+    - webmercator
+    sources:
+    - verniquet_stanford_15_tms
+  verniquet_stanford_16_cache:
+    grids:
+    - webmercator
+    sources:
+    - verniquet_stanford_16_tms
+  verniquet_stanford_17_cache:
+    grids:
+    - webmercator
+    sources:
+    - verniquet_stanford_17_tms
+  verniquet_stanford_18_cache:
+    grids:
+    - webmercator
+    sources:
+    - verniquet_stanford_18_tms
+  verniquet_stanford_19_cache:
+    grids:
+    - webmercator
+    sources:
+    - verniquet_stanford_19_tms
+  verniquet_stanford_20_cache:
+    grids:
+    - webmercator
+    sources:
+    - verniquet_stanford_20_tms
+  verniquet_stanford_21_cache:
+    grids:
+    - webmercator
+    sources:
+    - verniquet_stanford_21_tms
+  verniquet_stanford_22_cache:
+    grids:
+    - webmercator
+    sources:
+    - verniquet_stanford_22_tms
+  verniquet_stanford_23_cache:
+    grids:
+    - webmercator
+    sources:
+    - verniquet_stanford_23_tms
+  verniquet_stanford_24_cache:
+    grids:
+    - webmercator
+    sources:
+    - verniquet_stanford_24_tms
+  verniquet_stanford_25_cache:
+    grids:
+    - webmercator
+    sources:
+    - verniquet_stanford_25_tms
+  verniquet_stanford_26_cache:
+    grids:
+    - webmercator
+    sources:
+    - verniquet_stanford_26_tms
+  verniquet_stanford_27_cache:
+    grids:
+    - webmercator
+    sources:
+    - verniquet_stanford_27_tms
+  verniquet_stanford_28_cache:
+    grids:
+    - webmercator
+    sources:
+    - verniquet_stanford_28_tms
+  verniquet_stanford_29_cache:
+    grids:
+    - webmercator
+    sources:
+    - verniquet_stanford_29_tms
+  verniquet_stanford_30_cache:
+    grids:
+    - webmercator
+    sources:
+    - verniquet_stanford_30_tms
+  verniquet_stanford_31_cache:
+    grids:
+    - webmercator
+    sources:
+    - verniquet_stanford_31_tms
+  verniquet_stanford_32_cache:
+    grids:
+    - webmercator
+    sources:
+    - verniquet_stanford_32_tms
+  verniquet_stanford_33_cache:
+    grids:
+    - webmercator
+    sources:
+    - verniquet_stanford_33_tms
+  verniquet_stanford_34_cache:
+    grids:
+    - webmercator
+    sources:
+    - verniquet_stanford_34_tms
+  verniquet_stanford_35_cache:
+    grids:
+    - webmercator
+    sources:
+    - verniquet_stanford_35_tms
+  verniquet_stanford_36_cache:
+    grids:
+    - webmercator
+    sources:
+    - verniquet_stanford_36_tms
+  verniquet_stanford_37_cache:
+    grids:
+    - webmercator
+    sources:
+    - verniquet_stanford_37_tms
+  verniquet_stanford_38_cache:
+    grids:
+    - webmercator
+    sources:
+    - verniquet_stanford_38_tms
+  verniquet_stanford_39_cache:
+    grids:
+    - webmercator
+    sources:
+    - verniquet_stanford_39_tms
+  verniquet_stanford_40_cache:
+    grids:
+    - webmercator
+    sources:
+    - verniquet_stanford_40_tms
+  verniquet_stanford_41_cache:
+    grids:
+    - webmercator
+    sources:
+    - verniquet_stanford_41_tms
+  verniquet_stanford_42_cache:
+    grids:
+    - webmercator
+    sources:
+    - verniquet_stanford_42_tms
+  verniquet_stanford_43_cache:
+    grids:
+    - webmercator
+    sources:
+    - verniquet_stanford_43_tms
+  verniquet_stanford_44_cache:
+    grids:
+    - webmercator
+    sources:
+    - verniquet_stanford_44_tms
+  verniquet_stanford_45_cache:
+    grids:
+    - webmercator
+    sources:
+    - verniquet_stanford_45_tms
+  verniquet_stanford_46_cache:
+    grids:
+    - webmercator
+    sources:
+    - verniquet_stanford_46_tms
+  verniquet_stanford_47_cache:
+    grids:
+    - webmercator
+    sources:
+    - verniquet_stanford_47_tms
+  verniquet_stanford_48_cache:
+    grids:
+    - webmercator
+    sources:
+    - verniquet_stanford_48_tms
+  verniquet_stanford_49_cache:
+    grids:
+    - webmercator
+    sources:
+    - verniquet_stanford_49_tms
+  verniquet_stanford_50_cache:
+    grids:
+    - webmercator
+    sources:
+    - verniquet_stanford_50_tms
+  verniquet_stanford_51_cache:
+    grids:
+    - webmercator
+    sources:
+    - verniquet_stanford_51_tms
+  verniquet_stanford_52_cache:
+    grids:
+    - webmercator
+    sources:
+    - verniquet_stanford_52_tms
+  verniquet_stanford_53_cache:
+    grids:
+    - webmercator
+    sources:
+    - verniquet_stanford_53_tms
+  verniquet_stanford_54_cache:
+    grids:
+    - webmercator
+    sources:
+    - verniquet_stanford_54_tms
+  verniquet_stanford_55_cache:
+    grids:
+    - webmercator
+    sources:
+    - verniquet_stanford_55_tms
+  verniquet_stanford_56_cache:
+    grids:
+    - webmercator
+    sources:
+    - verniquet_stanford_56_tms
+  verniquet_stanford_57_cache:
+    grids:
+    - webmercator
+    sources:
+    - verniquet_stanford_57_tms
+  verniquet_stanford_58_cache:
+    grids:
+    - webmercator
+    sources:
+    - verniquet_stanford_58_tms
+  verniquet_stanford_59_cache:
+    grids:
+    - webmercator
+    sources:
+    - verniquet_stanford_59_tms
+  verniquet_stanford_60_cache:
+    grids:
+    - webmercator
+    sources:
+    - verniquet_stanford_60_tms
+  verniquet_stanford_61_cache:
+    grids:
+    - webmercator
+    sources:
+    - verniquet_stanford_61_tms
+  verniquet_stanford_62_cache:
+    grids:
+    - webmercator
+    sources:
+    - verniquet_stanford_62_tms
+  verniquet_stanford_63_cache:
+    grids:
+    - webmercator
+    sources:
+    - verniquet_stanford_63_tms
+  verniquet_stanford_64_cache:
+    grids:
+    - webmercator
+    sources:
+    - verniquet_stanford_64_tms
+  verniquet_stanford_65_cache:
+    grids:
+    - webmercator
+    sources:
+    - verniquet_stanford_65_tms
+  verniquet_stanford_66_cache:
+    grids:
+    - webmercator
+    sources:
+    - verniquet_stanford_66_tms
+  verniquet_stanford_67_cache:
+    grids:
+    - webmercator
+    sources:
+    - verniquet_stanford_67_tms
+  verniquet_stanford_68_cache:
+    grids:
+    - webmercator
+    sources:
+    - verniquet_stanford_68_tms
+  verniquet_stanford_69_cache:
+    grids:
+    - webmercator
+    sources:
+    - verniquet_stanford_69_tms
+  verniquet_stanford_70_cache:
+    grids:
+    - webmercator
+    sources:
+    - verniquet_stanford_70_tms
+  verniquet_stanford_71_cache:
+    grids:
+    - webmercator
+    sources:
+    - verniquet_stanford_71_tms
+  verniquet_stanford_72_cache:
+    grids:
+    - webmercator
+    sources:
+    - verniquet_stanford_72_tms
+  verniquet_stanford_cache:
+    grids:
+    - webmercator
+    sources:
+    - verniquet_stanford_tms
 sources:
-  osm_wms:
-    type: wms
-    req:
-      url: https://maps.omniscale.net/v2/demo/style.default/service?
-      layers: osm
-
+  verniquet_bnf_1_tms:
+    type: tile
+    grid: webmercator
+    url: https://allmaps.xyz/%(z)s/%(x)s/%(y)s.png?url=https://dataverse.harvard.edu/api/access/datafile/7002806
+    coverage:
+      bbox:
+      - 2.2833788189523423
+      - 48.881912143407305
+      - 2.294002388781319
+      - 48.88892696858039
+      srs: EPSG:4326
+    transparent: true
+  verniquet_bnf_2_tms:
+    type: tile
+    grid: webmercator
+    url: https://allmaps.xyz/%(z)s/%(x)s/%(y)s.png?url=https://dataverse.harvard.edu/api/access/datafile/7002740
+    coverage:
+      bbox:
+      - 2.2940082868227676
+      - 48.8819165224848
+      - 2.309948823512562
+      - 48.88893170124792
+      srs: EPSG:4326
+    transparent: true
+  verniquet_bnf_3_tms:
+    type: tile
+    grid: webmercator
+    url: https://allmaps.xyz/%(z)s/%(x)s/%(y)s.png?url=https://dataverse.harvard.edu/api/access/datafile/7002461
+    coverage:
+      bbox:
+      - 2.309952492729735
+      - 48.88192125398651
+      - 2.3258952614451776
+      - 48.888934228835815
+      srs: EPSG:4326
+    transparent: true
+  verniquet_bnf_4_tms:
+    type: tile
+    grid: webmercator
+    url: https://allmaps.xyz/%(z)s/%(x)s/%(y)s.png?url=https://dataverse.harvard.edu/api/access/datafile/7002551
+    coverage:
+      bbox:
+      - 2.325896701836451
+      - 48.8819237809495
+      - 2.3418417006411816
+      - 48.888934551343276
+      srs: EPSG:4326
+    transparent: true
+  verniquet_bnf_5_tms:
+    type: tile
+    grid: webmercator
+    url: https://allmaps.xyz/%(z)s/%(x)s/%(y)s.png?url=https://dataverse.harvard.edu/api/access/datafile/7002785
+    coverage:
+      bbox:
+      - 2.3418409122059374
+      - 48.88192410337305
+      - 2.3577881391625746
+      - 48.888932668770224
+      srs: EPSG:4326
+    transparent: true
+  verniquet_bnf_6_tms:
+    type: tile
+    grid: webmercator
+    url: https://allmaps.xyz/%(z)s/%(x)s/%(y)s.png?url=https://dataverse.harvard.edu/api/access/datafile/7002744
+    coverage:
+      bbox:
+      - 2.357785121901173
+      - 48.881922221257014
+      - 2.3737345750714063
+      - 48.88892858111722
+      srs: EPSG:4326
+    transparent: true
+  verniquet_bnf_7_tms:
+    type: tile
+    grid: webmercator
+    url: https://allmaps.xyz/%(z)s/%(x)s/%(y)s.png?url=https://dataverse.harvard.edu/api/access/datafile/7002771
+    coverage:
+      bbox:
+      - 2.3737293289851142
+      - 48.88191813460198
+      - 2.3896810064296803
+      - 48.88892228838548
+      srs: EPSG:4326
+    transparent: true
+  verniquet_bnf_8_tms:
+    type: tile
+    grid: webmercator
+    url: https://allmaps.xyz/%(z)s/%(x)s/%(y)s.png?url=https://dataverse.harvard.edu/api/access/datafile/7002732
+    coverage:
+      bbox:
+      - 2.3896735315207613
+      - 48.88191184340914
+      - 2.405627431299417
+      - 48.88891379057683
+      srs: EPSG:4326
+    transparent: true
+  verniquet_bnf_9_tms:
+    type: tile
+    grid: webmercator
+    url: https://allmaps.xyz/%(z)s/%(x)s/%(y)s.png?url=https://dataverse.harvard.edu/api/access/datafile/7002547
+    coverage:
+      bbox:
+      - 2.283386200018342
+      - 48.87490168982172
+      - 2.2940082868227676
+      - 48.8819165224848
+      srs: EPSG:4326
+    transparent: true
+  verniquet_bnf_10_tms:
+    type: tile
+    grid: webmercator
+    url: https://allmaps.xyz/%(z)s/%(x)s/%(y)s.png?url=https://dataverse.harvard.edu/api/access/datafile/7002471
+    coverage:
+      bbox:
+      - 2.2940141825812157
+      - 48.87490606782178
+      - 2.309952492729735
+      - 48.88192125398651
+      srs: EPSG:4326
+    transparent: true
+  verniquet_bnf_11_tms:
+    type: tile
+    grid: webmercator
+    url: https://allmaps.xyz/%(z)s/%(x)s/%(y)s.png?url=https://dataverse.harvard.edu/api/access/datafile/7002674
+    coverage:
+      bbox:
+      - 2.30995616052476
+      - 48.87491079815798
+      - 2.325896701836451
+      - 48.8819237809495
+      srs: EPSG:4326
+    transparent: true
+  verniquet_bnf_12_tms:
+    type: tile
+    grid: webmercator
+    url: https://allmaps.xyz/%(z)s/%(x)s/%(y)s.png?url=https://dataverse.harvard.edu/api/access/datafile/7002747
+    coverage:
+      bbox:
+      - 2.325898141666503
+      - 48.87491332449624
+      - 2.3418409122059374
+      - 48.88192410337305
+      srs: EPSG:4326
+    transparent: true
+  verniquet_bnf_13_tms:
+    type: tile
+    grid: webmercator
+    url: https://allmaps.xyz/%(z)s/%(x)s/%(y)s.png?url=https://dataverse.harvard.edu/api/access/datafile/7002469
+    coverage:
+      bbox:
+      - 2.3418401240703806
+      - 48.87491364683587
+      - 2.357785121901173
+      - 48.881922221257014
+      srs: EPSG:4326
+    transparent: true
+  verniquet_bnf_14_tms:
+    type: tile
+    grid: webmercator
+    url: https://allmaps.xyz/%(z)s/%(x)s/%(y)s.png?url=https://dataverse.harvard.edu/api/access/datafile/7002750
+    coverage:
+      bbox:
+      - 2.357782105800326
+      - 48.87491176517674
+      - 2.3737293289851142
+      - 48.88191813460198
+      srs: EPSG:4326
+    transparent: true
+  verniquet_bnf_15_tms:
+    type: tile
+    grid: webmercator
+    url: https://allmaps.xyz/%(z)s/%(x)s/%(y)s.png?url=https://dataverse.harvard.edu/api/access/datafile/7002458
+    coverage:
+      bbox:
+      - 2.373724084920274
+      - 48.87490767951942
+      - 2.3896735315207613
+      - 48.88191184340914
+      srs: EPSG:4326
+    transparent: true
+  verniquet_bnf_16_tms:
+    type: tile
+    grid: webmercator
+    url: https://allmaps.xyz/%(z)s/%(x)s/%(y)s.png?url=https://dataverse.harvard.edu/api/access/datafile/7002491
+    coverage:
+      bbox:
+      - 2.38966605949419
+      - 48.874901389865045
+      - 2.405617727571079
+      - 48.88190334768037
+      srs: EPSG:4326
+    transparent: true
+  verniquet_bnf_17_tms:
+    type: tile
+    grid: webmercator
+    url: https://allmaps.xyz/%(z)s/%(x)s/%(y)s.png?url=https://dataverse.harvard.edu/api/access/datafile/7002480
+    coverage:
+      bbox:
+      - 2.2833935782288304
+      - 48.8678912276681
+      - 2.2940141825812157
+      - 48.87490606782178
+      srs: EPSG:4326
+    transparent: true
+  verniquet_bnf_18_tms:
+    type: tile
+    grid: webmercator
+    url: https://allmaps.xyz/%(z)s/%(x)s/%(y)s.png?url=https://dataverse.harvard.edu/api/access/datafile/7002629
+    coverage:
+      bbox:
+      - 2.294020076057759
+      - 48.86789560459099
+      - 2.30995616052476
+      - 48.87491079815798
+      srs: EPSG:4326
+    transparent: true
+  verniquet_bnf_19_tms:
+    type: tile
+    grid: webmercator
+    url: https://allmaps.xyz/%(z)s/%(x)s/%(y)s.png?url=https://dataverse.harvard.edu/api/access/datafile/7002622
+    coverage:
+      bbox:
+      - 2.309959826898388
+      - 48.867900333761995
+      - 2.325898141666503
+      - 48.87491332449624
+      srs: EPSG:4326
+    transparent: true
+  verniquet_bnf_20_tms:
+    type: tile
+    grid: webmercator
+    url: https://allmaps.xyz/%(z)s/%(x)s/%(y)s.png?url=https://dataverse.harvard.edu/api/access/datafile/7002643
+    coverage:
+      bbox:
+      - 2.3258995809356047
+      - 48.86790285947575
+      - 2.3418401240703806
+      - 48.87491364683587
+      srs: EPSG:4326
+    transparent: true
+  verniquet_bnf_21_tms:
+    type: tile
+    grid: webmercator
+    url: https://allmaps.xyz/%(z)s/%(x)s/%(y)s.png?url=https://dataverse.harvard.edu/api/access/datafile/7002822
+    coverage:
+      bbox:
+      - 2.3418393362343335
+      - 48.867903181731506
+      - 2.357782105800326
+      - 48.87491176517674
+      srs: EPSG:4326
+    transparent: true
+  verniquet_bnf_22_tms:
+    type: tile
+    grid: webmercator
+    url: https://allmaps.xyz/%(z)s/%(x)s/%(y)s.png?url=https://dataverse.harvard.edu/api/access/datafile/7002631
+    coverage:
+      bbox:
+      - 2.357779090859474
+      - 48.86790130052913
+      - 2.373724084920274
+      - 48.87490767951942
+      srs: EPSG:4326
+    transparent: true
+  verniquet_bnf_23_tms:
+    type: tile
+    grid: webmercator
+    url: https://allmaps.xyz/%(z)s/%(x)s/%(y)s.png?url=https://dataverse.harvard.edu/api/access/datafile/7002654
+    coverage:
+      bbox:
+      - 2.373718842875908
+      - 48.86789721586919
+      - 2.38966605949419
+      - 48.874901389865045
+      srs: EPSG:4326
+    transparent: true
+  verniquet_bnf_24_tms:
+    type: tile
+    grid: webmercator
+    url: https://allmaps.xyz/%(z)s/%(x)s/%(y)s.png?url=https://dataverse.harvard.edu/api/access/datafile/7002784
+    coverage:
+      bbox:
+      - 2.389658590348556
+      - 48.86789092775293
+      - 2.4056080275859952
+      - 48.87489289621559
+      srs: EPSG:4326
+    transparent: true
+  verniquet_bnf_25_tms:
+    type: tile
+    grid: webmercator
+    url: https://allmaps.xyz/%(z)s/%(x)s/%(y)s.png?url=https://dataverse.harvard.edu/api/access/datafile/7002791
+    coverage:
+      bbox:
+      - 2.283400953585182
+      - 48.8608807569461
+      - 2.294020076057759
+      - 48.86789560459099
+      srs: EPSG:4326
+    transparent: true
+  verniquet_bnf_26_tms:
+    type: tile
+    grid: webmercator
+    url: https://allmaps.xyz/%(z)s/%(x)s/%(y)s.png?url=https://dataverse.harvard.edu/api/access/datafile/7002673
+    coverage:
+      bbox:
+      - 2.29402596725355
+      - 48.86088513279217
+      - 2.309959826898388
+      - 48.867900333761995
+      srs: EPSG:4326
+    transparent: true
+  verniquet_bnf_27_tms:
+    type: tile
+    grid: webmercator
+    url: https://allmaps.xyz/%(z)s/%(x)s/%(y)s.png?url=https://dataverse.harvard.edu/api/access/datafile/7002600
+    coverage:
+      bbox:
+      - 2.3099634918512866
+      - 48.86088986079831
+      - 2.3258995809356047
+      - 48.86790285947575
+      srs: EPSG:4326
+    transparent: true
+  verniquet_bnf_28_tms:
+    type: tile
+    grid: webmercator
+    url: https://allmaps.xyz/%(z)s/%(x)s/%(y)s.png?url=https://dataverse.harvard.edu/api/access/datafile/7002598
+    coverage:
+      bbox:
+      - 2.3259010196440437
+      - 48.86089238588769
+      - 2.3418393362343335
+      - 48.867903181731506
+      srs: EPSG:4326
+    transparent: true
+  verniquet_bnf_29_tms:
+    type: tile
+    grid: webmercator
+    url: https://allmaps.xyz/%(z)s/%(x)s/%(y)s.png?url=https://dataverse.harvard.edu/api/access/datafile/7002774
+    coverage:
+      bbox:
+      - 2.3418385486976767
+      - 48.86089270805959
+      - 2.357779090859474
+      - 48.86790130052913
+      srs: EPSG:4326
+    transparent: true
+  verniquet_bnf_30_tms:
+    type: tile
+    grid: webmercator
+    url: https://allmaps.xyz/%(z)s/%(x)s/%(y)s.png?url=https://dataverse.harvard.edu/api/access/datafile/7002580
+    coverage:
+      bbox:
+      - 2.357776077078042
+      - 48.86089082731384
+      - 2.373718842875908
+      - 48.86789721586919
+      srs: EPSG:4326
+    transparent: true
+  verniquet_bnf_31_tms:
+    type: tile
+    grid: webmercator
+    url: https://allmaps.xyz/%(z)s/%(x)s/%(y)s.png?url=https://dataverse.harvard.edu/api/access/datafile/7002728
+    coverage:
+      bbox:
+      - 2.373713602850994
+      - 48.86088674365107
+      - 2.389658590348556
+      - 48.86789092775293
+      srs: EPSG:4326
+    transparent: true
+  verniquet_bnf_32_tms:
+    type: tile
+    grid: webmercator
+    url: https://allmaps.xyz/%(z)s/%(x)s/%(y)s.png?url=https://dataverse.harvard.edu/api/access/datafile/7002466
+    coverage:
+      bbox:
+      - 2.38965112408242
+      - 48.86088045707241
+      - 2.4055983313423193
+      - 48.86788243618215
+      srs: EPSG:4326
+    transparent: true
+  verniquet_bnf_33_tms:
+    type: tile
+    grid: webmercator
+    url: https://allmaps.xyz/%(z)s/%(x)s/%(y)s.png?url=https://dataverse.harvard.edu/api/access/datafile/7002731
+    coverage:
+      bbox:
+      - 2.2834083260888622
+      - 48.85387027765544
+      - 2.29402596725355
+      - 48.86088513279217
+      srs: EPSG:4326
+    transparent: true
+  verniquet_bnf_34_tms:
+    type: tile
+    grid: webmercator
+    url: https://allmaps.xyz/%(z)s/%(x)s/%(y)s.png?url=https://dataverse.harvard.edu/api/access/datafile/7002553
+    coverage:
+      bbox:
+      - 2.2940318561697213
+      - 48.85387465242497
+      - 2.3099634918512866
+      - 48.86088986079831
+      srs: EPSG:4326
+    transparent: true
+  verniquet_bnf_35_tms:
+    type: tile
+    grid: webmercator
+    url: https://allmaps.xyz/%(z)s/%(x)s/%(y)s.png?url=https://dataverse.harvard.edu/api/access/datafile/7002763
+    coverage:
+      bbox:
+      - 2.3099671553842054
+      - 48.85387937926657
+      - 2.3259010196440437
+      - 48.86089238588769
+      srs: EPSG:4326
+    transparent: true
+  verniquet_bnf_36_tms:
+    type: tile
+    grid: webmercator
+    url: https://allmaps.xyz/%(z)s/%(x)s/%(y)s.png?url=https://dataverse.harvard.edu/api/access/datafile/7002664
+    coverage:
+      bbox:
+      - 2.3259024577921092
+      - 48.85388190373179
+      - 2.3418385486976767
+      - 48.86089270805959
+      srs: EPSG:4326
+    transparent: true
+  verniquet_bnf_37_tms:
+    type: tile
+    grid: webmercator
+    url: https://allmaps.xyz/%(z)s/%(x)s/%(y)s.png?url=https://dataverse.harvard.edu/api/access/datafile/7002808
+    coverage:
+      bbox:
+      - 2.34183776146025
+      - 48.853882225819824
+      - 2.357776077078042
+      - 48.86089082731384
+      srs: EPSG:4326
+    transparent: true
+  verniquet_bnf_38_tms:
+    type: tile
+    grid: webmercator
+    url: https://allmaps.xyz/%(z)s/%(x)s/%(y)s.png?url=https://dataverse.harvard.edu/api/access/datafile/7002824
+    coverage:
+      bbox:
+      - 2.3577730644554604
+      - 48.8538803455306
+      - 2.373713602850994
+      - 48.86088674365107
+      srs: EPSG:4326
+    transparent: true
+  verniquet_bnf_39_tms:
+    type: tile
+    grid: webmercator
+    url: https://allmaps.xyz/%(z)s/%(x)s/%(y)s.png?url=https://dataverse.harvard.edu/api/access/datafile/7002534
+    coverage:
+      bbox:
+      - 2.3737083648445565
+      - 48.8538762628647
+      - 2.38965112408242
+      - 48.86088045707241
+      srs: EPSG:4326
+    transparent: true
+  verniquet_bnf_40_tms:
+    type: tile
+    grid: webmercator
+    url: https://allmaps.xyz/%(z)s/%(x)s/%(y)s.png?url=https://dataverse.harvard.edu/api/access/datafile/7002612
+    coverage:
+      bbox:
+      - 2.389643660694374
+      - 48.85386997782326
+      - 2.405588638838181
+      - 48.860871967579804
+      srs: EPSG:4326
+    transparent: true
+  verniquet_bnf_41_tms:
+    type: tile
+    grid: webmercator
+    url: https://allmaps.xyz/%(z)s/%(x)s/%(y)s.png?url=https://dataverse.harvard.edu/api/access/datafile/7002511
+    coverage:
+      bbox:
+      - 2.283415695741244
+      - 48.846859789795886
+      - 2.2940318561697213
+      - 48.85387465242497
+      srs: EPSG:4326
+    transparent: true
+  verniquet_bnf_42_tms:
+    type: tile
+    grid: webmercator
+    url: https://allmaps.xyz/%(z)s/%(x)s/%(y)s.png?url=https://dataverse.harvard.edu/api/access/datafile/7002670
+    coverage:
+      bbox:
+      - 2.2940377428074106
+      - 48.84686416348912
+      - 2.3099671553842054
+      - 48.85387937926657
+      srs: EPSG:4326
+    transparent: true
+  verniquet_bnf_43_tms:
+    type: tile
+    grid: webmercator
+    url: https://allmaps.xyz/%(z)s/%(x)s/%(y)s.png?url=https://dataverse.harvard.edu/api/access/datafile/7002811
+    coverage:
+      bbox:
+      - 2.30997081749782
+      - 48.846868889166544
+      - 2.3259024577921092
+      - 48.85388190373179
+      srs: EPSG:4326
+    transparent: true
   verniquet_bnf_44_tms:
     type: tile
     grid: webmercator
     url: https://allmaps.xyz/%(z)s/%(x)s/%(y)s.png?url=https://dataverse.harvard.edu/api/access/datafile/7002723
     coverage:
-      bbox: [2.3259038953800517, 48.846871413007726, 2.34183776146025, 48.853882225819824]
-      srs: 'EPSG:4326'
+      bbox:
+      - 2.3259038953800517
+      - 48.846871413007726
+      - 2.34183776146025
+      - 48.853882225819824
+      srs: EPSG:4326
     transparent: true
-
+  verniquet_bnf_45_tms:
+    type: tile
+    grid: webmercator
+    url: https://allmaps.xyz/%(z)s/%(x)s/%(y)s.png?url=https://dataverse.harvard.edu/api/access/datafile/7002888
+    coverage:
+      bbox:
+      - 2.3418369745218897
+      - 48.846871735011966
+      - 2.3577730644554604
+      - 48.8538803455306
+      srs: EPSG:4326
+    transparent: true
+  verniquet_bnf_46_tms:
+    type: tile
+    grid: webmercator
+    url: https://allmaps.xyz/%(z)s/%(x)s/%(y)s.png?url=https://dataverse.harvard.edu/api/access/datafile/7002851
+    coverage:
+      bbox:
+      - 2.357770052991145
+      - 48.84686985517913
+      - 2.3737083648445565
+      - 48.8538762628647
+      srs: EPSG:4326
+    transparent: true
+  verniquet_bnf_47_tms:
+    type: tile
+    grid: webmercator
+    url: https://allmaps.xyz/%(z)s/%(x)s/%(y)s.png?url=https://dataverse.harvard.edu/api/access/datafile/7002546
+    coverage:
+      bbox:
+      - 2.373703128855574
+      - 48.846865773509776
+      - 2.389643660694374
+      - 48.85386997782326
+      srs: EPSG:4326
+    transparent: true
+  verniquet_bnf_48_tms:
+    type: tile
+    grid: webmercator
+    url: https://allmaps.xyz/%(z)s/%(x)s/%(y)s.png?url=https://dataverse.harvard.edu/api/access/datafile/7002757
+    coverage:
+      bbox:
+      - 2.3896362001829616
+      - 48.846859490005144
+      - 2.405578950071724
+      - 48.8538614904082
+      srs: EPSG:4326
+    transparent: true
+  verniquet_bnf_49_tms:
+    type: tile
+    grid: webmercator
+    url: https://allmaps.xyz/%(z)s/%(x)s/%(y)s.png?url=https://dataverse.harvard.edu/api/access/datafile/7002693
+    coverage:
+      bbox:
+      - 2.2834230625437617
+      - 48.839849293367024
+      - 2.2940377428074106
+      - 48.84686416348912
+      srs: EPSG:4326
+    transparent: true
+  verniquet_bnf_50_tms:
+    type: tile
+    grid: webmercator
+    url: https://allmaps.xyz/%(z)s/%(x)s/%(y)s.png?url=https://dataverse.harvard.edu/api/access/datafile/7002879
+    coverage:
+      bbox:
+      - 2.294043627167757
+      - 48.83985366598436
+      - 2.30997081749782
+      - 48.846868889166544
+      srs: EPSG:4326
+    transparent: true
+  verniquet_bnf_51_tms:
+    type: tile
+    grid: webmercator
+    url: https://allmaps.xyz/%(z)s/%(x)s/%(y)s.png?url=https://dataverse.harvard.edu/api/access/datafile/7002813
+    coverage:
+      bbox:
+      - 2.3099744781928218
+      - 48.83985839049789
+      - 2.3259038953800517
+      - 48.846871413007726
+      srs: EPSG:4326
+    transparent: true
+  verniquet_bnf_52_tms:
+    type: tile
+    grid: webmercator
+    url: https://allmaps.xyz/%(z)s/%(x)s/%(y)s.png?url=https://dataverse.harvard.edu/api/access/datafile/7002501
+    coverage:
+      bbox:
+      - 2.3259053324081593
+      - 48.839860913715235
+      - 2.3418369745218897
+      - 48.846871735011966
+      srs: EPSG:4326
+    transparent: true
+  verniquet_bnf_53_tms:
+    type: tile
+    grid: webmercator
+    url: https://allmaps.xyz/%(z)s/%(x)s/%(y)s.png?url=https://dataverse.harvard.edu/api/access/datafile/7002601
+    coverage:
+      bbox:
+      - 2.3418361878824774
+      - 48.83986123563568
+      - 2.357770052991145
+      - 48.84686985517913
+      srs: EPSG:4326
+    transparent: true
+  verniquet_bnf_54_tms:
+    type: tile
+    grid: webmercator
+    url: https://allmaps.xyz/%(z)s/%(x)s/%(y)s.png?url=https://dataverse.harvard.edu/api/access/datafile/7002809
+    coverage:
+      bbox:
+      - 2.3577670426845283
+      - 48.83985935625912
+      - 2.373703128855574
+      - 48.846865773509776
+      srs: EPSG:4326
+    transparent: true
+  verniquet_bnf_55_tms:
+    type: tile
+    grid: webmercator
+    url: https://allmaps.xyz/%(z)s/%(x)s/%(y)s.png?url=https://dataverse.harvard.edu/api/access/datafile/7002658
+    coverage:
+      bbox:
+      - 2.3736978948830436
+      - 48.839855275586075
+      - 2.3896362001829616
+      - 48.846859490005144
+      srs: EPSG:4326
+    transparent: true
+  verniquet_bnf_56_tms:
+    type: tile
+    grid: webmercator
+    url: https://allmaps.xyz/%(z)s/%(x)s/%(y)s.png?url=https://dataverse.harvard.edu/api/access/datafile/7002608
+    coverage:
+      bbox:
+      - 2.389628742546772
+      - 48.83984899361778
+      - 2.4055692650411116
+      - 48.846851004667066
+      srs: EPSG:4326
+    transparent: true
+  verniquet_bnf_57_tms:
+    type: tile
+    grid: webmercator
+    url: https://allmaps.xyz/%(z)s/%(x)s/%(y)s.png?url=https://dataverse.harvard.edu/api/access/datafile/7002816
+    coverage:
+      bbox:
+      - 2.2834304264978442
+      - 48.832838788368676
+      - 2.294043627167757
+      - 48.83985366598436
+      srs: EPSG:4326
+    transparent: true
+  verniquet_bnf_58_tms:
+    type: tile
+    grid: webmercator
+    url: https://allmaps.xyz/%(z)s/%(x)s/%(y)s.png?url=https://dataverse.harvard.edu/api/access/datafile/7002702
+    coverage:
+      bbox:
+      - 2.2940495092518582
+      - 48.83284315991034
+      - 2.3099744781928218
+      - 48.83985839049789
+      srs: EPSG:4326
+    transparent: true
+  verniquet_bnf_59_tms:
+    type: tile
+    grid: webmercator
+    url: https://allmaps.xyz/%(z)s/%(x)s/%(y)s.png?url=https://dataverse.harvard.edu/api/access/datafile/7002821
+    coverage:
+      bbox:
+      - 2.309978137469958
+      - 48.83284788326028
+      - 2.3259053324081593
+      - 48.839860913715235
+      srs: EPSG:4326
+    transparent: true
+  verniquet_bnf_60_tms:
+    type: tile
+    grid: webmercator
+    url: https://allmaps.xyz/%(z)s/%(x)s/%(y)s.png?url=https://dataverse.harvard.edu/api/access/datafile/7002876
+    coverage:
+      bbox:
+      - 2.32590676887672
+      - 48.83285040585398
+      - 2.3418361878824774
+      - 48.83986123563568
+      srs: EPSG:4326
+    transparent: true
+  verniquet_bnf_61_tms:
+    type: tile
+    grid: webmercator
+    url: https://allmaps.xyz/%(z)s/%(x)s/%(y)s.png?url=https://dataverse.harvard.edu/api/access/datafile/7002768
+    coverage:
+      bbox:
+      - 2.3418354015418474
+      - 48.83285072769066
+      - 2.3577670426845283
+      - 48.83985935625912
+      srs: EPSG:4326
+    transparent: true
+  verniquet_bnf_62_tms:
+    type: tile
+    grid: webmercator
+    url: https://allmaps.xyz/%(z)s/%(x)s/%(y)s.png?url=https://dataverse.harvard.edu/api/access/datafile/7002540
+    coverage:
+      bbox:
+      - 2.357764033535036
+      - 48.83284884877023
+      - 2.3736978948830436
+      - 48.839855275586075
+      srs: EPSG:4326
+    transparent: true
+  verniquet_bnf_63_tms:
+    type: tile
+    grid: webmercator
+    url: https://allmaps.xyz/%(z)s/%(x)s/%(y)s.png?url=https://dataverse.harvard.edu/api/access/datafile/7002754
+    coverage:
+      bbox:
+      - 2.3736926629259845
+      - 48.83284476909322
+      - 2.389628742546772
+      - 48.83984899361778
+      srs: EPSG:4326
+    transparent: true
+  verniquet_bnf_64_tms:
+    type: tile
+    grid: webmercator
+    url: https://allmaps.xyz/%(z)s/%(x)s/%(y)s.png?url=https://dataverse.harvard.edu/api/access/datafile/7002606
+    coverage:
+      bbox:
+      - 2.3896212877843945
+      - 48.832838488660855
+      - 2.4055595837444708
+      - 48.83984051035611
+      srs: EPSG:4326
+    transparent: true
+  verniquet_bnf_65_tms:
+    type: tile
+    grid: webmercator
+    url: https://allmaps.xyz/%(z)s/%(x)s/%(y)s.png?url=https://dataverse.harvard.edu/api/access/datafile/7002587
+    coverage:
+      bbox:
+      - 2.2834377876048753
+      - 48.82582827480046
+      - 2.2940495092518582
+      - 48.83284315991034
+      srs: EPSG:4326
+    transparent: true
+  verniquet_bnf_66_tms:
+    type: tile
+    grid: webmercator
+    url: https://allmaps.xyz/%(z)s/%(x)s/%(y)s.png?url=https://dataverse.harvard.edu/api/access/datafile/7002882
+    coverage:
+      bbox:
+      - 2.294055389060863
+      - 48.82583264526675
+      - 2.309978137469958
+      - 48.83284788326028
+      srs: EPSG:4326
+    transparent: true
+  verniquet_bnf_67_tms:
+    type: tile
+    grid: webmercator
+    url: https://allmaps.xyz/%(z)s/%(x)s/%(y)s.png?url=https://dataverse.harvard.edu/api/access/datafile/7002459
+    coverage:
+      bbox:
+      - 2.309981795329885
+      - 48.82583736745348
+      - 2.32590676887672
+      - 48.83285040585398
+      srs: EPSG:4326
+    transparent: true
+  verniquet_bnf_68_tms:
+    type: tile
+    grid: webmercator
+    url: https://allmaps.xyz/%(z)s/%(x)s/%(y)s.png?url=https://dataverse.harvard.edu/api/access/datafile/7002866
+    coverage:
+      bbox:
+      - 2.3259082047860025
+      - 48.825839889423676
+      - 2.3418354015418474
+      - 48.83285072769066
+      srs: EPSG:4326
+    transparent: true
+  verniquet_bnf_69_tms:
+    type: tile
+    grid: webmercator
+    url: https://allmaps.xyz/%(z)s/%(x)s/%(y)s.png?url=https://dataverse.harvard.edu/api/access/datafile/7002660
+    coverage:
+      bbox:
+      - 2.341834615499852
+      - 48.82584021117663
+      - 2.357764033535036
+      - 48.83284884877023
+      srs: EPSG:4326
+    transparent: true
+  verniquet_bnf_70_tms:
+    type: tile
+    grid: webmercator
+    url: https://allmaps.xyz/%(z)s/%(x)s/%(y)s.png?url=https://dataverse.harvard.edu/api/access/datafile/7002473
+    coverage:
+      bbox:
+      - 2.3577610255420955
+      - 48.82583833271219
+      - 2.3736926629259845
+      - 48.83284476909322
+      srs: EPSG:4326
+    transparent: true
+  verniquet_bnf_71_tms:
+    type: tile
+    grid: webmercator
+    url: https://allmaps.xyz/%(z)s/%(x)s/%(y)s.png?url=https://dataverse.harvard.edu/api/access/datafile/7002725
+    coverage:
+      bbox:
+      - 2.373687432983389
+      - 48.825834254030944
+      - 2.3896212877843945
+      - 48.832838488660855
+      srs: EPSG:4326
+    transparent: true
+  verniquet_bnf_72_tms:
+    type: tile
+    grid: webmercator
+    url: https://allmaps.xyz/%(z)s/%(x)s/%(y)s.png?url=https://dataverse.harvard.edu/api/access/datafile/7002870
+    coverage:
+      bbox:
+      - 2.3896138358943757
+      - 48.8258279751341
+      - 2.405549906179961
+      - 48.83283000747502
+      srs: EPSG:4326
+    transparent: true
+  verniquet_bnf_tms:
+    type: tile
+    grid: webmercator
+    url: https://allmaps.xyz/%(z)s/%(x)s/%(y)s.png?url=https://dataverse.harvard.edu/api/access/datafile/7002730
+    coverage:
+      bbox:
+      - 2.2789487344052968
+      - 48.82447319213146
+      - 2.408043511490396
+      - 48.89040785367291
+      srs: EPSG:4326
+    transparent: true
+  verniquet_stanford_1_tms:
+    type: tile
+    grid: webmercator
+    url: https://allmaps.xyz/%(z)s/%(x)s/%(y)s.png?url=https://dataverse.harvard.edu/api/access/datafile/7002486
+    coverage:
+      bbox:
+      - 2.2833788189523423
+      - 48.881912143407305
+      - 2.294002388781319
+      - 48.88892696858039
+      srs: EPSG:4326
+    transparent: true
+  verniquet_stanford_2_tms:
+    type: tile
+    grid: webmercator
+    url: https://allmaps.xyz/%(z)s/%(x)s/%(y)s.png?url=https://dataverse.harvard.edu/api/access/datafile/7002620
+    coverage:
+      bbox:
+      - 2.2940082868227676
+      - 48.8819165224848
+      - 2.309948823512562
+      - 48.88893170124792
+      srs: EPSG:4326
+    transparent: true
+  verniquet_stanford_3_tms:
+    type: tile
+    grid: webmercator
+    url: https://allmaps.xyz/%(z)s/%(x)s/%(y)s.png?url=https://dataverse.harvard.edu/api/access/datafile/7002632
+    coverage:
+      bbox:
+      - 2.309952492729735
+      - 48.88192125398651
+      - 2.3258952614451776
+      - 48.888934228835815
+      srs: EPSG:4326
+    transparent: true
+  verniquet_stanford_4_tms:
+    type: tile
+    grid: webmercator
+    url: https://allmaps.xyz/%(z)s/%(x)s/%(y)s.png?url=https://dataverse.harvard.edu/api/access/datafile/7002513
+    coverage:
+      bbox:
+      - 2.325896701836451
+      - 48.8819237809495
+      - 2.3418417006411816
+      - 48.888934551343276
+      srs: EPSG:4326
+    transparent: true
+  verniquet_stanford_5_tms:
+    type: tile
+    grid: webmercator
+    url: https://allmaps.xyz/%(z)s/%(x)s/%(y)s.png?url=https://dataverse.harvard.edu/api/access/datafile/7002797
+    coverage:
+      bbox:
+      - 2.3418409122059374
+      - 48.88192410337305
+      - 2.3577881391625746
+      - 48.888932668770224
+      srs: EPSG:4326
+    transparent: true
+  verniquet_stanford_6_tms:
+    type: tile
+    grid: webmercator
+    url: https://allmaps.xyz/%(z)s/%(x)s/%(y)s.png?url=https://dataverse.harvard.edu/api/access/datafile/7002526
+    coverage:
+      bbox:
+      - 2.357785121901173
+      - 48.881922221257014
+      - 2.3737345750714063
+      - 48.88892858111722
+      srs: EPSG:4326
+    transparent: true
+  verniquet_stanford_7_tms:
+    type: tile
+    grid: webmercator
+    url: https://allmaps.xyz/%(z)s/%(x)s/%(y)s.png?url=https://dataverse.harvard.edu/api/access/datafile/7002558
+    coverage:
+      bbox:
+      - 2.3737293289851142
+      - 48.88191813460198
+      - 2.3896810064296803
+      - 48.88892228838548
+      srs: EPSG:4326
+    transparent: true
+  verniquet_stanford_8_tms:
+    type: tile
+    grid: webmercator
+    url: https://allmaps.xyz/%(z)s/%(x)s/%(y)s.png?url=https://dataverse.harvard.edu/api/access/datafile/7002646
+    coverage:
+      bbox:
+      - 2.3896735315207613
+      - 48.88191184340914
+      - 2.405627431299417
+      - 48.88891379057683
+      srs: EPSG:4326
+    transparent: true
+  verniquet_stanford_9_tms:
+    type: tile
+    grid: webmercator
+    url: https://allmaps.xyz/%(z)s/%(x)s/%(y)s.png?url=https://dataverse.harvard.edu/api/access/datafile/7002765
+    coverage:
+      bbox:
+      - 2.283386200018342
+      - 48.87490168982172
+      - 2.2940082868227676
+      - 48.8819165224848
+      srs: EPSG:4326
+    transparent: true
+  verniquet_stanford_10_tms:
+    type: tile
+    grid: webmercator
+    url: https://allmaps.xyz/%(z)s/%(x)s/%(y)s.png?url=https://dataverse.harvard.edu/api/access/datafile/7002720
+    coverage:
+      bbox:
+      - 2.2940141825812157
+      - 48.87490606782178
+      - 2.309952492729735
+      - 48.88192125398651
+      srs: EPSG:4326
+    transparent: true
+  verniquet_stanford_11_tms:
+    type: tile
+    grid: webmercator
+    url: https://allmaps.xyz/%(z)s/%(x)s/%(y)s.png?url=https://dataverse.harvard.edu/api/access/datafile/7002796
+    coverage:
+      bbox:
+      - 2.30995616052476
+      - 48.87491079815798
+      - 2.325896701836451
+      - 48.8819237809495
+      srs: EPSG:4326
+    transparent: true
+  verniquet_stanford_12_tms:
+    type: tile
+    grid: webmercator
+    url: https://allmaps.xyz/%(z)s/%(x)s/%(y)s.png?url=https://dataverse.harvard.edu/api/access/datafile/7002641
+    coverage:
+      bbox:
+      - 2.325898141666503
+      - 48.87491332449624
+      - 2.3418409122059374
+      - 48.88192410337305
+      srs: EPSG:4326
+    transparent: true
+  verniquet_stanford_13_tms:
+    type: tile
+    grid: webmercator
+    url: https://allmaps.xyz/%(z)s/%(x)s/%(y)s.png?url=https://dataverse.harvard.edu/api/access/datafile/7002770
+    coverage:
+      bbox:
+      - 2.3418401240703806
+      - 48.87491364683587
+      - 2.357785121901173
+      - 48.881922221257014
+      srs: EPSG:4326
+    transparent: true
+  verniquet_stanford_14_tms:
+    type: tile
+    grid: webmercator
+    url: https://allmaps.xyz/%(z)s/%(x)s/%(y)s.png?url=https://dataverse.harvard.edu/api/access/datafile/7002525
+    coverage:
+      bbox:
+      - 2.357782105800326
+      - 48.87491176517674
+      - 2.3737293289851142
+      - 48.88191813460198
+      srs: EPSG:4326
+    transparent: true
+  verniquet_stanford_15_tms:
+    type: tile
+    grid: webmercator
+    url: https://allmaps.xyz/%(z)s/%(x)s/%(y)s.png?url=https://dataverse.harvard.edu/api/access/datafile/7002678
+    coverage:
+      bbox:
+      - 2.373724084920274
+      - 48.87490767951942
+      - 2.3896735315207613
+      - 48.88191184340914
+      srs: EPSG:4326
+    transparent: true
+  verniquet_stanford_16_tms:
+    type: tile
+    grid: webmercator
+    url: https://allmaps.xyz/%(z)s/%(x)s/%(y)s.png?url=https://dataverse.harvard.edu/api/access/datafile/7002627
+    coverage:
+      bbox:
+      - 2.38966605949419
+      - 48.874901389865045
+      - 2.405617727571079
+      - 48.88190334768037
+      srs: EPSG:4326
+    transparent: true
+  verniquet_stanford_17_tms:
+    type: tile
+    grid: webmercator
+    url: https://allmaps.xyz/%(z)s/%(x)s/%(y)s.png?url=https://dataverse.harvard.edu/api/access/datafile/7002817
+    coverage:
+      bbox:
+      - 2.2833935782288304
+      - 48.8678912276681
+      - 2.2940141825812157
+      - 48.87490606782178
+      srs: EPSG:4326
+    transparent: true
+  verniquet_stanford_18_tms:
+    type: tile
+    grid: webmercator
+    url: https://allmaps.xyz/%(z)s/%(x)s/%(y)s.png?url=https://dataverse.harvard.edu/api/access/datafile/7002604
+    coverage:
+      bbox:
+      - 2.294020076057759
+      - 48.86789560459099
+      - 2.30995616052476
+      - 48.87491079815798
+      srs: EPSG:4326
+    transparent: true
+  verniquet_stanford_19_tms:
+    type: tile
+    grid: webmercator
+    url: https://allmaps.xyz/%(z)s/%(x)s/%(y)s.png?url=https://dataverse.harvard.edu/api/access/datafile/7002468
+    coverage:
+      bbox:
+      - 2.309959826898388
+      - 48.867900333761995
+      - 2.325898141666503
+      - 48.87491332449624
+      srs: EPSG:4326
+    transparent: true
+  verniquet_stanford_20_tms:
+    type: tile
+    grid: webmercator
+    url: https://allmaps.xyz/%(z)s/%(x)s/%(y)s.png?url=https://dataverse.harvard.edu/api/access/datafile/7002827
+    coverage:
+      bbox:
+      - 2.3258995809356047
+      - 48.86790285947575
+      - 2.3418401240703806
+      - 48.87491364683587
+      srs: EPSG:4326
+    transparent: true
+  verniquet_stanford_21_tms:
+    type: tile
+    grid: webmercator
+    url: https://allmaps.xyz/%(z)s/%(x)s/%(y)s.png?url=https://dataverse.harvard.edu/api/access/datafile/7002759
+    coverage:
+      bbox:
+      - 2.3418393362343335
+      - 48.867903181731506
+      - 2.357782105800326
+      - 48.87491176517674
+      srs: EPSG:4326
+    transparent: true
+  verniquet_stanford_22_tms:
+    type: tile
+    grid: webmercator
+    url: https://allmaps.xyz/%(z)s/%(x)s/%(y)s.png?url=https://dataverse.harvard.edu/api/access/datafile/7002595
+    coverage:
+      bbox:
+      - 2.357779090859474
+      - 48.86790130052913
+      - 2.373724084920274
+      - 48.87490767951942
+      srs: EPSG:4326
+    transparent: true
+  verniquet_stanford_23_tms:
+    type: tile
+    grid: webmercator
+    url: https://allmaps.xyz/%(z)s/%(x)s/%(y)s.png?url=https://dataverse.harvard.edu/api/access/datafile/7002885
+    coverage:
+      bbox:
+      - 2.373718842875908
+      - 48.86789721586919
+      - 2.38966605949419
+      - 48.874901389865045
+      srs: EPSG:4326
+    transparent: true
+  verniquet_stanford_24_tms:
+    type: tile
+    grid: webmercator
+    url: https://allmaps.xyz/%(z)s/%(x)s/%(y)s.png?url=https://dataverse.harvard.edu/api/access/datafile/7002559
+    coverage:
+      bbox:
+      - 2.389658590348556
+      - 48.86789092775293
+      - 2.4056080275859952
+      - 48.87489289621559
+      srs: EPSG:4326
+    transparent: true
+  verniquet_stanford_25_tms:
+    type: tile
+    grid: webmercator
+    url: https://allmaps.xyz/%(z)s/%(x)s/%(y)s.png?url=https://dataverse.harvard.edu/api/access/datafile/7002839
+    coverage:
+      bbox:
+      - 2.283400953585182
+      - 48.8608807569461
+      - 2.294020076057759
+      - 48.86789560459099
+      srs: EPSG:4326
+    transparent: true
+  verniquet_stanford_26_tms:
+    type: tile
+    grid: webmercator
+    url: https://allmaps.xyz/%(z)s/%(x)s/%(y)s.png?url=https://dataverse.harvard.edu/api/access/datafile/7002864
+    coverage:
+      bbox:
+      - 2.29402596725355
+      - 48.86088513279217
+      - 2.309959826898388
+      - 48.867900333761995
+      srs: EPSG:4326
+    transparent: true
+  verniquet_stanford_27_tms:
+    type: tile
+    grid: webmercator
+    url: https://allmaps.xyz/%(z)s/%(x)s/%(y)s.png?url=https://dataverse.harvard.edu/api/access/datafile/7002527
+    coverage:
+      bbox:
+      - 2.3099634918512866
+      - 48.86088986079831
+      - 2.3258995809356047
+      - 48.86790285947575
+      srs: EPSG:4326
+    transparent: true
+  verniquet_stanford_28_tms:
+    type: tile
+    grid: webmercator
+    url: https://allmaps.xyz/%(z)s/%(x)s/%(y)s.png?url=https://dataverse.harvard.edu/api/access/datafile/7002536
+    coverage:
+      bbox:
+      - 2.3259010196440437
+      - 48.86089238588769
+      - 2.3418393362343335
+      - 48.867903181731506
+      srs: EPSG:4326
+    transparent: true
+  verniquet_stanford_29_tms:
+    type: tile
+    grid: webmercator
+    url: https://allmaps.xyz/%(z)s/%(x)s/%(y)s.png?url=https://dataverse.harvard.edu/api/access/datafile/7002832
+    coverage:
+      bbox:
+      - 2.3418385486976767
+      - 48.86089270805959
+      - 2.357779090859474
+      - 48.86790130052913
+      srs: EPSG:4326
+    transparent: true
+  verniquet_stanford_30_tms:
+    type: tile
+    grid: webmercator
+    url: https://allmaps.xyz/%(z)s/%(x)s/%(y)s.png?url=https://dataverse.harvard.edu/api/access/datafile/7002815
+    coverage:
+      bbox:
+      - 2.357776077078042
+      - 48.86089082731384
+      - 2.373718842875908
+      - 48.86789721586919
+      srs: EPSG:4326
+    transparent: true
+  verniquet_stanford_31_tms:
+    type: tile
+    grid: webmercator
+    url: https://allmaps.xyz/%(z)s/%(x)s/%(y)s.png?url=https://dataverse.harvard.edu/api/access/datafile/7002591
+    coverage:
+      bbox:
+      - 2.373713602850994
+      - 48.86088674365107
+      - 2.389658590348556
+      - 48.86789092775293
+      srs: EPSG:4326
+    transparent: true
+  verniquet_stanford_32_tms:
+    type: tile
+    grid: webmercator
+    url: https://allmaps.xyz/%(z)s/%(x)s/%(y)s.png?url=https://dataverse.harvard.edu/api/access/datafile/7002507
+    coverage:
+      bbox:
+      - 2.38965112408242
+      - 48.86088045707241
+      - 2.4055983313423193
+      - 48.86788243618215
+      srs: EPSG:4326
+    transparent: true
+  verniquet_stanford_33_tms:
+    type: tile
+    grid: webmercator
+    url: https://allmaps.xyz/%(z)s/%(x)s/%(y)s.png?url=https://dataverse.harvard.edu/api/access/datafile/7002634
+    coverage:
+      bbox:
+      - 2.2834083260888622
+      - 48.85387027765544
+      - 2.29402596725355
+      - 48.86088513279217
+      srs: EPSG:4326
+    transparent: true
+  verniquet_stanford_34_tms:
+    type: tile
+    grid: webmercator
+    url: https://allmaps.xyz/%(z)s/%(x)s/%(y)s.png?url=https://dataverse.harvard.edu/api/access/datafile/7002614
+    coverage:
+      bbox:
+      - 2.2940318561697213
+      - 48.85387465242497
+      - 2.3099634918512866
+      - 48.86088986079831
+      srs: EPSG:4326
+    transparent: true
+  verniquet_stanford_35_tms:
+    type: tile
+    grid: webmercator
+    url: https://allmaps.xyz/%(z)s/%(x)s/%(y)s.png?url=https://dataverse.harvard.edu/api/access/datafile/7002617
+    coverage:
+      bbox:
+      - 2.3099671553842054
+      - 48.85387937926657
+      - 2.3259010196440437
+      - 48.86089238588769
+      srs: EPSG:4326
+    transparent: true
+  verniquet_stanford_36_tms:
+    type: tile
+    grid: webmercator
+    url: https://allmaps.xyz/%(z)s/%(x)s/%(y)s.png?url=https://dataverse.harvard.edu/api/access/datafile/7002621
+    coverage:
+      bbox:
+      - 2.3259024577921092
+      - 48.85388190373179
+      - 2.3418385486976767
+      - 48.86089270805959
+      srs: EPSG:4326
+    transparent: true
+  verniquet_stanford_37_tms:
+    type: tile
+    grid: webmercator
+    url: https://allmaps.xyz/%(z)s/%(x)s/%(y)s.png?url=https://dataverse.harvard.edu/api/access/datafile/7002626
+    coverage:
+      bbox:
+      - 2.34183776146025
+      - 48.853882225819824
+      - 2.357776077078042
+      - 48.86089082731384
+      srs: EPSG:4326
+    transparent: true
+  verniquet_stanford_38_tms:
+    type: tile
+    grid: webmercator
+    url: https://allmaps.xyz/%(z)s/%(x)s/%(y)s.png?url=https://dataverse.harvard.edu/api/access/datafile/7002718
+    coverage:
+      bbox:
+      - 2.3577730644554604
+      - 48.8538803455306
+      - 2.373713602850994
+      - 48.86088674365107
+      srs: EPSG:4326
+    transparent: true
+  verniquet_stanford_39_tms:
+    type: tile
+    grid: webmercator
+    url: https://allmaps.xyz/%(z)s/%(x)s/%(y)s.png?url=https://dataverse.harvard.edu/api/access/datafile/7002594
+    coverage:
+      bbox:
+      - 2.3737083648445565
+      - 48.8538762628647
+      - 2.38965112408242
+      - 48.86088045707241
+      srs: EPSG:4326
+    transparent: true
+  verniquet_stanford_40_tms:
+    type: tile
+    grid: webmercator
+    url: https://allmaps.xyz/%(z)s/%(x)s/%(y)s.png?url=https://dataverse.harvard.edu/api/access/datafile/7002661
+    coverage:
+      bbox:
+      - 2.389643660694374
+      - 48.85386997782326
+      - 2.405588638838181
+      - 48.860871967579804
+      srs: EPSG:4326
+    transparent: true
+  verniquet_stanford_41_tms:
+    type: tile
+    grid: webmercator
+    url: https://allmaps.xyz/%(z)s/%(x)s/%(y)s.png?url=https://dataverse.harvard.edu/api/access/datafile/7002794
+    coverage:
+      bbox:
+      - 2.283415695741244
+      - 48.846859789795886
+      - 2.2940318561697213
+      - 48.85387465242497
+      srs: EPSG:4326
+    transparent: true
+  verniquet_stanford_42_tms:
+    type: tile
+    grid: webmercator
+    url: https://allmaps.xyz/%(z)s/%(x)s/%(y)s.png?url=https://dataverse.harvard.edu/api/access/datafile/7002470
+    coverage:
+      bbox:
+      - 2.2940377428074106
+      - 48.84686416348912
+      - 2.3099671553842054
+      - 48.85387937926657
+      srs: EPSG:4326
+    transparent: true
+  verniquet_stanford_43_tms:
+    type: tile
+    grid: webmercator
+    url: https://allmaps.xyz/%(z)s/%(x)s/%(y)s.png?url=https://dataverse.harvard.edu/api/access/datafile/7002633
+    coverage:
+      bbox:
+      - 2.30997081749782
+      - 48.846868889166544
+      - 2.3259024577921092
+      - 48.85388190373179
+      srs: EPSG:4326
+    transparent: true
+  verniquet_stanford_44_tms:
+    type: tile
+    grid: webmercator
+    url: https://allmaps.xyz/%(z)s/%(x)s/%(y)s.png?url=https://dataverse.harvard.edu/api/access/datafile/7002663
+    coverage:
+      bbox:
+      - 2.3259038953800517
+      - 48.846871413007726
+      - 2.34183776146025
+      - 48.853882225819824
+      srs: EPSG:4326
+    transparent: true
+  verniquet_stanford_45_tms:
+    type: tile
+    grid: webmercator
+    url: https://allmaps.xyz/%(z)s/%(x)s/%(y)s.png?url=https://dataverse.harvard.edu/api/access/datafile/7002531
+    coverage:
+      bbox:
+      - 2.3418369745218897
+      - 48.846871735011966
+      - 2.3577730644554604
+      - 48.8538803455306
+      srs: EPSG:4326
+    transparent: true
+  verniquet_stanford_46_tms:
+    type: tile
+    grid: webmercator
+    url: https://allmaps.xyz/%(z)s/%(x)s/%(y)s.png?url=https://dataverse.harvard.edu/api/access/datafile/7002695
+    coverage:
+      bbox:
+      - 2.357770052991145
+      - 48.84686985517913
+      - 2.3737083648445565
+      - 48.8538762628647
+      srs: EPSG:4326
+    transparent: true
+  verniquet_stanford_47_tms:
+    type: tile
+    grid: webmercator
+    url: https://allmaps.xyz/%(z)s/%(x)s/%(y)s.png?url=https://dataverse.harvard.edu/api/access/datafile/7002503
+    coverage:
+      bbox:
+      - 2.373703128855574
+      - 48.846865773509776
+      - 2.389643660694374
+      - 48.85386997782326
+      srs: EPSG:4326
+    transparent: true
+  verniquet_stanford_48_tms:
+    type: tile
+    grid: webmercator
+    url: https://allmaps.xyz/%(z)s/%(x)s/%(y)s.png?url=https://dataverse.harvard.edu/api/access/datafile/7002861
+    coverage:
+      bbox:
+      - 2.3896362001829616
+      - 48.846859490005144
+      - 2.405578950071724
+      - 48.8538614904082
+      srs: EPSG:4326
+    transparent: true
+  verniquet_stanford_49_tms:
+    type: tile
+    grid: webmercator
+    url: https://allmaps.xyz/%(z)s/%(x)s/%(y)s.png?url=https://dataverse.harvard.edu/api/access/datafile/7002516
+    coverage:
+      bbox:
+      - 2.2834230625437617
+      - 48.839849293367024
+      - 2.2940377428074106
+      - 48.84686416348912
+      srs: EPSG:4326
+    transparent: true
+  verniquet_stanford_50_tms:
+    type: tile
+    grid: webmercator
+    url: https://allmaps.xyz/%(z)s/%(x)s/%(y)s.png?url=https://dataverse.harvard.edu/api/access/datafile/7002649
+    coverage:
+      bbox:
+      - 2.294043627167757
+      - 48.83985366598436
+      - 2.30997081749782
+      - 48.846868889166544
+      srs: EPSG:4326
+    transparent: true
+  verniquet_stanford_51_tms:
+    type: tile
+    grid: webmercator
+    url: https://allmaps.xyz/%(z)s/%(x)s/%(y)s.png?url=https://dataverse.harvard.edu/api/access/datafile/7002818
+    coverage:
+      bbox:
+      - 2.3099744781928218
+      - 48.83985839049789
+      - 2.3259038953800517
+      - 48.846871413007726
+      srs: EPSG:4326
+    transparent: true
+  verniquet_stanford_52_tms:
+    type: tile
+    grid: webmercator
+    url: https://allmaps.xyz/%(z)s/%(x)s/%(y)s.png?url=https://dataverse.harvard.edu/api/access/datafile/7002624
+    coverage:
+      bbox:
+      - 2.3259053324081593
+      - 48.839860913715235
+      - 2.3418369745218897
+      - 48.846871735011966
+      srs: EPSG:4326
+    transparent: true
+  verniquet_stanford_53_tms:
+    type: tile
+    grid: webmercator
+    url: https://allmaps.xyz/%(z)s/%(x)s/%(y)s.png?url=https://dataverse.harvard.edu/api/access/datafile/7002489
+    coverage:
+      bbox:
+      - 2.3418361878824774
+      - 48.83986123563568
+      - 2.357770052991145
+      - 48.84686985517913
+      srs: EPSG:4326
+    transparent: true
+  verniquet_stanford_54_tms:
+    type: tile
+    grid: webmercator
+    url: https://allmaps.xyz/%(z)s/%(x)s/%(y)s.png?url=https://dataverse.harvard.edu/api/access/datafile/7002602
+    coverage:
+      bbox:
+      - 2.3577670426845283
+      - 48.83985935625912
+      - 2.373703128855574
+      - 48.846865773509776
+      srs: EPSG:4326
+    transparent: true
+  verniquet_stanford_55_tms:
+    type: tile
+    grid: webmercator
+    url: https://allmaps.xyz/%(z)s/%(x)s/%(y)s.png?url=https://dataverse.harvard.edu/api/access/datafile/7002566
+    coverage:
+      bbox:
+      - 2.3736978948830436
+      - 48.839855275586075
+      - 2.3896362001829616
+      - 48.846859490005144
+      srs: EPSG:4326
+    transparent: true
+  verniquet_stanford_56_tms:
+    type: tile
+    grid: webmercator
+    url: https://allmaps.xyz/%(z)s/%(x)s/%(y)s.png?url=https://dataverse.harvard.edu/api/access/datafile/7002472
+    coverage:
+      bbox:
+      - 2.389628742546772
+      - 48.83984899361778
+      - 2.4055692650411116
+      - 48.846851004667066
+      srs: EPSG:4326
+    transparent: true
+  verniquet_stanford_57_tms:
+    type: tile
+    grid: webmercator
+    url: https://allmaps.xyz/%(z)s/%(x)s/%(y)s.png?url=https://dataverse.harvard.edu/api/access/datafile/7002541
+    coverage:
+      bbox:
+      - 2.2834304264978442
+      - 48.832838788368676
+      - 2.294043627167757
+      - 48.83985366598436
+      srs: EPSG:4326
+    transparent: true
+  verniquet_stanford_58_tms:
+    type: tile
+    grid: webmercator
+    url: https://allmaps.xyz/%(z)s/%(x)s/%(y)s.png?url=https://dataverse.harvard.edu/api/access/datafile/7002650
+    coverage:
+      bbox:
+      - 2.2940495092518582
+      - 48.83284315991034
+      - 2.3099744781928218
+      - 48.83985839049789
+      srs: EPSG:4326
+    transparent: true
+  verniquet_stanford_59_tms:
+    type: tile
+    grid: webmercator
+    url: https://allmaps.xyz/%(z)s/%(x)s/%(y)s.png?url=https://dataverse.harvard.edu/api/access/datafile/7002751
+    coverage:
+      bbox:
+      - 2.309978137469958
+      - 48.83284788326028
+      - 2.3259053324081593
+      - 48.839860913715235
+      srs: EPSG:4326
+    transparent: true
+  verniquet_stanford_60_tms:
+    type: tile
+    grid: webmercator
+    url: https://allmaps.xyz/%(z)s/%(x)s/%(y)s.png?url=https://dataverse.harvard.edu/api/access/datafile/7002855
+    coverage:
+      bbox:
+      - 2.32590676887672
+      - 48.83285040585398
+      - 2.3418361878824774
+      - 48.83986123563568
+      srs: EPSG:4326
+    transparent: true
+  verniquet_stanford_61_tms:
+    type: tile
+    grid: webmercator
+    url: https://allmaps.xyz/%(z)s/%(x)s/%(y)s.png?url=https://dataverse.harvard.edu/api/access/datafile/7002843
+    coverage:
+      bbox:
+      - 2.3418354015418474
+      - 48.83285072769066
+      - 2.3577670426845283
+      - 48.83985935625912
+      srs: EPSG:4326
+    transparent: true
+  verniquet_stanford_62_tms:
+    type: tile
+    grid: webmercator
+    url: https://allmaps.xyz/%(z)s/%(x)s/%(y)s.png?url=https://dataverse.harvard.edu/api/access/datafile/7002607
+    coverage:
+      bbox:
+      - 2.357764033535036
+      - 48.83284884877023
+      - 2.3736978948830436
+      - 48.839855275586075
+      srs: EPSG:4326
+    transparent: true
+  verniquet_stanford_63_tms:
+    type: tile
+    grid: webmercator
+    url: https://allmaps.xyz/%(z)s/%(x)s/%(y)s.png?url=https://dataverse.harvard.edu/api/access/datafile/7002597
+    coverage:
+      bbox:
+      - 2.3736926629259845
+      - 48.83284476909322
+      - 2.389628742546772
+      - 48.83984899361778
+      srs: EPSG:4326
+    transparent: true
+  verniquet_stanford_64_tms:
+    type: tile
+    grid: webmercator
+    url: https://allmaps.xyz/%(z)s/%(x)s/%(y)s.png?url=https://dataverse.harvard.edu/api/access/datafile/7002465
+    coverage:
+      bbox:
+      - 2.3896212877843945
+      - 48.832838488660855
+      - 2.4055595837444708
+      - 48.83984051035611
+      srs: EPSG:4326
+    transparent: true
+  verniquet_stanford_65_tms:
+    type: tile
+    grid: webmercator
+    url: https://allmaps.xyz/%(z)s/%(x)s/%(y)s.png?url=https://dataverse.harvard.edu/api/access/datafile/7002668
+    coverage:
+      bbox:
+      - 2.2834377876048753
+      - 48.82582827480046
+      - 2.2940495092518582
+      - 48.83284315991034
+      srs: EPSG:4326
+    transparent: true
+  verniquet_stanford_66_tms:
+    type: tile
+    grid: webmercator
+    url: https://allmaps.xyz/%(z)s/%(x)s/%(y)s.png?url=https://dataverse.harvard.edu/api/access/datafile/7002496
+    coverage:
+      bbox:
+      - 2.294055389060863
+      - 48.82583264526675
+      - 2.309978137469958
+      - 48.83284788326028
+      srs: EPSG:4326
+    transparent: true
+  verniquet_stanford_67_tms:
+    type: tile
+    grid: webmercator
+    url: https://allmaps.xyz/%(z)s/%(x)s/%(y)s.png?url=https://dataverse.harvard.edu/api/access/datafile/7002623
+    coverage:
+      bbox:
+      - 2.309981795329885
+      - 48.82583736745348
+      - 2.32590676887672
+      - 48.83285040585398
+      srs: EPSG:4326
+    transparent: true
+  verniquet_stanford_68_tms:
+    type: tile
+    grid: webmercator
+    url: https://allmaps.xyz/%(z)s/%(x)s/%(y)s.png?url=https://dataverse.harvard.edu/api/access/datafile/7002671
+    coverage:
+      bbox:
+      - 2.3259082047860025
+      - 48.825839889423676
+      - 2.3418354015418474
+      - 48.83285072769066
+      srs: EPSG:4326
+    transparent: true
+  verniquet_stanford_69_tms:
+    type: tile
+    grid: webmercator
+    url: https://allmaps.xyz/%(z)s/%(x)s/%(y)s.png?url=https://dataverse.harvard.edu/api/access/datafile/7002521
+    coverage:
+      bbox:
+      - 2.341834615499852
+      - 48.82584021117663
+      - 2.357764033535036
+      - 48.83284884877023
+      srs: EPSG:4326
+    transparent: true
+  verniquet_stanford_70_tms:
+    type: tile
+    grid: webmercator
+    url: https://allmaps.xyz/%(z)s/%(x)s/%(y)s.png?url=https://dataverse.harvard.edu/api/access/datafile/7002681
+    coverage:
+      bbox:
+      - 2.3577610255420955
+      - 48.82583833271219
+      - 2.3736926629259845
+      - 48.83284476909322
+      srs: EPSG:4326
+    transparent: true
+  verniquet_stanford_71_tms:
+    type: tile
+    grid: webmercator
+    url: https://allmaps.xyz/%(z)s/%(x)s/%(y)s.png?url=https://dataverse.harvard.edu/api/access/datafile/7002487
+    coverage:
+      bbox:
+      - 2.373687432983389
+      - 48.825834254030944
+      - 2.3896212877843945
+      - 48.832838488660855
+      srs: EPSG:4326
+    transparent: true
+  verniquet_stanford_72_tms:
+    type: tile
+    grid: webmercator
+    url: https://allmaps.xyz/%(z)s/%(x)s/%(y)s.png?url=https://dataverse.harvard.edu/api/access/datafile/7002675
+    coverage:
+      bbox:
+      - 2.3896138358943757
+      - 48.8258279751341
+      - 2.405549906179961
+      - 48.83283000747502
+      srs: EPSG:4326
+    transparent: true
+  verniquet_stanford_tms:
+    type: tile
+    grid: webmercator
+    url: https://allmaps.xyz/%(z)s/%(x)s/%(y)s.png?url=https://dataverse.harvard.edu/api/access/datafile/7002615
+    coverage:
+      bbox:
+      - 2.2789487344052968
+      - 48.82447319213146
+      - 2.408043511490396
+      - 48.89040785367291
+      srs: EPSG:4326
+    transparent: true
 grids:
-    webmercator:
-        base: GLOBAL_WEBMERCATOR
-
-globals:
+  webmercator:
+    base: GLOBAL_WEBMERCATOR
+globals: {}
