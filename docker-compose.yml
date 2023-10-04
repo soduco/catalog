@@ -279,7 +279,7 @@ services:
       CANTALOUPE_ENDPOINT_ADMIN_ENABLED: "true"
       CANTALOUPE_ENDPOINT_ADMIN_SECRET: $CANTALOUPE_PASSWORD
     volumes:
-      - ./data/cantaloupdata:/imageroot
+      - /data/cantaloupe:/imageroot
       - ./config/cantaloupe/cantaloupe.properties:/etc/cantaloupe.properties
     labels:
       - "traefik.enable=true"
