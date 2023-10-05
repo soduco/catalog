@@ -296,7 +296,7 @@ services:
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.geonetwork-ui.entryPoints=websecure"
-      - "traefik.http.routers.geonetwork-ui.rule=Host(`preview.geohistoricaldata.org`, `www.preview.geohistoricaldata.org`)"
+      - "traefik.http.routers.geonetwork-ui.rule=Host(`catalog.geohistoricaldata.org`, `www.catalog.geohistoricaldata.org`) && PathPrefix(`/datahub`)"
       - "traefik.http.routers.geonetwork-ui.tls=true"
 
   map-proxy:
