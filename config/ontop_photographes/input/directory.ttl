@@ -1,3 +1,4 @@
+@prefix rr: <http://www.w3.org/ns/r2rml#> .
 @prefix : <http://example.org/voc#> .
 @prefix cc: <http://creativecommons.org/ns#> .
 @prefix dc: <http://purl.org/dc/elements/1.1/> .
@@ -34,568 +35,327 @@
 @prefix ric-dft: <https://www.ica.org/standards/RiC/vocabularies/documentaryFormTypes#> .
 @prefix ric-rst: <https://www.ica.org/standards/RiC/vocabularies/recordSetTypes#> .
 @prefix organization: <http://www.w3.org/ns/org#> .
-@base <http://rdf.geohistoricaldata.org/def/directory> .
-
-<http://rdf.geohistoricaldata.org/def/directory> rdf:type owl:Ontology ;
-                                                  cc:license <http://creativecommons.org/licenses/by/2.0/> ,
-                                                             <http://opendatacommons.org/licenses/by/> ,
-                                                             <http://www.data.gouv.fr/Licence-Ouverte-Open-Licence> ;
-                                                  dcterms:creator [ rdf:type foaf:Person ;
-                                                                    organization:hasMembership [ rdf:type organization:Membership ;
-                                                                                                 organization:memberDuring [ rdf:type time:Interval ;
-                                                                                                                             time:hasBeginning [ rdf:type time:Instant ;
-                                                                                                                                                 time:inXSDDateTimeStamp "2005-09-09"^^xsd:dateTimeStamp
-                                                                                                                                               ]
-                                                                                                                           ] ;
-                                                                                                 organization:organization <http://www.ign.fr/> ;
-                                                                                                 organization:role [ rdf:type organization:Role
-                                                                                                                   ]
-                                                                                               ] ;
-                                                                    foaf:family_name "Abadie" ;
-                                                                    foaf:firstName "Nathalie" ;
-                                                                    foaf:mbox <mailto:nathalie-f.abadie@ign.fr> ;
-                                                                    foaf:name "Nathalie Abadie" ;
-                                                                    foaf:workInfoHomepage <https://www.umr-lastig.fr/nathalie-abadie/>
-                                                                  ] ,
-                                                                  [ rdf:type foaf:Person ;
-                                                                    organization:hasMembership [ rdf:type organization:Membership ;
-                                                                                                 organization:memberDuring [ rdf:type time:Interval ;
-                                                                                                                             time:hasBeginning [ rdf:type time:Instant ;
-                                                                                                                                                 time:inXSDDateTimeStamp "2022-04-01"^^xsd:dateTimeStamp
-                                                                                                                                               ]
-                                                                                                                           ] ;
-                                                                                                 organization:organization <http://www.ign.fr/> ;
-                                                                                                 organization:role [ rdf:type organization:Role
-                                                                                                                   ]
-                                                                                               ] ;
-                                                                    foaf:family_name "Tual" ;
-                                                                    foaf:firstName "Solenn" ;
-                                                                    foaf:mbox <mailto:solenn.tual@ign.fr> ;
-                                                                    foaf:name "Solenn Tual" ;
-                                                                    foaf:workInfoHomepage <https://www.umr-lastig.fr/solenn-tual/>
-                                                                  ] ;
-                                                  dcterms:description "Ontologie décrivant le contenu des séries d'annuaires du commerce parisien du 19ème siècle"@fr ,
-                                                                      "Ontology describing the trade directory series published in Paris during theh 19th century."@en ;
-                                                  dcterms:issued "2022-08-31"^^xsd:date ;
-                                                  dcterms:publisher <http://fr.dbpedia.org/resource/Institut_national_de_l%27information_g%C3%A9ographique_et_foresti%C3%A8r> ;
-                                                  dcterms:rights "Copyright 2022, IGN" ;
-                                                  dcterms:title "Ontologie des annuaires du commerce parisien du 19ème siècle."@fr ,
-                                                                "Ontology of 19th century Paris trade directories."@en ;
-                                                  vann:preferredNamespacePrefix "adb" ;
-                                                  vann:preferredNamespaceUri adb: ;
-                                                  owl:versionInfo "Version 0.1 - 2022-08-31" .
-
-#################################################################
-#    Annotation properties
-#################################################################
-
-###  http://creativecommons.org/ns#license
-cc:license rdf:type owl:AnnotationProperty .
-
-
-###  http://purl.org/dc/terms/creator
-dcterms:creator rdf:type owl:AnnotationProperty .
-
-
-###  http://purl.org/dc/terms/description
-dcterms:description rdf:type owl:AnnotationProperty .
-
-
-###  http://purl.org/dc/terms/issued
-dcterms:issued rdf:type owl:AnnotationProperty .
-
-
-###  http://purl.org/dc/terms/publisher
-dcterms:publisher rdf:type owl:AnnotationProperty .
-
-
-###  http://purl.org/dc/terms/rights
-dcterms:rights rdf:type owl:AnnotationProperty .
-
-
-###  http://purl.org/dc/terms/title
-dcterms:title rdf:type owl:AnnotationProperty .
-
-
-###  http://purl.org/vocab/vann/preferredNamespacePrefix
-vann:preferredNamespacePrefix rdf:type owl:AnnotationProperty .
-
-
-###  http://purl.org/vocab/vann/preferredNamespaceUri
-vann:preferredNamespaceUri rdf:type owl:AnnotationProperty .
-
-
-###  http://www.w3.org/2006/time#hasBeginning
-time:hasBeginning rdf:type owl:AnnotationProperty .
-
-
-###  http://www.w3.org/2006/time#inXSDDateTimeStamp
-time:inXSDDateTimeStamp rdf:type owl:AnnotationProperty .
-
-
-###  http://www.w3.org/ns/org#hasMembership
-organization:hasMembership rdf:type owl:AnnotationProperty .
-
-
-###  http://www.w3.org/ns/org#memberDuring
-organization:memberDuring rdf:type owl:AnnotationProperty .
-
-
-###  http://www.w3.org/ns/org#organization
-organization:organization rdf:type owl:AnnotationProperty .
-
-
-###  http://www.w3.org/ns/org#role
-organization:role rdf:type owl:AnnotationProperty .
-
-
-###  http://xmlns.com/foaf/0.1/family_name
-foaf:family_name rdf:type owl:AnnotationProperty .
-
-
-###  http://xmlns.com/foaf/0.1/firstName
-foaf:firstName rdf:type owl:AnnotationProperty .
-
-
-###  http://xmlns.com/foaf/0.1/mbox
-foaf:mbox rdf:type owl:AnnotationProperty .
-
-
-###  http://xmlns.com/foaf/0.1/name
-foaf:name rdf:type owl:AnnotationProperty .
-
-
-###  http://xmlns.com/foaf/0.1/workInfoHomepage
-foaf:workInfoHomepage rdf:type owl:AnnotationProperty .
-
-
-#################################################################
-#    Datatypes
-#################################################################
-
-###  http://www.opengis.net/ont/geosparql#wktLiteral
-gsp:wktLiteral rdf:type rdfs:Datatype .
-
-
-#################################################################
-#    Object Properties
-#################################################################
-
-###  http://www.opengis.net/ont/geosparql#hasGeometry
-gsp:hasGeometry rdf:type owl:ObjectProperty ;
-                rdfs:domain gsp:Feature ;
-                rdfs:range gsp:Geometry .
-
-
-###  http://www.w3.org/ns/locn#address
-locn:address rdf:type owl:ObjectProperty ;
-             rdfs:range locn:Address .
-
-
-###  http://www.w3.org/ns/prov#generated
-prov:generated rdf:type owl:ObjectProperty ;
-               rdfs:domain prov:Activity ;
-               rdfs:range prov:Entity .
-
-
-###  http://www.w3.org/ns/prov#used
-prov:used rdf:type owl:ObjectProperty ;
-          rdfs:domain prov:Activity ;
-          rdfs:range prov:Entity .
-
-
-###  http://www.w3.org/ns/prov#wasDerivedFrom
-prov:wasDerivedFrom rdf:type owl:ObjectProperty ;
-                    rdfs:domain prov:Entity ;
-                    rdfs:range prov:Entity .
-
-
-###  http://www.w3.org/ns/prov#wasGeneratedBy
-prov:wasGeneratedBy rdf:type owl:ObjectProperty ;
-                    rdfs:domain prov:Entity ;
-                    rdfs:range prov:Activity .
-
-
-#################################################################
-#    Data properties
-#################################################################
-
-###  http://purl.org/pav/createdOn
-pav:createdOn rdf:type owl:DatatypeProperty ;
-              rdfs:range xsd:integer .
-
-
-###  http://rdaregistry.info/Elements/a/P50104
-rda:P50104 rdf:type owl:DatatypeProperty ;
-           rdfs:range xsd:string .
-
-
-###  http://rdf.geohistoricaldata.org/def/directory#numEntry
-adb:numEntry rdf:type owl:DatatypeProperty ;
-             rdfs:domain adb:Entry ;
-             rdfs:range xsd:integer .
-
-
-###  http://www.opengis.net/ont/geosparql#asWKT
-gsp:asWKT rdf:type owl:DatatypeProperty ;
-          rdfs:domain gsp:Geometry ;
-          rdfs:range gsp:wktLiteral .
-
-
-###  http://www.w3.org/2000/01/rdf-schema#comment
-rdfs:comment rdf:type owl:DatatypeProperty .
-
-
-###  http://www.w3.org/2000/01/rdf-schema#label
-rdfs:label rdf:type owl:DatatypeProperty .
-
-
-###  http://www.w3.org/ns/locn#fullAddress
-locn:fullAddress rdf:type owl:DatatypeProperty ;
-                 rdfs:domain locn:Address ;
-                 rdfs:range xsd:string .
-
-
-###  http://www.w3.org/ns/locn#locatorDesignator
-locn:locatorDesignator rdf:type owl:DatatypeProperty ;
-                       rdfs:domain locn:Address ;
-                       rdfs:range xsd:string .
-
-
-###  http://www.w3.org/ns/locn#thoroughfare
-locn:thoroughfare rdf:type owl:DatatypeProperty ;
-                  rdfs:domain locn:Address ;
-                  rdfs:range xsd:string .
-
-
-###  http://www.w3.org/ns/prov#atTime
-prov:atTime rdf:type owl:DatatypeProperty ;
-            rdfs:domain prov:Activity ;
-            rdfs:range xsd:dateTime .
-
-
-#################################################################
-#    Classes
-#################################################################
-
-###  http://purl.org/vocommons/voaf#Vocabulary
-voaf:Vocabulary rdf:type owl:Class .
-
-
-###  http://rdf.geohistoricaldata.org/def/directory#Directory
-adb:Directory rdf:type owl:Class .
-
-
-###  http://rdf.geohistoricaldata.org/def/directory#Entry
-adb:Entry rdf:type owl:Class .
-
-
-###  http://www.opengis.net/ont/geosparql#Feature
-gsp:Feature rdf:type owl:Class .
-
-
-###  http://www.opengis.net/ont/geosparql#Geometry
-gsp:Geometry rdf:type owl:Class .
-
-
-###  http://www.opengis.net/ont/sf#Point
-sf:Point rdf:type owl:Class .
-
-
-###  http://www.w3.org/2006/time#Instant
-time:Instant rdf:type owl:Class .
-
-
-###  http://www.w3.org/2006/time#Interval
-time:Interval rdf:type owl:Class .
-
-
-###  http://www.w3.org/ns/locn#Address
-locn:Address rdf:type owl:Class .
-
-
-###  http://www.w3.org/ns/org#Membership
-organization:Membership rdf:type owl:Class .
-
-
-###  http://www.w3.org/ns/org#Role
-organization:Role rdf:type owl:Class .
-
-
-###  http://www.w3.org/ns/prov#Activity
-prov:Activity rdf:type owl:Class .
-
-
-###  http://www.w3.org/ns/prov#Entity
-prov:Entity rdf:type owl:Class .
-
-
-###  http://xmlns.com/foaf/0.1/Person
-foaf:Person rdf:type owl:Class .
-
-
-[ rdf:type foaf:Person ;
-  organization:hasMembership [ rdf:type organization:Membership ;
-                               organization:memberDuring [ rdf:type time:Interval ;
-                                                           time:hasBeginning [ rdf:type time:Instant ;
-                                                                               time:inXSDDateTimeStamp "2005-09-09"^^xsd:dateTimeStamp
-                                                                             ]
-                                                         ] ;
-                               organization:organization <http://www.ign.fr/> ;
-                               organization:role [ rdf:type organization:Role
-                                                 ]
-                             ] ;
-  foaf:family_name "Abadie" ;
-  foaf:firstName "Nathalie" ;
-  foaf:mbox <mailto:nathalie-f.abadie@ign.fr> ;
-  foaf:name "Nathalie Abadie" ;
-  foaf:workInfoHomepage <https://www.umr-lastig.fr/nathalie-abadie/>
-] .
-
-[ rdf:type foaf:Person ;
-   organization:hasMembership [ rdf:type organization:Membership ;
-                                organization:memberDuring [ rdf:type time:Interval ;
-                                                            time:hasBeginning [ rdf:type time:Instant ;
-                                                                                time:inXSDDateTimeStamp "2022-04-01"^^xsd:dateTimeStamp
-                                                                              ]
-                                                          ] ;
-                                organization:organization <http://www.ign.fr/> ;
-                                organization:role [ rdf:type organization:Role
-                                                  ]
-                              ] ;
-   foaf:family_name "Tual" ;
-   foaf:firstName "Solenn" ;
-   foaf:mbox <mailto:solenn.tual@ign.fr> ;
-   foaf:name "Solenn Tual" ;
-   foaf:workInfoHomepage <https://www.umr-lastig.fr/solenn-tual/>
- ] .
-
-[ rdf:type foaf:Person ;
-   organization:hasMembership [ rdf:type organization:Membership ;
-                                organization:memberDuring [ rdf:type time:Interval ;
-                                                            time:hasBeginning [ rdf:type time:Instant ;
-                                                                                time:inXSDDateTimeStamp "2005-09-09"^^xsd:dateTimeStamp
-                                                                              ]
-                                                          ] ;
-                                organization:organization <http://www.ign.fr/> ;
-                                organization:role [ rdf:type organization:Role
-                                                  ]
-                              ] ;
-   foaf:family_name "Abadie" ;
-   foaf:firstName "Nathalie" ;
-   foaf:mbox <mailto:nathalie-f.abadie@ign.fr> ;
-   foaf:name "Nathalie Abadie" ;
-   foaf:workInfoHomepage <https://www.umr-lastig.fr/nathalie-abadie/>
- ] .
-
-[ rdf:type foaf:Person ;
-   organization:hasMembership [ rdf:type organization:Membership ;
-                                organization:memberDuring [ rdf:type time:Interval ;
-                                                            time:hasBeginning [ rdf:type time:Instant ;
-                                                                                time:inXSDDateTimeStamp "2022-04-01"^^xsd:dateTimeStamp
-                                                                              ]
-                                                          ] ;
-                                organization:organization <http://www.ign.fr/> ;
-                                organization:role [ rdf:type organization:Role
-                                                  ]
-                              ] ;
-   foaf:family_name "Tual" ;
-   foaf:firstName "Solenn" ;
-   foaf:mbox <mailto:solenn.tual@ign.fr> ;
-   foaf:name "Solenn Tual" ;
-   foaf:workInfoHomepage <https://www.umr-lastig.fr/solenn-tual/>
- ] .
-
-[ rdf:type foaf:Person ;
-   organization:hasMembership [ rdf:type organization:Membership ;
-                                organization:memberDuring [ rdf:type time:Interval ;
-                                                            time:hasBeginning [ rdf:type time:Instant ;
-                                                                                time:inXSDDateTimeStamp "2005-09-09"^^xsd:dateTimeStamp
-                                                                              ]
-                                                          ] ;
-                                organization:organization <http://www.ign.fr/> ;
-                                organization:role [ rdf:type organization:Role
-                                                  ]
-                              ] ;
-   foaf:family_name "Abadie" ;
-   foaf:firstName "Nathalie" ;
-   foaf:mbox <mailto:nathalie-f.abadie@ign.fr> ;
-   foaf:name "Nathalie Abadie" ;
-   foaf:workInfoHomepage <https://www.umr-lastig.fr/nathalie-abadie/>
- ] .
-
-[ rdf:type foaf:Person ;
-   organization:hasMembership [ rdf:type organization:Membership ;
-                                organization:memberDuring [ rdf:type time:Interval ;
-                                                            time:hasBeginning [ rdf:type time:Instant ;
-                                                                                time:inXSDDateTimeStamp "2022-04-01"^^xsd:dateTimeStamp
-                                                                              ]
-                                                          ] ;
-                                organization:organization <http://www.ign.fr/> ;
-                                organization:role [ rdf:type organization:Role
-                                                  ]
-                              ] ;
-   foaf:family_name "Tual" ;
-   foaf:firstName "Solenn" ;
-   foaf:mbox <mailto:solenn.tual@ign.fr> ;
-   foaf:name "Solenn Tual" ;
-   foaf:workInfoHomepage <https://www.umr-lastig.fr/solenn-tual/>
- ] .
-
-[ rdf:type foaf:Person ;
-   organization:hasMembership [ rdf:type organization:Membership ;
-                                organization:memberDuring [ rdf:type time:Interval ;
-                                                            time:hasBeginning [ rdf:type time:Instant ;
-                                                                                time:inXSDDateTimeStamp "2005-09-09"^^xsd:dateTimeStamp
-                                                                              ]
-                                                          ] ;
-                                organization:organization <http://www.ign.fr/> ;
-                                organization:role [ rdf:type organization:Role
-                                                  ]
-                              ] ;
-   foaf:family_name "Abadie" ;
-   foaf:firstName "Nathalie" ;
-   foaf:mbox <mailto:nathalie-f.abadie@ign.fr> ;
-   foaf:name "Nathalie Abadie" ;
-   foaf:workInfoHomepage <https://www.umr-lastig.fr/nathalie-abadie/>
- ] .
-
-[ rdf:type foaf:Person ;
-   organization:hasMembership [ rdf:type organization:Membership ;
-                                organization:memberDuring [ rdf:type time:Interval ;
-                                                            time:hasBeginning [ rdf:type time:Instant ;
-                                                                                time:inXSDDateTimeStamp "2022-04-01"^^xsd:dateTimeStamp
-                                                                              ]
-                                                          ] ;
-                                organization:organization <http://www.ign.fr/> ;
-                                organization:role [ rdf:type organization:Role
-                                                  ]
-                              ] ;
-   foaf:family_name "Tual" ;
-   foaf:firstName "Solenn" ;
-   foaf:mbox <mailto:solenn.tual@ign.fr> ;
-   foaf:name "Solenn Tual" ;
-   foaf:workInfoHomepage <https://www.umr-lastig.fr/solenn-tual/>
- ] .
-
-[ rdf:type foaf:Person ;
-   organization:hasMembership [ rdf:type organization:Membership ;
-                                organization:memberDuring [ rdf:type time:Interval ;
-                                                            time:hasBeginning [ rdf:type time:Instant ;
-                                                                                time:inXSDDateTimeStamp "2005-09-09"^^xsd:dateTimeStamp
-                                                                              ]
-                                                          ] ;
-                                organization:organization <http://www.ign.fr/> ;
-                                organization:role [ rdf:type organization:Role
-                                                  ]
-                              ] ;
-   foaf:family_name "Abadie" ;
-   foaf:firstName "Nathalie" ;
-   foaf:mbox <mailto:nathalie-f.abadie@ign.fr> ;
-   foaf:name "Nathalie Abadie" ;
-   foaf:workInfoHomepage <https://www.umr-lastig.fr/nathalie-abadie/>
- ] .
-
-[ rdf:type foaf:Person ;
-   organization:hasMembership [ rdf:type organization:Membership ;
-                                organization:memberDuring [ rdf:type time:Interval ;
-                                                            time:hasBeginning [ rdf:type time:Instant ;
-                                                                                time:inXSDDateTimeStamp "2022-04-01"^^xsd:dateTimeStamp
-                                                                              ]
-                                                          ] ;
-                                organization:organization <http://www.ign.fr/> ;
-                                organization:role [ rdf:type organization:Role
-                                                  ]
-                              ] ;
-   foaf:family_name "Tual" ;
-   foaf:firstName "Solenn" ;
-   foaf:mbox <mailto:solenn.tual@ign.fr> ;
-   foaf:name "Solenn Tual" ;
-   foaf:workInfoHomepage <https://www.umr-lastig.fr/solenn-tual/>
- ] .
-
-[ rdf:type foaf:Person ;
-   organization:hasMembership [ rdf:type organization:Membership ;
-                                organization:memberDuring [ rdf:type time:Interval ;
-                                                            time:hasBeginning [ rdf:type time:Instant ;
-                                                                                time:inXSDDateTimeStamp "2005-09-09"^^xsd:dateTimeStamp
-                                                                              ]
-                                                          ] ;
-                                organization:organization <http://www.ign.fr/> ;
-                                organization:role [ rdf:type organization:Role
-                                                  ]
-                              ] ;
-   foaf:family_name "Abadie" ;
-   foaf:firstName "Nathalie" ;
-   foaf:mbox <mailto:nathalie-f.abadie@ign.fr> ;
-   foaf:name "Nathalie Abadie" ;
-   foaf:workInfoHomepage <https://www.umr-lastig.fr/nathalie-abadie/>
- ] .
-
-[ rdf:type foaf:Person ;
-   organization:hasMembership [ rdf:type organization:Membership ;
-                                organization:memberDuring [ rdf:type time:Interval ;
-                                                            time:hasBeginning [ rdf:type time:Instant ;
-                                                                                time:inXSDDateTimeStamp "2022-04-01"^^xsd:dateTimeStamp
-                                                                              ]
-                                                          ] ;
-                                organization:organization <http://www.ign.fr/> ;
-                                organization:role [ rdf:type organization:Role
-                                                  ]
-                              ] ;
-   foaf:family_name "Tual" ;
-   foaf:firstName "Solenn" ;
-   foaf:mbox <mailto:solenn.tual@ign.fr> ;
-   foaf:name "Solenn Tual" ;
-   foaf:workInfoHomepage <https://www.umr-lastig.fr/solenn-tual/>
- ] .
-
-[ rdf:type foaf:Person ;
-   organization:hasMembership [ rdf:type organization:Membership ;
-                                organization:memberDuring [ rdf:type time:Interval ;
-                                                            time:hasBeginning [ rdf:type time:Instant ;
-                                                                                time:inXSDDateTimeStamp "2005-09-09"^^xsd:dateTimeStamp
-                                                                              ]
-                                                          ] ;
-                                organization:organization <http://www.ign.fr/> ;
-                                organization:role [ rdf:type organization:Role
-                                                  ]
-                              ] ;
-   foaf:family_name "Abadie" ;
-   foaf:firstName "Nathalie" ;
-   foaf:mbox <mailto:nathalie-f.abadie@ign.fr> ;
-   foaf:name "Nathalie Abadie" ;
-   foaf:workInfoHomepage <https://www.umr-lastig.fr/nathalie-abadie/>
- ] .
-
-[ rdf:type foaf:Person ;
-   organization:hasMembership [ rdf:type organization:Membership ;
-                                organization:memberDuring [ rdf:type time:Interval ;
-                                                            time:hasBeginning [ rdf:type time:Instant ;
-                                                                                time:inXSDDateTimeStamp "2022-04-01"^^xsd:dateTimeStamp
-                                                                              ]
-                                                          ] ;
-                                organization:organization <http://www.ign.fr/> ;
-                                organization:role [ rdf:type organization:Role
-                                                  ]
-                              ] ;
-   foaf:family_name "Tual" ;
-   foaf:firstName "Solenn" ;
-   foaf:mbox <mailto:solenn.tual@ign.fr> ;
-   foaf:name "Solenn Tual" ;
-   foaf:workInfoHomepage <https://www.umr-lastig.fr/solenn-tual/>
- ] .
-
-[ rdfs:label "Intern student"@en
- ] .
-
-[ rdfs:label "Survey engineer and Scientist"@en
- ] .
-
-[ rdfs:label "Stagiaire"@fr
- ] .
-
-[ rdfs:label "Chargée de recherche"@fr
- ] .
-
-###  Generated by the OWL API (version 4.5.9.2019-02-01T07:24:44Z) https://github.com/owlcs/owlapi
+@prefix dcat: <http://www.w3.org/ns/dcat#> .
+@prefix sd: <http://www.w3.org/ns/sparql-service-description#> .
+
+<urn:MAPID-2a851f885c024d0babf35f1a653339bc> a rr:TriplesMap;
+  rr:predicateObjectMap [ a rr:PredicateObjectMap;
+      rr:predicate rdfs:label;
+      rr:objectMap [ a rr:TermMap, rr:ObjectMap;
+          rr:datatype xsd:string;
+          rr:column "directory";
+          rr:termType rr:Literal
+        ]
+    ], [ a rr:PredicateObjectMap;
+      rr:predicate pav:createdOn;
+      rr:objectMap [ a rr:TermMap, rr:ObjectMap;
+          rr:datatype xsd:integer;
+          rr:column "published";
+          rr:termType rr:Literal
+        ]
+    ];
+  rr:logicalTable [ a rr:R2RMLView;
+      rr:sqlQuery "select distinct directory, published, graph_name from directories_graph.directories_content"
+    ];
+  rr:subjectMap [ a rr:SubjectMap, rr:TermMap;
+      rr:termType rr:IRI;
+      rr:class adb:Directory;
+      rr:template "http://rdf.geohistoricaldata.org/id/directories/directory/{directory}";
+	  rr:graphMap [ rr:template "http://rdf.geohistoricaldata.org/id/directories/{graph_name}" ];
+	  rr:graphMap [ rr:constant rr:defaultGraph ]
+    ] .
+
+<urn:MAPID-3b951f885c024d0babf35f1a653339bc> a rr:TriplesMap;
+  rr:predicateObjectMap [ a rr:PredicateObjectMap;
+      rr:predicate dcterms:title;
+      rr:objectMap [ a rr:TermMap, rr:ObjectMap;
+          rr:datatype xsd:string;
+          rr:column "title";
+          rr:termType rr:Literal
+        ]
+    ], [ a rr:PredicateObjectMap;
+      rr:predicate sd:namedGraph;
+      rr:objectMap [ a rr:TermMap, rr:ObjectMap;
+         rr:template "http://rdf.geohistoricaldata.org/id/directories/{graph_name}";
+         rr:termType rr:IRI
+        ]
+    ],[ a rr:PredicateObjectMap;
+      rr:predicate dcterms:issued;
+      rr:objectMap [ a rr:TermMap, rr:ObjectMap;
+          rr:datatype xsd:date;
+          rr:column "issued";
+          rr:termType rr:Literal
+        ]
+    ];
+  rr:logicalTable [ a rr:R2RMLView;
+      rr:sqlQuery "select distinct dataset_id, title, issued, graph_name from directories_graph.dataset"
+    ];
+  rr:subjectMap [ a rr:SubjectMap, rr:TermMap;
+      rr:termType rr:IRI;
+      rr:class dcat:Dataset;
+      rr:template "http://rdf.geohistoricaldata.org/id/directories/dataset/{dataset_id}";
+	  rr:graphMap [ rr:template "http://rdf.geohistoricaldata.org/id/directories/{graph_name}" ];
+	  rr:graphMap [ rr:constant rr:defaultGraph ]
+    ] .
+
+<urn:MAPID-d5f34f2efdaf45278789bec6572853e3> a rr:TriplesMap;
+  rr:logicalTable [ a rr:R2RMLView;
+      rr:sqlQuery "select distinct elt.entry_id, elt.graph_name as graph_name from directories_graph.geocoding gcd join directories_graph.directories_content elt on (gcd.id_address=elt.id_address)"
+
+    ];
+  rr:subjectMap [ a rr:SubjectMap, rr:TermMap;
+      rr:termType rr:IRI;
+      rr:class prov:Activity;
+      rr:constant <http://rdf.geohistoricaldata.org/id/directories/activity/0002>;
+	  rr:graphMap [ rr:template "http://rdf.geohistoricaldata.org/id/directories/{graph_name}" ];
+	  rr:graphMap [ rr:constant rr:defaultGraph ]
+    ];
+  rr:predicateObjectMap [ a rr:PredicateObjectMap;
+      rr:predicate prov:atTime;
+      rr:object "2022-08-31"^^xsd:dateTime
+    ], [ a rr:PredicateObjectMap;
+      rr:objectMap [ a rr:TermMap, rr:ObjectMap;
+          rr:template "http://rdf.geohistoricaldata.org/id/directories/entry/{entry_id}";
+          rr:termType rr:IRI
+        ];
+      rr:predicate prov:used
+    ], [ a rr:PredicateObjectMap;
+      rr:object "Géocodage historique"@fr;
+      rr:predicate rdfs:comment
+    ] .
+
+<urn:MAPID-348da7258faf42acaeb43491994444db-100320fe-995a-4e42-afc3-9523d69eea30>
+  a rr:TriplesMap;
+  rr:predicateObjectMap [ a rr:PredicateObjectMap;
+      rr:predicate prov:wasDerivedFrom;
+      rr:objectMap [ a rr:ObjectMap, rr:TermMap;
+          rr:template "http://rdf.geohistoricaldata.org/id/directories/directory/{directory}";
+          rr:termType rr:IRI
+        ]
+    ], [ a rr:PredicateObjectMap;
+      rr:objectMap [ a rr:TermMap, rr:ObjectMap;
+          rr:column "index";
+          rr:datatype xsd:integer;
+          rr:termType rr:Literal
+        ];
+      rr:predicate adb:numEntry
+    ], [ a rr:PredicateObjectMap;
+      rr:objectMap [ a rr:TermMap, rr:ObjectMap;
+          rr:termType rr:BlankNode;
+          rr:template "address/{id_address}"
+        ];
+      rr:predicate locn:address
+    ], [ a rr:PredicateObjectMap;
+      rr:objectMap [ a rr:TermMap, rr:ObjectMap;
+          rr:termType rr:BlankNode;
+          rr:template "address_gcd/{id_address}"
+        ];
+      rr:predicate locn:address
+    ],[ a rr:PredicateObjectMap;
+      rr:predicate rda:P50104;
+      rr:objectMap [ a rr:ObjectMap, rr:TermMap;
+          rr:column "activity";
+          rr:termType rr:Literal;
+          rr:datatype xsd:string
+        ]
+    ], [ a rr:PredicateObjectMap;
+      rr:objectMap [ a rr:TermMap, rr:ObjectMap;
+          rr:column "person";
+          rr:datatype xsd:string;
+          rr:termType rr:Literal
+        ];
+      rr:predicate rdfs:label
+    ];
+  rr:subjectMap [ a rr:TermMap, rr:SubjectMap;
+      rr:termType rr:IRI;
+      rr:class adb:Entry;
+      rr:template "http://rdf.geohistoricaldata.org/id/directories/entry/{entry_id}";
+	  rr:graphMap [ rr:template "http://rdf.geohistoricaldata.org/id/directories/{graph_name}" ];
+	  rr:graphMap [ rr:constant rr:defaultGraph ]
+    ];
+  rr:logicalTable [ a rr:R2RMLView;
+      rr:sqlQuery "select entry_id, index, directory, person, activity, loc, cardinal, fulladd, graph_name, id_address from directories_graph.directories_content where fulladd not like '';"
+    ] .
+
+<urn:MAPID-348da7258faf42acaeb43491994444db-daa8dc66-09bb-44c7-a25b-4219bf6e90ca>
+  a rr:TriplesMap;
+  rr:predicateObjectMap [ a rr:PredicateObjectMap;
+      rr:objectMap [ a rr:ObjectMap, rr:TermMap;
+          rr:column "cardinal";
+          rr:termType rr:Literal;
+          rr:datatype xsd:string
+        ];
+      rr:predicate locn:locatorDesignator
+    ], [ a rr:PredicateObjectMap;
+      rr:objectMap [ a rr:ObjectMap, rr:TermMap;
+          rr:column "loc";
+          rr:termType rr:Literal;
+          rr:language "fr"
+        ];
+      rr:predicate locn:thoroughfare
+    ], [ a rr:PredicateObjectMap;
+      rr:predicate prov:wasGeneratedBy;
+      rr:object <http://rdf.geohistoricaldata.org/id/directories/activity/0001>
+    ], [ a rr:PredicateObjectMap;
+      rr:predicate locn:fullAddress;
+      rr:objectMap [ a rr:ObjectMap, rr:TermMap;
+          rr:column "fulladd";
+          rr:termType rr:Literal;
+          rr:language "fr"
+        ]
+    ];
+  rr:logicalTable [ a rr:R2RMLView;
+      rr:sqlQuery "select entry_id, directory, person, activity, loc, cardinal, fulladd, graph_name, id_address from directories_graph.directories_content where fulladd not like '';"
+    ];
+  rr:subjectMap [ a rr:SubjectMap, rr:TermMap;
+      rr:class locn:Address;
+      rr:template "address/{id_address}";
+      rr:termType rr:BlankNode;
+	  rr:graphMap [ rr:template "http://rdf.geohistoricaldata.org/id/directories/{graph_name}" ];
+	  rr:graphMap [ rr:constant rr:defaultGraph ]
+    ] .
+
+<urn:MAPID-3953b625580a41a5b09699f068cfbab6> a rr:TriplesMap;
+  rr:logicalTable [ a rr:R2RMLView;
+      rr:sqlQuery "select distinct entry_id, directory, graph_name from directories_graph.directories_content"
+    ];
+  rr:subjectMap [ a rr:SubjectMap, rr:TermMap;
+      rr:termType rr:IRI;
+      rr:class prov:Activity;
+      rr:constant <http://rdf.geohistoricaldata.org/id/directories/activity/0001>;
+	  rr:graphMap [ rr:template "http://rdf.geohistoricaldata.org/id/directories/{graph_name}" ];
+	  rr:graphMap [ rr:constant rr:defaultGraph ]
+    ];
+  rr:predicateObjectMap [ a rr:PredicateObjectMap;
+      rr:object "Segmentation des entrées, reconnaissance du texte et des entités nommées.";
+      rr:predicate rdfs:comment
+    ], [ a rr:PredicateObjectMap;
+      rr:object "2022-06-15"^^xsd:dateTime;
+      rr:predicate prov:atTime
+    ], [ a rr:PredicateObjectMap;
+      rr:predicate prov:generated;
+      rr:objectMap [ a rr:ObjectMap, rr:TermMap;
+          rr:template "http://rdf.geohistoricaldata.org/id/directories/entry/{entry_id}";
+          rr:termType rr:IRI
+        ]
+    ], [ a rr:PredicateObjectMap;
+      rr:objectMap [ a rr:ObjectMap, rr:TermMap;
+          rr:termType rr:IRI;
+          rr:template "http://rdf.geohistoricaldata.org/id/directories/directory/{directory}"
+        ];
+      rr:predicate prov:used
+    ] .
+
+<urn:MAPID-1f79d04717894630b2cd3416a05e706d-ec6164a7-d8e9-4e72-be1c-0b5ead825367>
+  a rr:TriplesMap;
+  rr:predicateObjectMap [ a rr:PredicateObjectMap;
+      rr:predicate locn:address;
+      rr:objectMap [ a rr:ObjectMap, rr:TermMap;
+          rr:termType rr:BlankNode;
+          rr:template "address_gcd/{entry_id}"
+        ]
+    ];
+  rr:logicalTable [ a rr:R2RMLView;
+      rr:sqlQuery "select gcd.entry_id, gcd.precise_geo_response as rsp, gcd.precise_geom as geom, gcd.graph_name as graph_name from directories_graph.geocoding gcd;"
+    ];
+  rr:subjectMap [ a rr:TermMap, rr:SubjectMap;
+      rr:template "http://rdf.geohistoricaldata.org/id/directories/entry/{entry_id}";
+      rr:termType rr:IRI;
+	  rr:graphMap [ rr:template "http://rdf.geohistoricaldata.org/id/directories/{graph_name}" ];
+	  rr:graphMap [ rr:constant rr:defaultGraph ]
+    ] .
+
+<urn:MAPID-1f79d04717894630b2cd3416a05e706d-5f21c178-41db-4dc1-a868-1fe21d7bcd02>
+  a rr:TriplesMap;
+  rr:subjectMap [ a rr:SubjectMap, rr:TermMap;
+      rr:termType rr:BlankNode;
+      rr:template "address_gcd/{id_address}";
+      rr:class locn:Address;
+	  rr:graphMap [ rr:template "http://rdf.geohistoricaldata.org/id/directories/{graph_name}" ];
+	  rr:graphMap [ rr:constant rr:defaultGraph ]
+    ];
+  rr:predicateObjectMap [ a rr:PredicateObjectMap;
+      rr:objectMap [ a rr:ObjectMap, rr:TermMap;
+          rr:termType rr:BlankNode;
+          rr:template "geom/{id_address}"
+        ];
+      rr:predicate gsp:hasGeometry
+    ], [ a rr:PredicateObjectMap;
+      rr:predicate locn:fullAddress;
+      rr:objectMap [ a rr:ObjectMap, rr:TermMap;
+          rr:termType rr:Literal;
+          rr:language "fr";
+          rr:column "rsp"
+        ]
+    ], [ a rr:PredicateObjectMap;
+      rr:object <http://rdf.geohistoricaldata.org/id/directories/activity/0002>;
+      rr:predicate prov:wasGeneratedBy
+    ];
+  rr:logicalTable [ a rr:R2RMLView;
+      rr:sqlQuery "select gcd.id_address as id_address, gcd.precise_geo_response as rsp, gcd.precise_geom as geom, gcd.graph_name as graph_name from directories_graph.geocoding gcd;"
+    ] .
+
+<urn:MAPID-1f79d04717894630b2cd3416a05e706d-17aa6dd3-4bc6-40ba-b563-2d466e67522b>
+  a rr:TriplesMap;
+  rr:predicateObjectMap [ a rr:PredicateObjectMap;
+      rr:objectMap [ a rr:ObjectMap, rr:TermMap;
+          rr:termType rr:Literal;
+          rr:template "<http://www.opengis.net/def/crs/OGC/1.3/CRS84> {wkt}";
+          rr:datatype gsp:wktLiteral
+        ];
+      rr:predicate gsp:asWKT
+    ],[ a rr:PredicateObjectMap;
+      rr:objectMap [ a rr:ObjectMap, rr:TermMap;
+          rr:termType rr:Literal;
+          rr:template "{wkb}";
+          rr:datatype adb:wkbLiteral
+        ];
+      rr:predicate adb:asWKB
+    ];
+  rr:subjectMap [ a rr:SubjectMap, rr:TermMap;
+      rr:termType rr:BlankNode;
+      rr:class gsp:Geometry;
+      rr:template "geom/{id_address}";
+	  rr:graphMap [ rr:template "http://rdf.geohistoricaldata.org/id/directories/{graph_name}" ];
+	  rr:graphMap [ rr:constant rr:defaultGraph ]
+    ];
+  rr:logicalTable [ a rr:R2RMLView;
+      rr:sqlQuery "select gcd.id_address, gcd.precise_geo_response as rsp, st_astext(gcd.precise_geom) as wkt, gcd.precise_geom as wkb, gcd.graph_name as graph_name from directories_graph.geocoding gcd;"
+    ] .
+
+<urn:MAPID-73173d30b7d14afbb3274f588bc8ac6c> a rr:TriplesMap;
+  rr:subjectMap [ a rr:TermMap, rr:SubjectMap;
+      rr:template "http://rdf.geohistoricaldata.org/id/directories/entry/{entry_id1}";
+      rr:termType rr:IRI;
+	  rr:graphMap [ rr:template "http://rdf.geohistoricaldata.org/id/directories/{graph_name}" ];
+	  rr:graphMap [ rr:constant rr:defaultGraph ]
+    ];
+  rr:logicalTable [ a rr:R2RMLView;
+      rr:sqlQuery "select li.* from directories_graph.liens li;"
+    ];
+  rr:predicateObjectMap [ a rr:PredicateObjectMap;
+      rr:objectMap [ a rr:ObjectMap, rr:TermMap;
+          rr:termType rr:IRI;
+          rr:template "http://rdf.geohistoricaldata.org/id/directories/entry/{entry_id2}"
+        ];
+      rr:predicate owl:sameAs
+    ] .
+
+<urn:MAPID-7a855c40fa4d43eabcffcb242272ed94> a rr:TriplesMap;
+  rr:logicalTable [ a rr:R2RMLView;
+      rr:sqlQuery "select lie.* from directories_graph.liens_externes lie;"
+    ];
+  rr:subjectMap [ a rr:SubjectMap, rr:TermMap;
+      rr:termType rr:IRI;
+      rr:template "http://rdf.geohistoricaldata.org/id/directories/entry/{entry_id}";
+	  rr:graphMap [ rr:template "http://rdf.geohistoricaldata.org/id/directories/{graph_name}" ];
+	  rr:graphMap [ rr:constant rr:defaultGraph ]
+    ];
+  rr:predicateObjectMap [ a rr:PredicateObjectMap;
+      rr:objectMap [ a rr:ObjectMap, rr:TermMap;
+          rr:datatype xsd:anyURI;
+          rr:termType rr:Literal;
+          rr:column "uri"
+        ];
+      rr:predicate owl:sameAs
+    ] .
