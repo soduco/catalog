@@ -190,10 +190,10 @@ services:
     #Build: webgl2-preview/.
     restart: unless-stopped
     labels:
-      - traefik.enable=false
-      # - traefik.http.routers.preview.entryPoints=websecure
-      # - traefik.http.routers.preview.rule=Host(`preview.geohistoricaldata.org`, `www.preview.geohistoricaldata.org`)
-      # - traefik.http.routers.preview.tls=true
+      - traefik.enable=true
+      - traefik.http.routers.preview.entryPoints=websecure
+      - traefik.http.routers.preview.rule=Host(`preview.geohistoricaldata.org`, `www.preview.geohistoricaldata.org`)
+      - traefik.http.routers.preview.tls=true
 
 
   ontop:
