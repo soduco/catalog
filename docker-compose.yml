@@ -252,8 +252,8 @@ services:
     image: ontop/ontop-endpoint:4.2.0
     restart: unless-stopped
     environment:
-      ONTOP_ONTOLOGY_FILE: /opt/ontop/input/directory.ttl
-      ONTOP_MAPPING_FILE: /opt/ontop/input/directory_saved.obda
+      ONTOP_ONTOLOGY_FILE: /opt/ontop/input/directory.rdf
+      ONTOP_MAPPING_FILE: /opt/ontop/input/directory.ttl
       ONTOP_PROPERTIES_FILE: /opt/ontop/input/directory.properties
       # ONTOP_PORTAL_FILE: /opt/ontop/input/university-complete.portal.toml
       ONTOP_CORS_ALLOWED_ORIGINS: "*"
