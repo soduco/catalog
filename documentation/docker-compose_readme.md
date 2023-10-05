@@ -100,6 +100,13 @@ Les images qui ont été testées (09/2023) sont celles de:
 
 Il en ressort que l'image UCLA est plus "pratique" car on peut lui passer des variable d'environnement Java pour adapter, notamment pour adapter la quantitée de ram allouée. NB: l'image UCLA utilise par défaut 80% de la RAM allouée au container. (Ne pas allouer 100% -> cause des crashs)
 
+Pour le support des images au format JPEG2000 il faut bien penser à effectuer la manipulation suivante :
+
+Sur le dashboard admin, dans la catégorie `Processors`, il faut modifier la valeur de `Selection Strategy` en `manual`.
+Cf photo suivante :
+
+![cantaloupe admin dashboard](images/cantaloupe.png)
+
 ## geonetwork-ui
 
 Application de visualisation des datasets présents dans notre catalogue.
