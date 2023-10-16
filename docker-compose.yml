@@ -309,3 +309,14 @@ services:
       - traefik.http.routers.map-proxy.entryPoints=websecure
       - traefik.http.routers.map-proxy.rule=Host(`map.geohistoricaldata.org`, `www.map.geohistoricaldata.org`)
       - traefik.http.routers.map-proxy.tls=true
+
+  directory:
+    image: nginx
+    volumes:
+      - /data/directory:/usr/share/nginx/html:ro
+      - ./config/directory/default.conf:/etc/nginx/conf.d/default.conf
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.directory.entryPoints=websecure
+      - traefik.http.routers.directory.rule=Host(`directory.geohistoricaldata.org`, `www.directory.geohistoricaldata.org`)
+      - traefik.http.routers.directory.tls=true
