@@ -137,6 +137,7 @@ services:
     volumes:
       - geonetwork:/catalogue-data
       - geonetwork_jetty:/var/lib/jetty
+      - ./config/geonetwork/config-security-core.xml:/var/lib/jetty/webapps/geonetwork/WEB-INF/config-security/config-security-core.xml
     depends_on:
       - elasticsearch
       - database
