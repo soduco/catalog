@@ -6,4 +6,4 @@
 	url = https://github.com/soduco/LodView.git
 [submodule "geonetwork-ui"]
 	path = source/geonetwork-ui
-	url = https://github.com/geonetwork/geonetwork-ui.git
+	url = https://github.com/soduco/geonetwork-ui.git
