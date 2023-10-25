@@ -103,7 +103,7 @@ services:
       - traefik.http.routers.pgadmin4.tls=true
       - traefik.http.routers.pgadmin4.middlewares=redirect-pgadmin
       # regex trouvé ici : https://gist.github.com/kekru/d088be6a3fa844089ae62d80c077bb38
-      - traefik.http.middlewares.redirect-pgadmin.redirectregex.regex=^https:\\/\\/([^\\/]+)\\/?$$
+      - traefik.http.middlewares.redirect-pgadmin.redirectregex.regex=^https:\/\/([^\/]+)\/?$$
       - traefik.http.middlewares.redirect-pgadmin.redirectregex.replacement=https://$$1/pgadmin
 
 
@@ -244,7 +244,7 @@ services:
       - traefik.http.routers.lodview.rule=Host(`rdf.geohistoricaldata.org`, `www.rdf.geohistoricaldata.org`)
       - traefik.http.routers.lodview.tls=true
       - traefik.http.routers.lodview.middlewares=redirect-lodview
-      - traefik.http.middlewares.redirect-lodview.redirectregex.regex=^https:\\/\\/([^\\/]+)\\/?$$
+      - traefik.http.middlewares.redirect-lodview.redirectregex.regex=^https:\/\/([^\/]+)\/?$$
       - traefik.http.middlewares.redirect-lodview.redirectregex.replacement=https://$$1/lodview
 
 # Ontop for Solenn's work.
