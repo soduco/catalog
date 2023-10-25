@@ -290,7 +290,7 @@ services:
       - traefik.http.services.cantaloupe.loadbalancer.server.port=8182
 
   geonetwork-ui:
-    image: geonetwork/geonetwork-ui-datahub
+    image: geonetwork/geonetwork-ui-datahub:main-3c899e0f
     restart: unless-stopped
     environment:
       - GN4_API_URL=https://catalog.geohistoricaldata.org/geonetwork/srv/api
