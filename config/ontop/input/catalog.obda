@@ -4,6 +4,7 @@ cc:		http://creativecommons.org/ns#
 dc:		http://purl.org/dc/elements/1.1/
 ex:		http://example.org/
 sf:		http://www.opengis.net/ont/sf#
+act:		http://data.alegoria-project.fr/id/codes/ign/geotheque/typedactivite/
 alg:		http://data.alegoria-project.fr/id/anf/
 cat:		http://catalog.geohistoricaldata.org/rdf/id/
 clt:		http://data.culture.fr/thesaurus/resource/
@@ -13,11 +14,13 @@ rdf:		http://www.w3.org/1999/02/22-rdf-syntax-ns#
 xml:		http://www.w3.org/XML/1998/namespace
 xsd:		http://www.w3.org/2001/XMLSchema#
 xys:		http://data.ign.fr/def/xysemantics#
+dcat:		http://www.w3.org/ns/dcat#
 foaf:		http://xmlns.com/foaf/0.1/
 geom:		http://data.ign.fr/def/geometrie#
 html:		http://www.w3.org/1999/xhtml
 ignf:		http://data.ign.fr/def/ignf#
 obda:		https://w3id.org/obda/vocabulary#
+prov:		http://www.w3.org/ns/prov#
 rdfs:		http://www.w3.org/2000/01/rdf-schema#
 rico:		https://www.ica.org/standards/RiC/ontology#
 skos:		http://www.w3.org/2004/02/skos/core#
@@ -30,27 +33,27 @@ ric-rst:		https://www.ica.org/standards/RiC/vocabularies/recordSetTypes#
 
 [MappingDeclaration] @collection [[
 mappingId	MAPID-c9cb2caa197449788c84b1f1a8359f54
-target		cat:recordset/{uuid} a rico:RecordSet ; rico:title {title}^^xsd:string ; geom:crs ign-crs:{crsuri} ; rico:descriptiveNote {motsclefs}^^xsd:string ; xys:geometricResolution _:resolution/{uuid} ; rico:isAssociatedWithDate _:date/{uuid} ; xys:extent _:extent/{uuid} . _:extent/{uuid} a xys:Extent ; xys:geographicElement _:geoElement/{uuid} . _:geoElement/{uuid} a xys:BoundingPolygon ; xys:polygon _:polygon/{uuid} . _:polygon/{uuid} a sf:Polygon ; geom:crs ign-crs:WGS84G ; gsp:asWKT {geo_extent}^^gsp:wktLiteral . _:resolution/{uuid} a xys:EquivalentScaleResolution ; xys:scaleDenominator {geometric_resolution}^^xsd:integer . _:date/{uuid} a rico:DateRange ; rico:beginningDate {date1}^^xsd:date ; rico:endDate {date2}^^xsd:date . 
+target		cat:{lrecordtype}/{uuid} a rico:{recordtype} ; rico:title {title}^^xsd:string ; geom:crs ign-crs:{crsuri} ; rico:descriptiveNote {motsclefs}^^xsd:string ; xys:geometricResolution _:resolution/{uuid} ; rico:isAssociatedWithDate _:date/{uuid} ; xys:extent _:extent/{uuid} . _:extent/{uuid} a xys:Extent ; xys:geographicElement _:geoElement/{uuid} . _:geoElement/{uuid} a xys:BoundingPolygon ; xys:polygon _:polygon/{uuid} . _:polygon/{uuid} a sf:Polygon ; geom:crs ign-crs:WGS84G ; gsp:asWKT {geo_extent}^^gsp:wktLiteral . _:resolution/{uuid} a xys:EquivalentScaleResolution ; xys:scaleDenominator {geometric_resolution}^^xsd:integer . _:date/{uuid} a rico:DateRange ; rico:beginningDate {date1}^^xsd:date ; rico:endDate {date2}^^xsd:date . 
 source		SELECT *
-			FROM "public"."rico_recordsets_mapping";
+			FROM "public"."rico_recordresources_mapping";
 
 mappingId	MAPID-e9f27ec5c91c4bc99dfbcca016a6f406
 target		cat:instantiation/{uuid} a rico:Instantiation ; rico:title {title}^^xsd:string ; geom:crs ign-crs:{crsuri} ; rico:descriptiveNote {motsclefs}^^xsd:string ; rico:hasCarrierType clt:{carrier} . 
 source		SELECT * FROM "public"."rico_instanciations_mapping";
 
 mappingId	MAPID-01acdf59dec543a2b17be4f2fba42e48
-target		cat:recordset/{uuid} a rico:RecordSet ; rico:hasCreator cat:person/{contacts_cc} . cat:person/{contacts_cc} a rico:Person ; rico:isOrWasDescribedBy cat:corporateBody/SoducoProject ; rdfs:label {contacts_names}^^xsd:string ; rico:hasOrHadAgentName cat:agentName/{contacts_cc} . cat:agentName/{contacts_cc} a rico:AgentName ; rdfs:label {contacts_names}^^xsd:string ; rico:normalizedValue {contacts_names}^^xsd:string ; rico:isOrWasAgentNameOf cat:person/{contacts_cc} ; rico:isOrWasRegulatedBy alg:rule/rl001 ; rico:type "nom d'agent : forme préférée"@fr . cat:record/{contacts_cc} a rico:Record ; rico:hasDocumentaryFormType ric-dft:AuthorityRecord ; rdfs:label {contacts_notices}^^xsd:string ; rico:title {contacts_notices}^^xsd:string ; rico:describesOrDescribed cat:person/{contacts_cc} ; rdfs:seeAlso {contacts_uris}^^xsd:anyURI ; rico:hasCreator cat:corporateBody/SoducoProject ; rico:hasPublisher cat:corporateBody/SoducoProject ; rico:isOrWasRegulatedBy alg:rule/rl001 , alg:rule/rl003 , alg:rule/rl004 . 
-source		SELECT uuid, contacts_names, contacts_uris, REGEXP_REPLACE(contacts_names, ' ','','g') AS contacts_cc, CONCAT(contacts_names, ' : notice d''autorité') AS contacts_notices FROM "public"."rico_contacts" AS CTC WHERE CTC.contacts_roles LIKE 'originator' AND CTC.contacts_names IS NOT NULL;
+target		cat:{lrecordtype}/{uuid} a rico:{recordtype} ; rico:hasCreator cat:person/{contacts_cc} . cat:person/{contacts_cc} a rico:Person ; rico:isOrWasDescribedBy cat:corporateBody/SoducoProject ; rdfs:label {contacts_names}^^xsd:string ; rico:hasOrHadAgentName cat:agentName/{contacts_cc} . cat:agentName/{contacts_cc} a rico:AgentName ; rdfs:label {contacts_names}^^xsd:string ; rico:normalizedValue {contacts_names}^^xsd:string ; rico:isOrWasAgentNameOf cat:person/{contacts_cc} ; rico:isOrWasRegulatedBy alg:rule/rl001 ; rico:type "nom d'agent : forme préférée"@fr . cat:record/{contacts_cc} a rico:Record ; rico:hasDocumentaryFormType ric-dft:AuthorityRecord ; rdfs:label {contacts_notices}^^xsd:string ; rico:title {contacts_notices}^^xsd:string ; rico:describesOrDescribed cat:person/{contacts_cc} ; rdfs:seeAlso {contacts_uris}^^xsd:anyURI ; rico:hasCreator cat:corporateBody/SoducoProject ; rico:hasPublisher cat:corporateBody/SoducoProject ; rico:isOrWasRegulatedBy alg:rule/rl001 , alg:rule/rl003 , alg:rule/rl004 . 
+source		SELECT uuid, document_type AS recordtype, lower(document_type) AS lrecordtype, contacts_names, contacts_uris, REGEXP_REPLACE(contacts_names, ' ','','g') AS contacts_cc, CONCAT(contacts_names, ' : notice d''autorité') AS contacts_notices FROM "public"."rico_contacts" AS CTC WHERE CTC.contacts_roles LIKE 'originator' AND CTC.contacts_names IS NOT NULL AND document_type IN ('RecordSet', 'Record', 'RecordPart');
 
 mappingId	MAPID-d29b6c90e50f49889aa7d1b7d019e2b3
 target		cat:instantiation/{uuid} rico:hasOrHadHolder cat:corporateBody/{contacts_cc} . cat:corporateBody/{contacts_cc} a rico:CorporateBody ; rico:isOrWasDescribedBy cat:corporateBody/SoducoProject ; rdfs:label {contacts_names}^^xsd:string ; rico:hasOrHadAgentName cat:agentName/{contacts_cc} . cat:agentName/{contacts_cc} a rico:AgentName ; rdfs:label {contacts_names}^^xsd:string ; rico:normalizedValue {contacts_names}^^xsd:string ; rico:isOrWasAgentNameOf cat:corporateBody/{contacts_cc} ; rico:isOrWasRegulatedBy alg:rule/rl001 ; rico:type "nom d'agent : forme préférée"@fr . cat:record/{contacts_cc} a rico:Record ; rico:hasDocumentaryFormType ric-dft:AuthorityRecord ; rdfs:label {contacts_notices}^^xsd:string ; rico:title {contacts_notices}^^xsd:string ; rico:describesOrDescribed cat:corporateBody/{contacts_cc} ; rdfs:seeAlso {contacts_uris}^^xsd:anyURI ; rico:hasCreator cat:corporateBody/SoducoProject ; rico:hasPublisher cat:corporateBody/SoducoProject ; rico:isOrWasRegulatedBy alg:rule/rl001 , alg:rule/rl003 , alg:rule/rl004 . 
-source		SELECT uuid, contacts_names, contacts_uris, REGEXP_REPLACE(contacts_names, ' ','','g') AS contacts_cc, CONCAT(contacts_names, ' : notice d''autorité') AS contacts_notices FROM "public"."rico_contacts" AS CTC WHERE CTC.contacts_roles LIKE 'custodian' AND CTC.contacts_names IS NOT NULL;
+source		SELECT uuid, contacts_names, contacts_uris, REGEXP_REPLACE(contacts_names, ' ','','g') AS contacts_cc, CONCAT(contacts_names, ' : notice d''autorité') AS contacts_notices FROM "public"."rico_contacts" AS CTC WHERE CTC.contacts_roles LIKE 'custodian' AND CTC.contacts_names IS NOT NULL AND document_type Like 'Instantiation' ;
 
 mappingId	MAPID-459e43494af1461f90f1076a28c831ee
-target		cat:recordset/{res1} rico:hasInstantiation cat:instantiation/{res2} . 
-source		SELECT REC.uuid as res1, REL.uuid as res2
-			FROM "public"."rico_recordsets_mapping" AS REC 
-			JOIN "public"."rico_horizontal_relations" AS REL 
+target		cat:{lrecordtype}/{res1} rico:hasInstantiation cat:instantiation/{res2} . 
+source		SELECT REC.uuid as res1, REC.lrecordtype, REL.uuid as res2
+			FROM "public"."rico_recordresources_mapping" AS REC
+			JOIN "public"."rico_horizontal_relations" AS REL
 			ON REC."uuid"=REL."parent";
 
 mappingId	MAPID-5c75c32c2ae34b9e952771b87b5403e3
@@ -59,13 +62,29 @@ source		SELECT REC.uuid as res1, REL.uuid as res2
 			FROM "public"."rico_instanciations_mapping" AS REC JOIN "public"."rico_horizontal_relations" AS REL ON REC."uuid"=REL."parent";
 
 mappingId	MAPID-f83688cc0f8d436db0b0faa4bca3ed1d
-target		cat:recordset/{res1} rico:{ppte} cat:recordset/{res2} . 
+target		cat:{lrecordtyperes1}/{res1} rico:{ppte} cat:{lrecordtyperes2}/{res2} . 
 source		SELECT *
-			FROM "public"."rico_recordsets_vertical_relations";
+			FROM "public"."rico_recordresources_vertical_relations";
 
 mappingId	MAPID-720be9d3cc6a4b839c4c04132e92b90a
 target		cat:instantiation/{res1} rico:{ppte} cat:instantiation/{res2} . 
 source		SELECT *
 			FROM "public"."rico_instanciations_vertical_relations";
+
+mappingId	MAPID-ead2facd57c646ce824f4c9bd982e670
+target		cat:person/{uuid} a foaf:Person , prov:Agent ; foaf:name {person} . 
+source		select * from "public"."prov_person";
+
+mappingId	MAPID-334ee3bf249845e7bba84f14f3ceec1e
+target		cat:software_agent/uuid a prov:SoftwareAgent ; dcat:landingPage {software_website}^^xsd:anyURI ; rdfs:label {software_agent} ; rdfs:comment {software_comment}^^xsd:anyURI . 
+source		select * from "public"."prov_software";
+
+mappingId	MAPID-9e51e9ee729f4c5b9a3b4a25bda46cc9
+target		cat:activity/{uuid} a prov:Activity , rico:Activity ; rico:hasActivityType act:{activity} ; prov:used cat:instantiation/{used} ; prov:generated cat:instantiation/{data_generated} ; prov:startedAtTime {date_begin}^^xsd:date ; prov:endedAtTime {date_end}^^xsd:date ; rdfs:comment {comment}^^xsd:string ; prov:wasAssociatedWith cat:software_agent/{software} . 
+source		select * from "public"."prov_activity" where activity in ('Scannage', 'Numerisation', 'Vectorisation', 'CorrectionManuelle', 'Geolocalisation', 'Georeferencement', 'Geocodage', 'AcquisitionPointsControle', 'Liage', 'OCR', 'NER', 'DetectionMiseEnPage', 'Structuration', 'Autre');
+
+mappingId	MAPID-cbad02ca5b1f4b74a0b9078292ea6b0a
+target		cat:instantiation/{uuid} a rico:Instantiation , prov:Entity , dcat:Distribution ; dcat:downloadURL {download_url}^^xsd:anyURI . 
+source		select * from "public"."prov_distribution";
 ]]
 
