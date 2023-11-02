@@ -3,22 +3,18 @@
 endpoints :
 
 - [traefik](http://traefik.geohistoricaldata.org)
-- [geonetwork](http://catalog.geohistoricaldata.org)
+- [portainer](portainer.geohistoricaldata.org)
 - [pgadmin4](http://pgadmin.geohistoricaldata.org)
 - [cantaloupe](http://iiif.geohistoricaldata.org)
-- [ontop](http://ontop.geohistoricaldata.org)
-- database address: catalog.geohistoricaldata.org:8080
-- geonetwork-ui (disabled for now)
 
-TLS now enabled.
+- [geonetwork](http://catalog.geohistoricaldata.org)
+- [datahub](http://catalog.geohistoricaldata.org/datahub)
+- [Allmaps (map viewer)](preview.geohistoricaldata.org)
+- [mirador (IIIF viewer)](directory.geohistoricaldata.org)
+- [ontop atlas](ontop.geohistoricaldata.org)
+- [ontop annuaires](http://ontop.geohistoricaldata.org)
+- [lodview](rdf.geohistoricaldata.org)
 
-Memo for futur certificate generation :
+TLS enabled.
 
-list of subdomains for certbot :
-catalog.geohistoricaldata.org,traefik.geohistoricaldata.org,iiif.geohistoricaldata.org,ontop.geohistoricaldata.org,pgadmin.geohistoricaldata.org,database.geohistoricaldata.org
-
-Certbot used for certificate generation with this command (needs port 80 open, so with traefik down):
-
-```bash
-sudo certbot certonly --standalone -d catalog.geohistoricaldata.org,traefik.geohistoricaldata.org,iiif.geohistoricaldata.org,ontop.geohistoricaldata.org,pgadmin.geohistoricaldata.org,database.geohistoricaldata.org
-```
+See documentation/ssl_certificats_readme.md to re-generate ssl certificates
