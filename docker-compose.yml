@@ -187,8 +187,10 @@ services:
 
 
   preview:
-    image: webgl2-preview
-    #Build: webgl2-preview/.
+    image: nginx
+    volumes:
+      - /data/soduco_webmap-main:/usr/share/nginx/html:ro
+      - ./config/directory/default.conf:/etc/nginx/conf.d/default.conf
     restart: unless-stopped
     labels:
       - traefik.enable=true
