@@ -7,3 +7,6 @@
 [submodule "source/geonetwork-ui"]
 	path = source/geonetwork-ui
 	url = https://github.com/soduco/geonetwork-ui.git
+[submodule "source/LodLive"]
+	path = source/LodLive
+	url = https://github.com/soduco/LodLive.git
