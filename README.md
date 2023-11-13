@@ -15,6 +15,7 @@ endpoints :
 - [ontop annuaires](dir.geohistoricaldata.org)
 - [lodview](rdf.geohistoricaldata.org)
 - [mapproxy](map.geohistoricaldata.org) (no direct access)
+- [database](catalog.geohistoricaldata.org:8080)
 
 TLS enabled.
 
