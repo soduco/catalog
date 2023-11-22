@@ -727,9 +727,9 @@ xys:polygon rdf:type owl:ObjectProperty ;
 
 
 ###  http://www.w3.org/ns/dcat#downloadURL
-dcat:downloadURL rdf:type owl:ObjectProperty ;
+dcat:downloadURL rdf:type owl:DatatypeProperty ;
                  rdfs:domain dcat:Distribution ;
-                 rdfs:range rdfs:Resource ;
+                 rdfs:range xsd:anyURI ;
                  rdfs:comment "Ceci est un lien direct à un fichier téléchargeable en un format donnée. Exple fichier CSV ou RDF. Le format est décrit par les propriétés de distribution dct:format et/ou dcat:mediaType."@fr ,
                               "The URL of the downloadable file in a given format. E.g. CSV file or RDF file. The format is indicated by the distribution's dct:format and/or dcat:mediaType."@en ;
                  rdfs:isDefinedBy <http://www.w3.org/TR/vocab-dcat/> ;
@@ -743,8 +743,8 @@ dcat:downloadURL rdf:type owl:ObjectProperty ;
 
 
 ###  http://www.w3.org/ns/dcat#landingPage
-dcat:landingPage rdf:type owl:ObjectProperty ;
-                 rdfs:range foaf:Document ;
+dcat:landingPage rdf:type owl:DatatypeProperty ;
+                 rdfs:range xsd:anyURI ;
                  rdfs:comment "A Web page that can be navigated to in a Web browser to gain access to the catalog, a dataset, its distributions and/or additional information."@en ,
                               "Une page Web accessible par un navigateur Web donnant accès au catalogue, un jeu de données, ses distributions et/ou des informations additionnelles."@fr ;
                  rdfs:isDefinedBy <http://www.w3.org/TR/vocab-dcat/> ;
@@ -793,7 +793,7 @@ prov:hadDerivation rdf:type owl:ObjectProperty ;
 ###  http://www.w3.org/ns/prov#hadPrimarySource
 prov:hadPrimarySource rdf:type owl:ObjectProperty ;
                       rdfs:subPropertyOf prov:wasDerivedFrom ;
-                      owl:inverseOf prov:wasPrmarySourceOf ;
+                      owl:inverseOf prov:wasPrimarySourceOf ;
                       rdfs:domain prov:Entity ;
                       rdfs:range prov:Entity ;
                       rdfs:isDefinedBy <http://www.w3.org/ns/prov-o#> ;
@@ -862,8 +862,8 @@ prov:wasGeneratedBy rdf:type owl:ObjectProperty ;
                     rdfs:label "wasGeneratedBy" .
 
 
-###  http://www.w3.org/ns/prov#wasPrmarySourceOf
-prov:wasPrmarySourceOf rdf:type owl:ObjectProperty .
+###  http://www.w3.org/ns/prov#wasPrimarySourceOf
+prov:wasPrimarySourceOf rdf:type owl:ObjectProperty .
 
 
 ###  http://www.w3.org/ns/prov#wasUsedBy
