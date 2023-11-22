@@ -292,7 +292,8 @@ services:
     image: ghcr.io/mapproxy/mapproxy/mapproxy:1.16.0-nginx
     restart: unless-stopped
     volumes:
-      - ./config/map_proxy:/mapproxy/config
+      - /data/config/map_proxy/mapproxy.yaml:/mapproxy/config/mapproxy.yaml:ro
+      - /data/config/map_proxy/cache_data:/mapproxy/config/cache_data
     labels:
       - traefik.enable=true
       - traefik.http.routers.map-proxy.entryPoints=websecure
