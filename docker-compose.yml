@@ -146,7 +146,7 @@ services:
       - traefik.http.routers.geonetwork.entryPoints=websecure
       - traefik.http.routers.geonetwork.rule=Host(`catalog.geohistoricaldata.org`, `www.catalog.geohistoricaldata.org`)
       - traefik.http.routers.geonetwork.tls=true
-      - traefik.http.routers.geonetwork.middlewares=redirect-geonetwork,redirect-rdf,redirect-sparql
+      - traefik.http.routers.geonetwork.middlewares=redirect-geonetwork,redirect-rdf
       - traefik.http.middlewares.redirect-geonetwork.redirectregex.regex=^https:\/\/([^\/]+)\/?$$
       - traefik.http.middlewares.redirect-geonetwork.redirectregex.replacement=https://$$1/geonetwork
       - traefik.http.middlewares.redirect-rdf.redirectregex.regex=^https://catalog.geohistoricaldata.org/rdf/id/(.*)
@@ -216,7 +216,7 @@ services:
       - ./config/ontop/jdbc:/opt/ontop/jdbc
     depends_on:
       - "database"
-    labels:
+ labels:
       - traefik.enable=true
       - traefik.http.routers.ontop.entryPoints=websecure
       - traefik.http.routers.ontop.rule=Host(`ontop.geohistoricaldata.org`, `www.ontop.geohistoricaldata.org`)
