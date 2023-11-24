@@ -217,8 +217,16 @@ services:
     labels:
       - traefik.enable=true
       - traefik.http.routers.ontop.entryPoints=websecure
-      - traefik.http.routers.ontop.rule=Host(`rdf.geohistoricaldata.org`, `www.rdf.geohistoricaldata.org`) && !PathPrefix(`/lodview`)
+      - traefik.http.routers.ontop.rule=Host(`rdf.geohistoricaldata.org`, `www.rdf.geohistoricaldata.org`) && !PathPrefix(`/lodview`) && !Query(`callback=lodlive`)
       - traefik.http.routers.ontop.tls=true
+      - traefik.http.routers.ontop-rewrite.rule=Host(`rdf.geohistoricaldata.org`, `www.rdf.geohistoricaldata.org`) && !PathPrefix(`/lodview`) && Query(`callback=lodlive`)
+      - traefik.http.routers.ontop-rewrite.entryPoints=websecure
+      - traefik.http.routers.ontop-rewrite.tls=true
+      - traefik.http.routers.ontop-rewrite.middlewares=rewrite-lodlive
+      - traefik.http.middlewares.rewrite-lodlive.plugin.rewrite.lastModified=true
+      - traefik.http.middlewares.rewrite-lodlive.plugin.rewrite.monitor.types[0]=text/html
+      - traefik.http.middlewares.rewrite-lodlive.plugin.rewrite.rewrites[0].regex=(?s:(.*))
+      - traefik.http.middlewares.rewrite-lodlive.plugin.rewrite.rewrites[0].replacement=lodlive($${1})
 
 
   lodview:
