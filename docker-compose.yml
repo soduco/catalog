@@ -219,7 +219,18 @@ services:
       - traefik.http.routers.ontop.entryPoints=websecure
       - traefik.http.routers.ontop.rule=Host(`rdf.geohistoricaldata.org`, `www.rdf.geohistoricaldata.org`)
       - traefik.http.routers.ontop.tls=true
-      # middleware to rewrite Ontop response into LodLive expected format. (Ontop's sparql endpoint doesn't take callbacks in http request)
+      - traefik.http.routers.ontop.middlewares=redirect-lodview
+      # middleware to redirect resources to lodview.
+      # "(?:/lodview)*" prevent an infinite loop of /lodview
+      # (/.*/.{8}-.{4}-.{4}-.{4}-.{12}) match with /something/geonetwork_uuid
+      # example : https://rdf.geohistoricaldata.org/lodview/instantiation/e5a2978d-8b05-401d-ad0c-5b91d1f273d3.html
+      - traefik.http.middlewares.redirect-lodview.redirectregex.regex=^https://rdf.geohistoricaldata.org(?:/lodview)*(/.*/.{8}-.{4}-.{4}-.{4}-.{12})
+      - traefik.http.middlewares.redirect-lodview.redirectregex.replacement=https://rdf.geohistoricaldata.org/lodview$${1}
+      - traefik.http.routers.ontop-sparql.entryPoints=websecure
+      # Entrypoint for sparql endpoint. Necessary for lodview redirection rule to work properly
+      - traefik.http.routers.ontop-sparql.rule=Host(`rdf.geohistoricaldata.org`, `www.rdf.geohistoricaldata.org`) && PathPrefix(`/sparql`)
+      - traefik.http.routers.ontop-sparql.tls=true
+      # Entrypoint and middleware to rewrite Ontop responses into LodLive expected format. (Ontop's sparql endpoint doesn't take callbacks in http request)
       - traefik.http.routers.ontop-rewrite.rule=Host(`rdf.geohistoricaldata.org`, `www.rdf.geohistoricaldata.org`) && Query(`callback=lodlive`)
       - traefik.http.routers.ontop-rewrite.entryPoints=websecure
       - traefik.http.routers.ontop-rewrite.tls=true
