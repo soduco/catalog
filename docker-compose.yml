@@ -146,11 +146,9 @@ services:
       - traefik.http.routers.geonetwork.entryPoints=websecure
       - traefik.http.routers.geonetwork.rule=Host(`catalog.geohistoricaldata.org`, `www.catalog.geohistoricaldata.org`)
       - traefik.http.routers.geonetwork.tls=true
-      - traefik.http.routers.geonetwork.middlewares=redirect-geonetwork,redirect-rdf
+      - traefik.http.routers.geonetwork.middlewares=redirect-geonetwork
       - traefik.http.middlewares.redirect-geonetwork.redirectregex.regex=^https:\/\/([^\/]+)\/?$$
       - traefik.http.middlewares.redirect-geonetwork.redirectregex.replacement=https://$$1/geonetwork
-      - traefik.http.middlewares.redirect-rdf.redirectregex.regex=^https://catalog.geohistoricaldata.org/rdf/id/(.*)
-      - traefik.http.middlewares.redirect-rdf.redirectregex.replacement=https://rdf.geohistoricaldata.org/lodview/$${1}
 
 
   elasticsearch:
@@ -216,10 +214,10 @@ services:
       - ./config/ontop/jdbc:/opt/ontop/jdbc
     depends_on:
       - "database"
- labels:
+    labels:
       - traefik.enable=true
       - traefik.http.routers.ontop.entryPoints=websecure
-      - traefik.http.routers.ontop.rule=Host(`ontop.geohistoricaldata.org`, `www.ontop.geohistoricaldata.org`)
+      - traefik.http.routers.ontop.rule=Host(`rdf.geohistoricaldata.org`, `www.rdf.geohistoricaldata.org`) && !PathPrefix(`/lodview`)
       - traefik.http.routers.ontop.tls=true
 
 
@@ -229,11 +227,8 @@ services:
     labels:
       - traefik.enable=true
       - traefik.http.routers.lodview.entryPoints=websecure
-      - traefik.http.routers.lodview.rule=Host(`rdf.geohistoricaldata.org`, `www.rdf.geohistoricaldata.org`)
+      - traefik.http.routers.lodview.rule=Host(`rdf.geohistoricaldata.org`, `www.rdf.geohistoricaldata.org`) && PathPrefix(`/lodview`)
       - traefik.http.routers.lodview.tls=true
-      - traefik.http.routers.lodview.middlewares=redirect-lodview
-      - traefik.http.middlewares.redirect-lodview.redirectregex.regex=^https:\/\/([^\/]+)\/?$$
-      - traefik.http.middlewares.redirect-lodview.redirectregex.replacement=https://$$1/lodview
 
 # Ontop for Solenn's work.
 # Container's name must be changed to something better, like ontop_dir
