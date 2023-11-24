@@ -6,7 +6,7 @@ ex:		http://example.org/
 sf:		http://www.opengis.net/ont/sf#
 act:		http://data.alegoria-project.fr/id/codes/ign/geotheque/typedactivite/
 alg:		http://data.alegoria-project.fr/id/anf/
-cat:		http://catalog.geohistoricaldata.org/rdf/id/
+cat:		https://rdf.geohistoricaldata.org/
 clt:		http://data.culture.fr/thesaurus/resource/
 gsp:		http://www.opengis.net/ont/geosparql#
 owl:		http://www.w3.org/2002/07/owl#
