@@ -217,9 +217,10 @@ services:
     labels:
       - traefik.enable=true
       - traefik.http.routers.ontop.entryPoints=websecure
-      - traefik.http.routers.ontop.rule=Host(`rdf.geohistoricaldata.org`, `www.rdf.geohistoricaldata.org`) && !PathPrefix(`/lodview`) && !Query(`callback=lodlive`)
+      - traefik.http.routers.ontop.rule=Host(`rdf.geohistoricaldata.org`, `www.rdf.geohistoricaldata.org`)
       - traefik.http.routers.ontop.tls=true
-      - traefik.http.routers.ontop-rewrite.rule=Host(`rdf.geohistoricaldata.org`, `www.rdf.geohistoricaldata.org`) && !PathPrefix(`/lodview`) && Query(`callback=lodlive`)
+      # middleware to rewrite Ontop response into LodLive expected format. (Ontop's sparql endpoint doesn't take callbacks in http request)
+      - traefik.http.routers.ontop-rewrite.rule=Host(`rdf.geohistoricaldata.org`, `www.rdf.geohistoricaldata.org`) && Query(`callback=lodlive`)
       - traefik.http.routers.ontop-rewrite.entryPoints=websecure
       - traefik.http.routers.ontop-rewrite.tls=true
       - traefik.http.routers.ontop-rewrite.middlewares=rewrite-lodlive
