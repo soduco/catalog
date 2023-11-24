@@ -38,7 +38,7 @@ source		SELECT *
 			FROM "public"."rico_recordresources_mapping";
 
 mappingId	MAPID-e9f27ec5c91c4bc99dfbcca016a6f406
-target		cat:instantiation/{uuid} a rico:Instantiation ; rico:title {title}^^xsd:string ; geom:crs ign-crs:{crsuri} ; rico:descriptiveNote {motsclefs}^^xsd:string ; rico:hasCarrierType clt:{carrier} . 
+target		cat:instantiation/{uuid} a rico:Instantiation ; rico:title {title}^^xsd:string ; rdfs:label {title}^^xsd:string ; geom:crs ign-crs:{crsuri} ; rico:descriptiveNote {motsclefs}^^xsd:string ; rico:hasCarrierType clt:{carrier} . 
 source		SELECT * FROM "public"."rico_instanciations_mapping";
 
 mappingId	MAPID-01acdf59dec543a2b17be4f2fba42e48
