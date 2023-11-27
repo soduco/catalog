@@ -7652,6 +7652,36 @@ rdfs:seeAlso rdf:type owl:DatatypeProperty ;
              rdfs:domain rdfs:Resource .
 
 
+###  http://www.w3.org/ns/dcat#downloadURL
+dcat:downloadURL rdf:type owl:DatatypeProperty ;
+                 rdfs:domain dcat:Distribution ;
+                 rdfs:range xsd:anyURI ;
+                 rdfs:comment "Ceci est un lien direct à un fichier téléchargeable en un format donnée. Exple fichier CSV ou RDF. Le format est décrit par les propriétés de distribution dct:format et/ou dcat:mediaType."@fr ,
+                              "The URL of the downloadable file in a given format. E.g. CSV file or RDF file. The format is indicated by the distribution's dct:format and/or dcat:mediaType."@en ;
+                 rdfs:isDefinedBy <http://www.w3.org/TR/vocab-dcat/> ;
+                 rdfs:label "URL de téléchargement"@fr ;
+                 skos:definition "Ceci est un lien direct à un fichier téléchargeable en un format donnée. Exple fichier CSV ou RDF. Le format est décrit par les propriétés de distribution dct:format et/ou dcat:mediaType."@fr ,
+                                 "The URL of the downloadable file in a given format. E.g. CSV file or RDF file. The format is indicated by the distribution's dct:format and/or dcat:mediaType."@en ;
+                 skos:editorialNote "Status: English  Definition text modified by DCAT revision team, Italian, Spanish and Czech translation updated, other translations pending."@en ,
+                                    "rdfs:label, rdfs:comment and/or skos:scopeNote have been modified. Non-english versions must be updated."@en ;
+                 skos:scopeNote "La valeur est une URL."@fr ,
+                                "dcat:downloadURL SHOULD be used for the address at which this distribution is available directly, typically through a HTTP Get request."@en .
+
+
+###  http://www.w3.org/ns/dcat#landingPage
+dcat:landingPage rdf:type owl:DatatypeProperty ;
+                 rdfs:range xsd:anyURI ;
+                 rdfs:comment "A Web page that can be navigated to in a Web browser to gain access to the catalog, a dataset, its distributions and/or additional information."@en ,
+                              "Une page Web accessible par un navigateur Web donnant accès au catalogue, un jeu de données, ses distributions et/ou des informations additionnelles."@fr ;
+                 rdfs:isDefinedBy <http://www.w3.org/TR/vocab-dcat/> ;
+                 rdfs:label "landing page"@en ,
+                            "page d'atterrissage"@fr ;
+                 skos:definition "A Web page that can be navigated to in a Web browser to gain access to the catalog, a dataset, its distributions and/or additional information."@en ,
+                                 "Une page Web accessible par un navigateur Web donnant accès au catalogue, un jeu de données, ses distributions et/ou des informations additionnelles."@fr ;
+                 skos:scopeNote "If the distribution(s) are accessible only through a landing page (i.e. direct download URLs are not known), then the landing page link should be duplicated as accessURL on a distribution."@en ,
+                                "Si la distribution est seulement accessible à travers une page d'atterrissage (exple. pas de connaissance d'URLS de téléchargement direct ), alors le lien de la page d'atterrissage doit être dupliqué comme accessURL sur la distribution."@fr .
+
+
 ###  http://www.w3.org/ns/prov#endedAtTime
 prov:endedAtTime rdf:type owl:DatatypeProperty ;
                  rdfs:domain prov:Activity ;
@@ -8866,36 +8896,6 @@ rico:width rdf:type owl:DatatypeProperty ;
            rdfs:comment "Horizontal dimension of an entity."@en ;
            rdfs:isDefinedBy <https://www.ica.org/standards/RiC/ontology> ;
            rdfs:label "width"@en .
-
-
-###  http://www.w3.org/ns/dcat#downloadURL
-dcat:downloadURL rdf:type owl:DatatypeProperty ;
-                 rdfs:domain dcat:Distribution ;
-                 rdfs:range xsd:anyURI ;
-                 rdfs:comment "Ceci est un lien direct à un fichier téléchargeable en un format donnée. Exple fichier CSV ou RDF. Le format est décrit par les propriétés de distribution dct:format et/ou dcat:mediaType."@fr ,
-                              "The URL of the downloadable file in a given format. E.g. CSV file or RDF file. The format is indicated by the distribution's dct:format and/or dcat:mediaType."@en ;
-                 rdfs:isDefinedBy <http://www.w3.org/TR/vocab-dcat/> ;
-                 rdfs:label "URL de téléchargement"@fr ;
-                 skos:definition "Ceci est un lien direct à un fichier téléchargeable en un format donnée. Exple fichier CSV ou RDF. Le format est décrit par les propriétés de distribution dct:format et/ou dcat:mediaType."@fr ,
-                                 "The URL of the downloadable file in a given format. E.g. CSV file or RDF file. The format is indicated by the distribution's dct:format and/or dcat:mediaType."@en ;
-                 skos:editorialNote "Status: English  Definition text modified by DCAT revision team, Italian, Spanish and Czech translation updated, other translations pending."@en ,
-                                    "rdfs:label, rdfs:comment and/or skos:scopeNote have been modified. Non-english versions must be updated."@en ;
-                 skos:scopeNote "La valeur est une URL."@fr ,
-                                "dcat:downloadURL SHOULD be used for the address at which this distribution is available directly, typically through a HTTP Get request."@en .
-
-
-###  http://www.w3.org/ns/dcat#landingPage
-dcat:landingPage rdf:type owl:DatatypeProperty ;
-                 rdfs:range xsd:anyURI ;
-                 rdfs:comment "A Web page that can be navigated to in a Web browser to gain access to the catalog, a dataset, its distributions and/or additional information."@en ,
-                              "Une page Web accessible par un navigateur Web donnant accès au catalogue, un jeu de données, ses distributions et/ou des informations additionnelles."@fr ;
-                 rdfs:isDefinedBy <http://www.w3.org/TR/vocab-dcat/> ;
-                 rdfs:label "landing page"@en ,
-                            "page d'atterrissage"@fr ;
-                 skos:definition "A Web page that can be navigated to in a Web browser to gain access to the catalog, a dataset, its distributions and/or additional information."@en ,
-                                 "Une page Web accessible par un navigateur Web donnant accès au catalogue, un jeu de données, ses distributions et/ou des informations additionnelles."@fr ;
-                 skos:scopeNote "If the distribution(s) are accessible only through a landing page (i.e. direct download URLs are not known), then the landing page link should be duplicated as accessURL on a distribution."@en ,
-                                "Si la distribution est seulement accessible à travers une page d'atterrissage (exple. pas de connaissance d'URLS de téléchargement direct ), alors le lien de la page d'atterrissage doit être dupliqué comme accessURL sur la distribution."@fr .
 
 
 #################################################################
@@ -10732,12 +10732,12 @@ rico:Record rdf:type owl:Class ;
             or work Activity."""@en ;
             rdfs:isDefinedBy <https://www.ica.org/standards/RiC/ontology> ;
             rdfs:label "Record"@en ;
-            skos:changeNote [ dc:date "2020-10-23" ;
+            skos:changeNote [ dc:date "2021-02-08" ;
+                              rdf:value "Removed the Restriction."@en
+                            ] ,
+                            [ dc:date "2020-10-23" ;
                               rdf:value """Scope note: updated and made several paragraphs. Objective:
                     to make RiC-O compliant with RiC-CM v0.2."""@en
-                            ] ,
-                            [ dc:date "2021-02-08" ;
-                              rdf:value "Removed the Restriction."@en
                             ] ;
             skos:scopeNote """Record is a kind of Record Resource. A Record must have or
             have had at least one Instantiation. A Record may have more than one Instantiation. A
@@ -10990,13 +10990,13 @@ rico:RecordState rdf:type owl:Class ;
             Record or Record Part."""@en ;
                  rdfs:isDefinedBy <https://www.ica.org/standards/RiC/ontology> ;
                  rdfs:label "Record State"@en ;
-                 skos:changeNote [ dc:date "2020-10-23" ;
-                                   rdf:value """scope note: updated. Objective: to make RiC-O compliant
-                    with RiC-CM v0.2."""@en
-                                 ] ,
-                                 [ dc:date "2020-12-28" ;
+                 skos:changeNote [ dc:date "2020-12-28" ;
                                    rdf:value """IRI and label changed (RecordResourceState to RecordState),
                     as well as textual definition."""@en
+                                 ] ,
+                                 [ dc:date "2020-10-23" ;
+                                   rdf:value """scope note: updated. Objective: to make RiC-O compliant
+                    with RiC-CM v0.2."""@en
                                  ] ;
                  skos:scopeNote """Can in particular refer to a record state of development or
             its status of transmission once finished (draft, original, copy...). Specifying that a
@@ -11459,4 +11459,4 @@ ric-rst:Series rdf:type owl:NamedIndividual ,
                skos:prefLabel "series"@en .
 
 
-###  Generated by the OWL API (version 4.5.9.2019-02-01T07:24:44Z) https://github.com/owlcs/owlapi
+###  Generated by the OWL API (version 4.5.26.2023-07-17T20:34:13Z) https://github.com/owlcs/owlapi

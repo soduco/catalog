@@ -76,15 +76,19 @@ target		cat:person/{uuid} a foaf:Person , prov:Agent ; foaf:name {person} .
 source		select * from "public"."prov_person";
 
 mappingId	MAPID-334ee3bf249845e7bba84f14f3ceec1e
-target		cat:software_agent/{software_uuid} a prov:SoftwareAgent ;  dcat:landingPage {software_website}^^xsd:anyURI ; rdfs:label {software_agent} ; rdfs:comment {software_comment}^^xsd:anyURI . 
+target		cat:software_agent/{software_uuid} a prov:SoftwareAgent ; dcat:landingPage {software_website}^^xsd:anyURI ; rdfs:label {software_agent} ; rdfs:comment {software_comment}^^xsd:anyURI . 
 source		select * from "public"."prov_software";
 
 mappingId	MAPID-9e51e9ee729f4c5b9a3b4a25bda46cc9
-target		cat:activity/{uuid} a prov:Activity , rico:Activity ; rico:hasActivityType act:{activity_type} ; prov:used cat:instantiation/{source_uuid} ; prov:generated cat:instantiation/{data_generated_uuid} ; prov:startedAtTime {date_begin}^^xsd:dateTime ; prov:endedAtTime {date_end}^^xsd:dateTime ; rdfs:comment {description}^^xsd:string ; prov:wasAssociatedWith cat:software_agent/{software_uuid} . 
+target		cat:activity/{uuid} a prov:Activity , rico:Activity ; rico:hasActivityType act:{activity_type} ; prov:generated cat:instantiation/{data_generated_uuid} ; prov:startedAtTime {date_begin}^^xsd:dateTime ; prov:endedAtTime {date_end}^^xsd:dateTime ; rdfs:comment {description}^^xsd:string ; prov:wasAssociatedWith cat:software_agent/{software_uuid} . 
 source		select * from "public"."prov_activity" where activity_type in ('Scannage', 'Numerisation', 'Vectorisation', 'CorrectionManuelle', 'Geolocalisation', 'Georeferencement', 'Geocodage', 'AcquisitionPointsControle', 'Liage', 'OCR', 'NER', 'DetectionMiseEnPage', 'Structuration', 'Autre');
 
 mappingId	MAPID-cbad02ca5b1f4b74a0b9078292ea6b0a
 target		cat:instantiation/{uuid} a rico:Instantiation , prov:Entity , dcat:Distribution ; dcat:downloadURL {download_url}^^xsd:anyURI . 
 source		select * from "public"."prov_distribution";
+
+mappingId	MAPID-baabf51711d14897af0177c7f7483f32
+target		cat:activity/{uuid} prov:used cat:instantiation/{source_uuid} . 
+source		select uuid, unnest(source_uuid) AS source_uuid from "public"."prov_activity" where activity_type in ('Scannage', 'Numerisation', 'Vectorisation', 'CorrectionManuelle', 'Geolocalisation', 'Georeferencement', 'Geocodage', 'AcquisitionPointsControle', 'Liage', 'OCR', 'NER', 'DetectionMiseEnPage', 'Structuration', 'Autre');
 ]]
 
