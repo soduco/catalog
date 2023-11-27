@@ -19,13 +19,15 @@ AS
             xpath('//mri:keyword/gco:CharacterString/text()'::text, metadata.data::xml, ARRAY[ARRAY['gco'::text, 'http://standards.iso.org/iso/19115/-3/gco/1.0'::text], ARRAY['mri'::text, 'http://standards.iso.org/iso/19115/-3/mri/1.0'::text]])::text[] AS keywords,
             metadata.data
            FROM metadata
-          WHERE 'recordset'::text ~~* ANY (xpath('//mri:keyword/gco:CharacterString/text()'::text, metadata.data::xml, ARRAY[ARRAY['gco'::text, 'http://standards.iso.org/iso/19115/-3/gco/1.0'::text], ARRAY['mri'::text, 'http://standards.iso.org/iso/19115/-3/mri/1.0'::text]])::text[])
+          WHERE (EXISTS ( SELECT true AS bool
+                   FROM unnest(xpath('//mri:keyword/gco:CharacterString/text()'::text, metadata.data::xml, ARRAY[ARRAY['gco'::text, 'http://standards.iso.org/iso/19115/-3/gco/1.0'::text], ARRAY['mri'::text, 'http://standards.iso.org/iso/19115/-3/mri/1.0'::text]])::text[]) xpath_text(xpath_text)
+                  WHERE xpath_text.xpath_text ~* '(record(set|part)?)|file'::text))
         )
  SELECT raw.uuid,
     raw.title,
     array_to_string(ARRAY( SELECT kw.kw
            FROM unnest(raw.keywords) kw(kw)
-          WHERE kw.kw = ANY (ARRAY['Record'::text, 'RecordSet'::text, 'RecordPart'::text])), ','::text) AS recordtype,
+          WHERE kw.kw ~~* ANY (ARRAY['Record'::text, 'RecordSet'::text, 'RecordPart'::text, 'File'::text])), ','::text) AS recordtype,
     raw.distribution_format,
     raw.geo_extent,
     raw.temporal_extent,
@@ -41,7 +43,7 @@ WITH DATA;
 ALTER TABLE IF EXISTS public.rico_recordresources
     OWNER TO geonetwork;
 
-    -- View: public.rico_recordresources_mapping
+-- View: public.rico_recordresources_mapping
 
 -- DROP VIEW public.rico_recordresources_mapping;
 
@@ -85,7 +87,7 @@ CREATE OR REPLACE VIEW public.rico_recordresources_vertical_relations
  SELECT rec.uuid AS res1,
     lower(rec.recordtype) AS lrecordtyperes1,
     rel.parent AS res2,
-    lower(rec.recordtype) AS lrecordtyperes2,
+    lower(recp.recordtype) AS lrecordtyperes2,
         CASE rel.association
             WHEN 'isComposedOf'::text THEN 'includesOrIncluded'::text
             WHEN 'largerWorkCitation'::text THEN 'isOrWasIncludedIn'::text
