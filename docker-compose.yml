@@ -198,7 +198,7 @@ services:
 
 
   ontop:
-    image: ontop/ontop-endpoint:4.2.0
+    image: ontop/ontop:5.1.1
     restart: unless-stopped
     environment:
       ONTOP_ONTOLOGY_FILE: /opt/ontop/input/catalog.ttl
