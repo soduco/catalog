@@ -89,5 +89,5 @@ source		SELECT * FROM "public"."prov_distribution";
 
 mappingId	MAPID-baabf51711d14897af0177c7f7483f32
 target		cat:activity/{uuid} prov:used cat:instantiation/{source_uuid} . 
-source		select uuid, unnest(source_uuid) AS source_uuid from "public"."prov_activity" where activity_type in ('Scannage', 'Numerisation', 'Vectorisation', 'CorrectionManuelle', 'Geolocalisation', 'Georeferencement', 'Geocodage', 'AcquisitionPointsControle', 'Liage', 'OCR', 'NER', 'DetectionMiseEnPage', 'Structuration', 'Autre');
+source		SELECT * FROM "public"."prov_activity_source";
 ]]
