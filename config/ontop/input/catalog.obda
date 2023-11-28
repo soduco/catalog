@@ -80,7 +80,7 @@ target		cat:software_agent/{software_uuid} a prov:SoftwareAgent ; dcat:landingPa
 source		SELECT * FROM "public"."prov_software";
 
 mappingId	MAPID-9e51e9ee729f4c5b9a3b4a25bda46cc9
-target		cat:activity/{uuid} a prov:Activity , rico:Activity ; rico:hasActivityType act:{activity_type} ; prov:generated cat:instantiation/{data_generated_uuid} ; prov:startedAtTime {date_begin}^^xsd:dateTime ; prov:endedAtTime {date_end}^^xsd:dateTime ; rdfs:comment {description}^^xsd:string ; prov:wasAssociatedWith cat:software_agent/{software_uuid} . 
+target		cat:activity/{uuid} a prov:Activity , rico:Activity ; rico:hasActivityType act:{activity_type} ; prov:generated cat:instantiation/{data_generated_uuid} ; prov:startedAtTime {date_begin}^^xsd:dateTime ; prov:endedAtTime {date_end}^^xsd:dateTime ; rdfs:comment {description}^^xsd:string ; prov:wasAssociatedWith cat:software_agent/{software_uuid} ; rdfs:label {description} . 
 source		SELECT * FROM "public"."prov_activity" WHERE activity_type IN ('Scannage', 'Numerisation', 'Vectorisation', 'CorrectionManuelle', 'Geolocalisation', 'Georeferencement', 'Geocodage', 'AcquisitionPointsControle', 'Liage', 'OCR', 'NER', 'DetectionMiseEnPage', 'Structuration', 'Autre');
 
 mappingId	MAPID-cbad02ca5b1f4b74a0b9078292ea6b0a
@@ -92,7 +92,7 @@ target		cat:activity/{uuid} prov:used cat:instantiation/{source_uuid} .
 source		SELECT * FROM "public"."prov_activity_source";
 
 mappingId	MAPID-55bdebd7846b4493a13e41d5d835d10d
-target		cat:instantiation/{source_uuid} a rico:Instantiation ; rico:title {source_title}^^xsd:string ; rdfs:label {source_title}^^xsd:string ; dcat:landingPage {source_url}^^xsd:anyURI ; rico:isOrWasComponentOf {resource_uuid} . 
+target		cat:instantiation/{source_uuid} a rico:Instantiation ; rico:title {source_title}^^xsd:string ; rdfs:label {source_title}^^xsd:string ; dcat:landingPage {source_url}^^xsd:anyURI ; rico:isOrWasComponentOf cat:instantiation/{resource_uuid} . 
 source		SELECT * FROM "public"."prov_activity_source";
 ]]
 
