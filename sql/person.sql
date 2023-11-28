@@ -22,15 +22,19 @@ ALTER TABLE public.persons
 
 -- DROP MATERIALIZED VIEW IF EXISTS public.prov_person;
 
+-- role do not retrieve the first role encountered and note the one matching the personn
+
 CREATE MATERIALIZED VIEW IF NOT EXISTS public.prov_person
 TABLESPACE pg_default
 AS
  SELECT parsed.uuid_document,
     parsed.person,
+    -- parsed.role,
     persons.uuid,
     parsed.data
    FROM ( SELECT metadata.uuid AS uuid_document,
             unnest(xpath('//cit:party//cit:name/gco:CharacterString/text()'::text, metadata.data::xml, ARRAY[ARRAY['cit'::text, 'http://standards.iso.org/iso/19115/-3/cit/2.0'::text], ARRAY['gco'::text, 'http://standards.iso.org/iso/19115/-3/gco/1.0'::text]])::text[]) AS person,
+            -- unnest(xpath('//cit:role/cit:CI_RoleCode/@codeListValue'::text, metadata.data::xml, ARRAY[ARRAY['cit'::text, 'http://standards.iso.org/iso/19115/-3/cit/2.0'::text]])::text[]) AS role,
             metadata.data
            FROM metadata) parsed
      LEFT JOIN persons ON parsed.person = persons.title
