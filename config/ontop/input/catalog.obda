@@ -90,4 +90,9 @@ source		SELECT * FROM "public"."prov_distribution";
 mappingId	MAPID-baabf51711d14897af0177c7f7483f32
 target		cat:activity/{uuid} prov:used cat:instantiation/{source_uuid} . 
 source		SELECT * FROM "public"."prov_activity_source";
+
+mappingId	MAPID-55bdebd7846b4493a13e41d5d835d10d
+target		cat:instantiation/{source_uuid} a rico:Instantiation ; rico:title {source_title}^^xsd:string ; rdfs:label {source_title}^^xsd:string ; dcat:landingPage {source_url}^^xsd:anyURI ; rico:isOrWasComponentOf {resource_uuid} . 
+source		SELECT * FROM "public"."prov_activity_source";
 ]]
+
