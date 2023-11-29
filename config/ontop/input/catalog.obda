@@ -96,7 +96,7 @@ target		cat:instantiation/{source_uuid} a rico:Instantiation ; rico:title {sourc
 source		SELECT * FROM "public"."prov_activity_source";
 
 mappingId	MAPID-5f87d6420afc44cb8d36a0be0257e6f0
-target		cat:instantiation{output_uuid} a rico:Instantiation ; rico:title {output_title}^^xsd:string ; rdfs:label {output_title}^^xsd:string ; dcat:landingPage {output_url}^^xsd:anyURI ; rico:isOrWasComponentOf cat:instantiation/{resource_uuid} . 
+target		cat:instantiation/{output_uuid} a rico:Instantiation ; rico:title {output_title}^^xsd:string ; rdfs:label {output_title}^^xsd:string ; dcat:landingPage {output_url}^^xsd:anyURI ; rico:isOrWasComponentOf cat:instantiation/{resource_uuid} . 
 source		SELECT * FROM "public"."prov_activity_output";
 
 mappingId	MAPID-06e878c1c5fe4ba68d0f3d036691d940
