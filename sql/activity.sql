@@ -41,25 +41,18 @@ ALTER TABLE IF EXISTS public.prov_activity
 CREATE MATERIALIZED VIEW IF NOT EXISTS public.prov_activity_source
 TABLESPACE pg_default
 AS
-SELECT parsed.uuid, parsed.source_uuid, parsed.resource_uuid,
-          unnest(xpath(
-			  '//mdb:resourceLineage//mrl:source//mrl:sourceCitation//cit:identifier/mcc:MD_Identifier/mcc:code/gco:CharacterString[text()='''||parsed.source_uuid::text||''']/../../../../cit:title/gco:CharacterString/text()', 
-			  metadata.data::xml, 
-			  ARRAY[ARRAY['mdb'::text, 'http://standards.iso.org/iso/19115/-3/mdb/2.0'::text], ARRAY['mrl'::text, 'http://standards.iso.org/iso/19115/-3/mrl/2.0'::text], ARRAY['gco'::text, 'http://standards.iso.org/iso/19115/-3/gco/1.0'::text], ARRAY['mcc'::text, 'http://standards.iso.org/iso/19115/-3/mcc/1.0'::text], ARRAY['cit'::text, 'http://standards.iso.org/iso/19115/-3/cit/2.0'::text]])::text[] )
-			  	AS source_title,
-          unnest(xpath(
-			  '//mdb:resourceLineage//mrl:source//mrl:sourceCitation//cit:identifier/mcc:MD_Identifier/mcc:code/gco:CharacterString[text()='''||parsed.source_uuid::text||''']/../../../../cit:onlineResource//gco:CharacterString/text()', 
-			  metadata.data::xml, 
-			  ARRAY[ARRAY['mdb'::text, 'http://standards.iso.org/iso/19115/-3/mdb/2.0'::text], ARRAY['mrl'::text, 'http://standards.iso.org/iso/19115/-3/mrl/2.0'::text], ARRAY['gco'::text, 'http://standards.iso.org/iso/19115/-3/gco/1.0'::text], ARRAY['mcc'::text, 'http://standards.iso.org/iso/19115/-3/mcc/1.0'::text], ARRAY['cit'::text, 'http://standards.iso.org/iso/19115/-3/cit/2.0'::text]])::text[] )
-			  	AS source_url
-	FROM (SELECT prov_activity.uuid,
-		unnest(prov_activity.source_uuid) AS source_uuid,
-		  resource_uuid
-	   FROM prov_activity
-	  WHERE prov_activity.activity_type = ANY (ARRAY['Scannage'::text, 'Numerisation'::text, 'Vectorisation'::text, 'CorrectionManuelle'::text, 'Geolocalisation'::text, 'Georeferencement'::text, 'Geocodage'::text, 'AcquisitionPointsControle'::text, 'Liage'::text, 'OCR'::text, 'NER'::text, 'DetectionMiseEnPage'::text, 'Structuration'::text, 'Autre'::text])
-	) parsed
-	LEFT JOIN metadata ON parsed.resource_uuid = metadata.uuid
-  WITH DATA;
+ SELECT parsed.uuid,
+    parsed.source_uuid,
+    parsed.resource_uuid,
+    unnest(xpath(('//mdb:resourceLineage//mrl:source//mrl:sourceCitation//cit:identifier/mcc:MD_Identifier/mcc:code/gco:CharacterString[text()='''::text || parsed.source_uuid) || ''']/../../../../cit:title/gco:CharacterString/text()'::text, metadata.data::xml, ARRAY[ARRAY['mdb'::text, 'http://standards.iso.org/iso/19115/-3/mdb/2.0'::text], ARRAY['mrl'::text, 'http://standards.iso.org/iso/19115/-3/mrl/2.0'::text], ARRAY['gco'::text, 'http://standards.iso.org/iso/19115/-3/gco/1.0'::text], ARRAY['mcc'::text, 'http://standards.iso.org/iso/19115/-3/mcc/1.0'::text], ARRAY['cit'::text, 'http://standards.iso.org/iso/19115/-3/cit/2.0'::text]])::text[]) AS source_title,
+    unnest(xpath(('//mdb:resourceLineage//mrl:source//mrl:sourceCitation//cit:identifier/mcc:MD_Identifier/mcc:code/gco:CharacterString[text()='''::text || parsed.source_uuid) || ''']/../../../../cit:onlineResource//gco:CharacterString/text()'::text, metadata.data::xml, ARRAY[ARRAY['mdb'::text, 'http://standards.iso.org/iso/19115/-3/mdb/2.0'::text], ARRAY['mrl'::text, 'http://standards.iso.org/iso/19115/-3/mrl/2.0'::text], ARRAY['gco'::text, 'http://standards.iso.org/iso/19115/-3/gco/1.0'::text], ARRAY['mcc'::text, 'http://standards.iso.org/iso/19115/-3/mcc/1.0'::text], ARRAY['cit'::text, 'http://standards.iso.org/iso/19115/-3/cit/2.0'::text]])::text[]) AS source_url
+   FROM ( SELECT prov_activity.uuid,
+            unnest(prov_activity.source_uuid) AS source_uuid,
+            prov_activity.resource_uuid
+           FROM prov_activity
+          WHERE prov_activity.activity_type = ANY (ARRAY['Scannage'::text, 'Numerisation'::text, 'Vectorisation'::text, 'CorrectionManuelle'::text, 'Geolocalisation'::text, 'Georeferencement'::text, 'Geocodage'::text, 'AcquisitionPointsControle'::text, 'Liage'::text, 'OCR'::text, 'NER'::text, 'DetectionMiseEnPage'::text, 'Structuration'::text, 'Autre'::text])) parsed
+     LEFT JOIN metadata ON parsed.resource_uuid::text = metadata.uuid::text
+WITH DATA;
 
 ALTER TABLE IF EXISTS public.prov_activity_source
     OWNER TO geonetwork;
