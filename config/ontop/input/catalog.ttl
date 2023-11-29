@@ -29,7 +29,7 @@
 @prefix ign-crs: <http://data.ign.fr/id/ignf/crs/> .
 @prefix ric-dft: <https://www.ica.org/standards/RiC/vocabularies/documentaryFormTypes#> .
 @prefix ric-rst: <https://www.ica.org/standards/RiC/vocabularies/recordSetTypes#> .
-@base <https://www.ica.org/standards/RiC/ontology> .
+@base <http://example.org/voc#> .
 
 <https://www.ica.org/standards/RiC/ontology> rdf:type owl:Ontology ;
                                               cc:license <https://creativecommons.org/licenses/by/4.0/> ;
@@ -2413,12 +2413,12 @@ rico:hasIdentifierType rdf:type owl:ObjectProperty ;
             it."""@en ;
                        rdfs:isDefinedBy <https://www.ica.org/standards/RiC/ontology> ;
                        rdfs:label "has identifier type"@en ;
-                       skos:changeNote [ dc:date "2020-10-19" ;
+                       skos:changeNote [ dc:date "2021-01-22" ;
+                                         rdf:value "changed the superproperty IRI."@en
+                                       ] ,
+                                       [ dc:date "2020-10-19" ;
                                          rdf:value """Object property added along with IdentifierType class and
                     isIdentifierTypeOf object property. """@en
-                                       ] ,
-                                       [ dc:date "2021-01-22" ;
-                                         rdf:value "changed the superproperty IRI."@en
                                        ] .
 
 
@@ -8605,13 +8605,13 @@ rico:recordResourceExtent rdf:type owl:DatatypeProperty ;
             information."""@en ;
                           rdfs:isDefinedBy <https://www.ica.org/standards/RiC/ontology> ;
                           rdfs:label "Record Resource extent"@en ;
-                          skos:changeNote [ dc:date "2020-11-21" ;
-                                            rdf:value """Updated the scope note, as a RecordResourceExtent class has
-                    been created."""@en
-                                          ] ,
-                                          [ dc:date "2020-11-01" ;
+                          skos:changeNote [ dc:date "2020-11-01" ;
                                             rdf:value """Text definition and scope note updated. Examples added.
                     Objective: to make RiC-O compliant with RiC-CM v0.2."""@en
+                                          ] ,
+                                          [ dc:date "2020-11-21" ;
+                                            rdf:value """Updated the scope note, as a RecordResourceExtent class has
+                    been created."""@en
                                           ] ;
                           skos:example "1,500 words"@en ,
                                        "2 films"@en ,
@@ -9387,13 +9387,13 @@ rico:CarrierExtent rdf:type owl:Class ;
                    rdfs:comment "The extent of a Record Resource carrier"@en ;
                    rdfs:isDefinedBy <https://www.ica.org/standards/RiC/ontology> ;
                    rdfs:label "Carrier Extent"@en ;
-                   skos:changeNote [ dc:date "2020-10-28" ;
-                                     rdf:value """Class added in order to handle an accurate description of a
-                    carrier extent"""@en
-                                   ] ,
-                                   [ dc:date "2020-11-21" ;
+                   skos:changeNote [ dc:date "2020-11-21" ;
                                      rdf:value """Changed a bit the definition and added change
                     notes."""@en
+                                   ] ,
+                                   [ dc:date "2020-10-28" ;
+                                     rdf:value """Class added in order to handle an accurate description of a
+                    carrier extent"""@en
                                    ] ;
                    skos:scopeNote """Countable characteristics of a record resource carrier
             expressed as a quantity."""@en ;
@@ -11079,12 +11079,12 @@ rico:Rule rdf:type owl:Class ;
           rdfs:comment "Conditions that govern the existence or authority of an Agent or the performance of an Activity, or that contribute to the distinct characteristics of things created or managed by an Agent."@en ;
           rdfs:isDefinedBy <https://www.ica.org/standards/RiC/ontology> ;
           rdfs:label "Rule"@en ;
-          skos:changeNote [ dc:date "2020-10-23" ;
+          skos:changeNote [ dc:date "2021-02-11" ;
+                            rdf:value "Updated the definition (rdfs:comment) and scope note, as they were recently changed in RiC-CM 0.2 full draft."@en
+                          ] ,
+                          [ dc:date "2020-10-23" ;
                             rdf:value """Scope note: made separate paragraphs and updated.
                     Objective: to make RiC-O compliant with RiC-CM v0.2."""@en
-                          ] ,
-                          [ dc:date "2021-02-11" ;
-                            rdf:value "Updated the definition (rdfs:comment) and scope note, as they were recently changed in RiC-CM 0.2 full draft."@en
                           ] ;
           skos:scopeNote """Rule can be related directly to Agent, Activity, or anything created or managed by agents, such as a Record Resource or Instantiation.
             A Rule may be unwritten or written or otherwise documented. Unwritten rules may include though are not limited to the following:  social mores, customs, or community expectations. Written rules may include though are not limited to the following: constitutions, legislation, acts (legal), statutes, legal codes, ordinances, charters, mission statements, regulations, policies, procedures, instructions, codes of conduct or ethics, professional standards, work assignments or work plans.
