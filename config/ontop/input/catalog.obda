@@ -67,7 +67,7 @@ source		SELECT *
 			FROM "public"."rico_recordresources_vertical_relations";
 
 mappingId	MAPID-720be9d3cc6a4b839c4c04132e92b90a
-target		cat:instantiation/{res1} rico:{ppte} cat:instantiation/{res2} . 
+target		cat:instantiation/{res1} rico:{ppte} cat:{parent_type}/{parent} . 
 source		SELECT *
 			FROM "public"."rico_instanciations_vertical_relations";
 
