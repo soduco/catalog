@@ -39,7 +39,8 @@ CREATE INDEX rico_vertical_relations_uuid_idx
 CREATE OR REPLACE VIEW public.rico_instanciations_vertical_relations
  AS
  SELECT rec.uuid AS res1,
-    rel.parent AS res2,
+    rel.parent AS parent,
+	rel.parent_type AS parent_type,
         CASE rel.association
             WHEN 'isComposedOf'::text THEN 'hasOrHadComponent'::text
             WHEN 'largerWorkCitation'::text THEN 'isOrWasComponentOf'::text
