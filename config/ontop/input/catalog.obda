@@ -51,10 +51,8 @@ source		SELECT uuid, contacts_names, contacts_uris, REGEXP_REPLACE(contacts_name
 
 mappingId	MAPID-459e43494af1461f90f1076a28c831ee
 target		cat:{lrecordtype}/{res1} rico:hasInstantiation cat:instantiation/{res2} . 
-source		SELECT REC.uuid AS res1, REC.lrecordtype, REL.uuid AS res2
-			FROM "public"."rico_recordresources_mapping" AS REC
-			JOIN "public"."rico_horizontal_relations" AS REL
-			ON REC."uuid"=REL."parent";
+source		SELECT REL."parent" AS res1, lower(REL."parent_type") AS lrecordtype, REL.uuid AS res2
+			FROM "public"."rico_horizontal_relations" AS REL WHERE REL."resource_type" ~* 'instantiation';
 
 mappingId	MAPID-5c75c32c2ae34b9e952771b87b5403e3
 target		cat:instantiation/{res1} rico:hasDerivedInstantiation cat:instantiation/{res2} . 
@@ -102,5 +100,10 @@ source		SELECT * FROM "public"."prov_activity_output";
 mappingId	MAPID-06e878c1c5fe4ba68d0f3d036691d940
 target		cat:activity/{uuid} prov:generated cat:instantiation/{output_uuid} . 
 source		SELECT * FROM "public"."prov_activity_output";
+
+mappingId	MAPID-486deeb6b8f84162a459aca8ab6727bd
+target		cat:{lrecordtype}/{res1} rico:precedesInTime cat:{resource_type}/{res2} . 
+source		SELECT REL."parent" AS res1, lower(REL."parent_type") AS lrecordtype, REL.uuid AS res2,  lower(REL."resource_type") AS resource_type
+			FROM "public"."rico_horizontal_relations" AS REL WHERE REL."resource_type" !~* 'instantiation';
 ]]
 
