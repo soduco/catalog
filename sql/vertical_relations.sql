@@ -1,6 +1,6 @@
 -- View: public.rico_vertical_relations
 
-DROP MATERIALIZED VIEW IF EXISTS public.rico_vertical_relations CASCADE;
+-- DROP MATERIALIZED VIEW IF EXISTS public.rico_vertical_relations;
 
 CREATE MATERIALIZED VIEW IF NOT EXISTS public.rico_vertical_relations
 TABLESPACE pg_default
@@ -8,15 +8,15 @@ AS
  SELECT parsed.uuid,
     parsed.association,
     parsed.parent,
-	parsed.parent_type,
+    unnest(xpath('//mri:MD_Keywords[mri:type/mri:MD_KeywordTypeCode[@codeListValue="taxon"]]/mri:keyword/gco:CharacterString/text()'::text, metadata.data::xml, ARRAY[ARRAY['mri'::text, 'http://standards.iso.org/iso/19115/-3/mri/1.0'::text], ARRAY['gco'::text, 'http://standards.iso.org/iso/19115/-3/gco/1.0'::text]])::text[]) AS parent_type,
     parsed.data
-   FROM ( SELECT metadata.uuid,
-            unnest(xpath('//mri:MD_AssociatedResource/mri:associationType/mri:DS_AssociationTypeCode/@codeListValue'::text, metadata.data::xml, ARRAY[ARRAY['mri'::text, 'http://standards.iso.org/iso/19115/-3/mri/1.0'::text]])::text[]) AS association,
-            unnest(xpath('//mri:MD_AssociatedResource/mri:metadataReference/@uuidref'::text, metadata.data::xml, ARRAY[ARRAY['mri'::text, 'http://standards.iso.org/iso/19115/-3/mri/1.0'::text]])::text[]) AS parent,
-    	    unnest(xpath('//mri:MD_Keywords[mri:type/mri:MD_KeywordTypeCode[@codeListValue="taxon"]]/mri:keyword/gco:CharacterString/text()'::text, metadata.data::xml, ARRAY[ARRAY['mri'::text, 'http://standards.iso.org/iso/19115/-3/mri/1.0'::text], ARRAY['gco'::text, 'http://standards.iso.org/iso/19115/-3/gco/1.0'::text]])::text[]) AS parent_type,
-            metadata.data
-           FROM metadata) parsed
-  WHERE parsed.uuid IS NOT NULL
+   FROM ( SELECT metadata_1.uuid,
+            unnest(xpath('//mri:MD_AssociatedResource/mri:associationType/mri:DS_AssociationTypeCode/@codeListValue'::text, metadata_1.data::xml, ARRAY[ARRAY['mri'::text, 'http://standards.iso.org/iso/19115/-3/mri/1.0'::text]])::text[]) AS association,
+            unnest(xpath('//mri:MD_AssociatedResource/mri:metadataReference/@uuidref'::text, metadata_1.data::xml, ARRAY[ARRAY['mri'::text, 'http://standards.iso.org/iso/19115/-3/mri/1.0'::text]])::text[]) AS parent,
+            metadata_1.data
+           FROM metadata metadata_1) parsed,
+    metadata
+  WHERE parsed.uuid IS NOT NULL AND parsed.parent = metadata.uuid::text
 WITH DATA;
 
 ALTER TABLE IF EXISTS public.rico_vertical_relations
